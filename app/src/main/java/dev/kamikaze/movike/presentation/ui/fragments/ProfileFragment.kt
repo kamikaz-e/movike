@@ -20,7 +20,7 @@ class ProfileFragment : BaseFragment<ProfileNavigator>() {
     private val viewModel: ProfileViewModel by viewModels { factory }
 
     private var _binding: FragmentProfileBinding? = null
-    private val binding: FragmentProfileBinding get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)

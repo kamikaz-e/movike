@@ -12,12 +12,12 @@ abstract class CollapsingToolbarFragment<N : BaseNavigator>(
 
     override fun onStart() {
         super.onStart()
-        callbacks?.supportCollapsingView(collapsingViewRes)
+        callbacks.supportCollapsingView(collapsingViewRes)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        callbacks?.clearCollapsingView()
+        callbacks.clearCollapsingView()
     }
 
 }

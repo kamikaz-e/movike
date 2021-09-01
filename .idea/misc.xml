@@ -24,9 +24,11 @@
         <entry key="..\:/projects/Movike/feature-snack/src/main/res/layout/view_snack_callback.xml" value="0.2953703703703704" />
         <entry key="..\:/projects/Movike/shared-error/src/main/res/layout/error_view.xml" value="0.26666666666666666" />
         <entry key="..\:/projects/Movike/shared-error/src/main/res/layout/view_error.xml" value="0.26481481481481484" />
+        <entry key="..\:/projects/movike/app/src/main/res/layout/fragment_feed.xml" value="0.30648148148148147" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

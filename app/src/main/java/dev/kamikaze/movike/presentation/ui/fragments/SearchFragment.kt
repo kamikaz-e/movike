@@ -32,15 +32,15 @@ class SearchFragment : BaseFragment<SearchNavigator>(),
     private val viewModel: SearchViewModel by viewModels { factory }
 
     private var _binding: FragmentSearchBinding? = null
-    private val binding: FragmentSearchBinding get() = _binding!!
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var adapter: SearchMovieAdapter
-
     @Inject
     lateinit var loadingStateAdapter: LoadingStateAdapter
 
     private var job: Job? = null
+    
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
