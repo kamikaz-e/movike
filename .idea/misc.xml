@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/activity_main.xml" value="0.2740740740740741" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/custom_view_error.xml" value="0.26666666666666666" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/fragment_detail_movie.xml" value="0.2708333333333333" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/fragment_feed.xml" value="0.2763023493360572" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/fragment_movie.xml" value="0.2722222222222222" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/fragment_profile.xml" value="0.2708333333333333" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/fragment_search.xml" value="0.2814814814814815" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/layout_default_collapsing_view.xml" value="0.2708333333333333" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/layout_snack.xml" value="0.2708333333333333" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/layout_snack_callback.xml" value="0.2708333333333333" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/list_item_loading_state.xml" value="0.2708333333333333" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/view_error.xml" value="0.275" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/view_snack.xml" value="0.3589462129527991" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/view_snack_callback.xml" value="0.2708333333333333" />
+        <entry key="..\:/projects/Movike/app/src/main/res/layout/view_watch_movie.xml" value="0.29444444444444445" />
+        <entry key="..\:/projects/Movike/feature-snack/src/main/res/layout/layout_snack_callback_view.xml" value="0.29259259259259257" />
+        <entry key="..\:/projects/Movike/feature-snack/src/main/res/layout/layout_snack_view.xml" value="0.2953703703703704" />
+        <entry key="..\:/projects/Movike/feature-snack/src/main/res/layout/view_snack.xml" value="0.2953703703703704" />
+        <entry key="..\:/projects/Movike/feature-snack/src/main/res/layout/view_snack_callback.xml" value="0.2953703703703704" />
+        <entry key="..\:/projects/Movike/shared-error/src/main/res/layout/error_view.xml" value="0.26666666666666666" />
+        <entry key="..\:/projects/Movike/shared-error/src/main/res/layout/view_error.xml" value="0.26481481481481484" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

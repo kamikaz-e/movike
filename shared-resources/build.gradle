@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+
+    compileSdkVersion buildConfigVersion.sdk
+    buildToolsVersion buildConfigVersion.tools
+
+    defaultConfig {
+        minSdkVersion buildConfigVersion.min_sdk
+        targetSdkVersion buildConfigVersion.sdk
+
+        versionCode = code
+        versionName = name
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("release-key.keystore")
+            storePassword "storeflow"
+            keyAlias "mike"
+            keyPassword "orangeflow"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            //debuggable true
+            buildConfigField "String", "APP_LINK", '""'
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"bfdc275b8577a736e7cd02b7ea45e335\""
+        }
+    }
+
+    lintOptions {
+        checkDependencies true
+        disable "ContentDescription", "AlwaysShowAction"
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+
+    //Todo Material Design
+    implementation material_design
+}

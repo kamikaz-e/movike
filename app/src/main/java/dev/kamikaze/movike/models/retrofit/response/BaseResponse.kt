@@ -1,0 +1,1 @@
+package dev.kamikaze.movike.models.retrofit.responseimport kotlinx.serialization.Serializable@Serializableopen class BaseResponse(    var page: Int = 0,    var total_results: Int = 0,    var total_pages: Int = 0)

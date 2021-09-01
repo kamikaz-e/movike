@@ -1,0 +1,54 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/searchContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bgr_round_white"
+    android:paddingHorizontal="@dimen/margin_padding_medium"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <View
+        android:id="@+id/closeSearchBtn"
+        android:layout_width="@dimen/margin_padding_large"
+        android:layout_height="@dimen/margin_padding_large"
+        android:background="@drawable/ic_arrow_back_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/search_view_height"
+        android:layout_marginStart="@dimen/margin_padding_medium"
+        android:layout_marginEnd="@dimen/margin_padding_large"
+        android:background="@color/transparent"
+        android:hint="@string/enter_name_movie"
+        android:importantForAutofill="no"
+        android:inputType="text|textNoSuggestions"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/clearBtn"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/closeSearchBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
+
+    <View
+        android:id="@+id/clearBtn"
+        android:layout_width="@dimen/margin_padding_medium"
+        android:layout_height="@dimen/margin_padding_medium"
+        android:background="@drawable/ic_cross_clear"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

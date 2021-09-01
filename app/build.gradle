@@ -1,0 +1,189 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'kotlinx-serialization'
+    id 'androidx.navigation.safeargs'
+}
+
+android {
+
+    compileSdkVersion buildConfigVersion.sdk
+    buildToolsVersion buildConfigVersion.tools
+
+    defaultConfig {
+        minSdkVersion buildConfigVersion.min_sdk
+        targetSdkVersion buildConfigVersion.sdk
+
+        applicationId = id
+        versionCode = code
+        versionName = name
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("release-key.keystore")
+            storePassword "storeflow"
+            keyAlias "mike"
+            keyPassword "orangeflow"
+        }
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            //debuggable true
+            buildConfigField "String", "APP_LINK", '""'
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+            buildConfigField "String", "API_KEY", "\"bfdc275b8577a736e7cd02b7ea45e335\""
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    lintOptions {
+        checkDependencies true
+        disable "ContentDescription", "AlwaysShowAction"
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+
+    //Todo Libraries
+    implementation project(":shared-error")
+    implementation project(":shared-utils")
+    implementation project(":shared-resources")
+    implementation project(":feature-snack")
+
+    //Todo Dagger2
+    kapt dagger.kapt_compiler
+    kapt dagger.android_processor
+    implementation dagger.main
+    implementation dagger.android
+    implementation dagger.android_support
+
+    //Todo Navigation
+    implementation navigation.fragment
+    implementation navigation.ui
+    implementation navigation.feature_support
+
+    //Todo Paging
+    implementation paging.main
+    implementation paging.guava // Guava ListenableFuture support
+    //implementation paging.compose  // Jetpack Compose integration
+
+    //Todo Okhttp3
+    implementation okhttp3.main
+    implementation okhttp3.logging_interceptor
+    implementation okhttp3.urlconnection
+
+    //Todo Lifecycle
+    implementation lifecycle.viewmodel
+    implementation lifecycle.livedata
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation lifecycle.runtime
+    // Saved state module for ViewModel
+    implementation lifecycle.saving_state_viewmodel
+    // Annotations Java8
+    implementation lifecycle.common
+    // ProcessLifecycleOwner provides a lifecycle for the whole application process
+    implementation lifecycle.lifecycle_process_app
+    // Helpers for implementing LifecycleOwner in a Service
+    //implementation lifecycle.service
+    // Test helpers for LiveData
+    //testImplementation lifecycle.testing
+
+    //Todo Coroutines
+    implementation coroutines.main
+    implementation coroutines.core
+
+    //Todo Annotations
+    implementation annotations.android
+    implementation annotations.jetbrains
+
+    //Todo Room
+    kapt room.compiler
+    implementation room.main
+    implementation room.kotlin
+    implementation room.paging
+
+    //Todo Kotlin Serialization Retrofit Converter
+    implementation serialization.main
+    implementation serialization.converter
+
+    //Todo Constraint
+    implementation constraint
+
+    //Todo Firebase
+    implementation firebase.analytics
+
+    /*Todo Glide
+    kapt glide.kapt_compiler
+    implementation glide.main*/
+
+    /*Todo Picasso
+    implementation picasso*/
+
+    //Todo LeakCanary
+    debugImplementation leak_canary
+
+    //Todo Core
+    implementation core
+
+    //Todo Coil
+    implementation coil
+
+    //Todo Preferences
+    implementation preferences
+
+    //Todo MaterialDesign
+    implementation material_design
+
+    //Todo FragmentOptions
+    implementation fragment_options
+
+    //Todo RefreshLayout
+    implementation swipe_refresh_layout
+
+    //Todo RecyclerView
+    implementation recycler_view
+
+    //Todo Activity
+    implementation activity
+
+    //Todo AppCompat
+    implementation appcompat
+
+    /*//Todo Transitions
+    implementation transitions*/
+
+}

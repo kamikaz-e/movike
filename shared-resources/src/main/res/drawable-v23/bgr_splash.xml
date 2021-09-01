@@ -1,0 +1,13 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:opacity="opaque">
+
+    <item android:drawable="@color/black" />
+
+    <item
+        android:width="@dimen/splash_icon_size"
+        android:height="@dimen/splash_icon_size"
+        android:drawable="@drawable/ic_launcher_foreground"
+        android:gravity="center" />
+
+</layer-list>

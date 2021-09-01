@@ -1,0 +1,33 @@
+<resources>
+    <string name="enter_name_movie">Название фильма…</string>
+
+    <!---  Fragments -->
+    <string name="feed_title">Лента</string>
+    <string name="profile_title">Профиль</string>
+
+    <!-- Navigation -->
+    <string name="next">Следующий</string>
+    <string name="previous">Предыдущий</string>
+
+    <!-- Array CategoryFavorite -->
+    <string name="watch">Посмотрю</string>
+    <string name="viewed">Смотрел</string>
+    <string name="hiding">Скрыть</string>
+
+    <string name="cancel">Отменить</string>
+    <string name="update">Обновить</string>
+    <string name="default_error_title">Ошибка сети</string>
+    <string name="default_error_subtitle">Отсутствует соединение с сервером</string>
+    <string name="update_error_title">Данная версия приложения устарела. Обновитесь до актуальной версии</string>
+    <string name="unknown_server_error">Неизвестная ошибка сервера</string>
+    <string name="network_error_title">Мобильные данные отключены</string>
+    <string name="network_error_subtitle">Включите передачу мобильных данных или Wi-Fi</string>
+    <string name="resource_not_found">Не удалось найти запрошенный вами ресурс</string>
+    <string name="nothing_to_update">Нечего обновлять</string>
+    <string name="request_method_not_support_resource">Этот метод запроса не поддерживается для данного ресурса</string>
+    <string name="not_connect_to_server">Не удалось подключиться к внутреннему серверу</string>
+    <string name="id_invalid">Идентификатор недействителен</string>
+    <string name="api_undergoing_maintenance">API проходит техническое обслуживание. Повторите попытку позже</string>
+    <string name="input_not_valid">Введенные данные содержат ошибку</string>
+
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+
+    <array name="categoryFavorite">
+        <item>@string/watch</item>
+        <item>@string/viewed</item>
+        <item>@string/hiding</item>
+    </array>
+
+</resources>

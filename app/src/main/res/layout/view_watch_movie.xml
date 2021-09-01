@@ -1,0 +1,18 @@
+<TextView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/watchTV"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bgr_round_black_ripple_grey"
+    android:clickable="true"
+    android:drawablePadding="@dimen/margin_padding_nano"
+    android:focusable="true"
+    android:gravity="center"
+    android:paddingHorizontal="@dimen/margin_padding_medium"
+    android:paddingVertical="@dimen/margin_padding_micro"
+    android:text="@string/watch"
+    app:drawableStartCompat="@drawable/ic_favorite_white" />
+

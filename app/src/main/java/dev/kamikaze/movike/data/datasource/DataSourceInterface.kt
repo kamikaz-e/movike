@@ -1,0 +1,1 @@
+package dev.kamikaze.movike.data.datasourceimport androidx.paging.PagingDataimport dev.kamikaze.movike.models.room.entity.Movieimport kotlinx.coroutines.flow.Flowinterface DataSourceInterface {    val movies: Flow<PagingData<Movie>>    fun getSearchMovieItems(searchString: String): Flow<PagingData<Movie>>}

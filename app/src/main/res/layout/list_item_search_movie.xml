@@ -1,0 +1,100 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="144dp"
+    android:layout_marginVertical="@dimen/margin_padding_small"
+    android:background="@drawable/bgr_black_dark_ripple_grey"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/posterIV"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_empty_image" />
+
+    <TextView
+        android:id="@+id/ratingTV"
+        android:layout_width="28dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bgr_circle_black"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_micro"
+        android:textColor="@color/white_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/posterIV"
+        tools:text="8.5" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="@dimen/margin_padding_micro"
+        android:layout_marginStart="@dimen/margin_padding_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/posterIV"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_medium"
+            android:textColor="@color/white_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Джентльмены" />
+
+        <TextView
+            android:id="@+id/yearTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_small"
+            android:textColor="@color/grey_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTV"
+            tools:text="2020" />
+
+        <ImageView
+            android:id="@+id/optionsIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_micro"
+            android:layout_marginEnd="@dimen/margin_padding_nano"
+            android:background="@drawable/bgr_circle_black_dark_ripple_grey"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/margin_padding_micro"
+            android:src="@drawable/ic_options_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/movieActionBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_padding_small"
+            android:background="@drawable/bgr_round_black_ripple_grey"
+            android:clickable="true"
+            android:drawablePadding="@dimen/margin_padding_nano"
+            android:focusable="true"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_padding_medium"
+            android:paddingVertical="@dimen/margin_padding_micro"
+            android:text="@string/watch"
+            app:drawableStartCompat="@drawable/ic_favorite_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

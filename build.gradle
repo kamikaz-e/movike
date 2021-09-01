@@ -1,0 +1,170 @@
+buildscript {
+
+    ext {
+
+        id = "dev.kamikaze.movike"
+
+        buildConfigVersion = [
+                "major"  : 1,
+                "minor"  : 0,
+                "patch"  : 0,
+                "build"  : 1,
+                "sdk"    : 31,
+                "min_sdk": 21,
+                "tools"  : "31.0.0"
+        ]
+
+        code = buildConfigVersion.major * 1000 + buildConfigVersion.minor * 100 + buildConfigVersion.patch * 10 + buildConfigVersion.build
+
+        name = "$buildConfigVersion.major.$buildConfigVersion.minor.$buildConfigVersion.patch"
+
+        vers = [
+                kotlin                  : "1.5.30",
+                gradle                  : '7.0.1',
+                dagger                  : "2.38.1",
+                nav_version             : "2.3.5",
+                paging                  : "3.0.1",
+                google_services         : "4.3.4",
+                moshi                   : "1.12.0",
+                retrofit2               : "2.9.0",
+                okhttp3                 : "5.0.0-alpha.2",
+                network_response_adapter: "4.2.2",
+                coroutines              : "1.5.1",
+                android_annotations     : "1.2.0",
+                jetbrains_annotations   : "22.0.0",
+                room                    : "2.4.0-alpha04",
+                collapse_toolbar        : "1.0.0",
+                material_design         : '1.5.0-alpha02',
+                fragment_options        : "1.3.6",
+                preferences             : "1.1.1",
+                lifecycle               : "2.4.0-alpha03",
+                picasso                 : "2.71828",
+                firebase_analytics      : "19.0.1",
+                swipe_refresh_layout    : "1.1.0",
+                recycler_view           : "1.2.1",
+                glide                   : "4.12.0",
+                transitions             : "1.4.1",
+                room_paging             : "2.4.0-alpha04",
+                core                    : "1.6.0",
+                arch_testing            : "2.1.0",
+                compose                 : "1.0.0-alpha12",
+                leak_canary             : "2.7",
+                coil                    : "1.3.2",
+                constraint              : "2.1.0",
+                activity                : "1.3.1",
+                appcompat               : "1.3.1",
+                serialization           : "1.2.2",
+                serialization_converter : "0.8.0"
+        ]
+
+        navigation = [
+                fragment       : "androidx.navigation:navigation-fragment-ktx:$vers.nav_version",
+                ui             : "androidx.navigation:navigation-ui-ktx:$vers.nav_version",
+                feature_support: "androidx.navigation:navigation-dynamic-features-fragment:$vers.nav_version",
+        ]
+
+        paging = [
+                main   : "androidx.paging:paging-runtime:$vers.paging",
+                guava  : "androidx.paging:paging-guava:$vers.paging",
+                compose: "androidx.paging:paging-compose:$vers.compose"
+        ]
+
+        moshi = [
+                main   : "com.squareup.moshi:moshi-kotlin:$vers.moshi",
+                codegen: "com.squareup.moshi:moshi-kotlin-codegen:$vers.moshi"
+        ]
+
+        dagger = [
+                main             : "com.google.dagger:dagger:$vers.dagger",
+                kapt_compiler    : "com.google.dagger:dagger-compiler:$vers.dagger",
+                android          : "com.google.dagger:dagger-android:$vers.dagger",
+                android_support  : "com.google.dagger:dagger-android-support:$vers.dagger",
+                android_processor: "com.google.dagger:dagger-android-processor:$vers.dagger"
+        ]
+
+        retrofit = [
+                main     : "com.squareup.retrofit2:retrofit:$vers.retrofit2",
+                converter: "com.squareup.retrofit2:converter-moshi:$vers.retrofit2"
+        ]
+
+        okhttp3 = [
+                main               : "com.squareup.okhttp3:okhttp:$vers.okhttp3",
+                logging_interceptor: "com.squareup.okhttp3:logging-interceptor:$vers.okhttp3",
+                urlconnection      : "com.squareup.okhttp3:okhttp-urlconnection:$vers.okhttp3"
+        ]
+
+        lifecycle = [
+                viewmodel             : "androidx.lifecycle:lifecycle-viewmodel-ktx:$vers.lifecycle",
+                livedata              : "androidx.lifecycle:lifecycle-livedata-ktx:$vers.lifecycle",
+                runtime               : "androidx.lifecycle:lifecycle-runtime-ktx:$vers.lifecycle",
+                saving_state_viewmodel: "androidx.lifecycle:lifecycle-viewmodel-savedstate:$vers.lifecycle",
+                common                : "androidx.lifecycle:lifecycle-common-java8:$vers.lifecycle",
+                lifecycle_process_app : "androidx.lifecycle:lifecycle-process:$vers.lifecycle",
+                service               : "androidx.lifecycle:lifecycle-service:$vers.lifecycle",
+                testing               : "androidx.arch.core:core-testing:$vers.arch_testing"
+        ]
+
+        coroutines = [
+                main: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$vers.coroutines",
+                core: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$vers.coroutines"
+        ]
+
+        annotations = [
+                android  : "androidx.annotation:annotation:$vers.android_annotations",
+                jetbrains: "org.jetbrains:annotations:$vers.jetbrains_annotations"
+        ]
+
+        room = [
+                main    : "androidx.room:room-runtime:$vers.room",
+                kotlin  : "androidx.room:room-ktx:$vers.room",
+                compiler: "androidx.room:room-compiler:$vers.room",
+                paging  : "androidx.room:room-paging:$vers.room_paging"
+        ]
+
+        firebase = [
+                analytics: "com.google.firebase:firebase-analytics:$vers.firebase_analytics"
+        ]
+
+        glide = [
+                main         : "com.github.bumptech.glide:glide:$vers.glide",
+                kapt_compiler: "com.github.bumptech.glide:compiler:$vers.glide"
+        ]
+
+        serialization = [
+                main     : "org.jetbrains.kotlinx:kotlinx-serialization-json:$vers.serialization",
+                converter: "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$vers.serialization_converter"
+        ]
+
+        picasso = "com.squareup.picasso:picasso:$vers.picasso"
+        coil = "io.coil-kt:coil:$vers.coil"
+        core = "androidx.core:core-ktx:$vers.core"
+        material_design = "com.google.android.material:material:$vers.material_design"
+        fragment_options = "androidx.fragment:fragment-ktx:$vers.fragment_options"
+        preferences = "androidx.preference:preference-ktx:$vers.preferences"
+        swipe_refresh_layout = "androidx.swiperefreshlayout:swiperefreshlayout:$vers.swipe_refresh_layout"
+        recycler_view = "androidx.recyclerview:recyclerview:$vers.recycler_view"
+        transitions = "androidx.transition:transition:$vers.transitions"
+        leak_canary = "com.squareup.leakcanary:leakcanary-android:$vers.leak_canary"
+        constraint = "androidx.constraintlayout:constraintlayout:$vers.constraint"
+        activity = "androidx.activity:activity-ktx:$vers.activity"
+        appcompat = "androidx.appcompat:appcompat:$vers.appcompat"
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$vers.gradle"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$vers.kotlin"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$vers.kotlin"
+        classpath "com.google.gms:google-services:$vers.google_services"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$vers.nav_version"
+    }
+
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

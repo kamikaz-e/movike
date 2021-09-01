@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "19915096469",
+    "firebase_url": "https://movike-94bad.firebaseio.com",
+    "project_id": "movike-94bad",
+    "storage_bucket": "movike-94bad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19915096469:android:d88bfb09d16ff9d3d6769c",
+        "android_client_info": {
+          "package_name": "dev.kamikaze.movike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19915096469-1qmmlifabetija3fb6gfnfpi97d82k9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApO73rgdH2nndPV4Dc96ekBDG81XlUojc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19915096469-1qmmlifabetija3fb6gfnfpi97d82k9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

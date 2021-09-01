@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name" translatable="false">Movike</string>
+
+    <string name="enter_name_movie">The name of the movie…</string>
+
+    <!---  Fragments -->
+    <string name="feed_title">FEED</string>
+    <string name="profile_title">Profile</string>
+
+    <!-- Navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!-- Strings used for Array CategoryFavorite -->
+    <string name="watch">Watch</string>
+    <string name="viewed">Viewed</string>
+    <string name="hiding">Hiding</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="update">Update</string>
+    <string name="default_error_title">Network error</string>
+    <string name="default_error_subtitle">There is no connection to the server</string>
+    <string name="update_error_title">This version of the application is outdated. Update to the latest version</string>
+    <string name="unknown_server_error">Unknown server error</string>
+    <string name="network_error_title">Mobile data is disabled</string>
+    <string name="network_error_subtitle">Enable mobile data transfer or Wi-Fi</string>
+    <string name="resource_not_found">The resource you requested could not be found</string>
+    <string name="nothing_to_update">There is nothing to update</string>
+    <string name="request_method_not_support_resource">This request method is not supported for this resource</string>
+    <string name="not_connect_to_server">Failed to connect to the internal server</string>
+    <string name="id_invalid">The ID is invalid</string>
+    <string name="api_undergoing_maintenance">The API is undergoing maintenance. Please try again later</string>
+    <string name="input_not_valid">The entered data contains an error</string>
+
+</resources>

@@ -1,0 +1,74 @@
+<androidx.core.widget.NestedScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/black_dark"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_padding_medium">
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_micro"
+            android:layout_marginEnd="@dimen/margin_padding_large"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_xxxlarge"
+            app:layout_constraintEnd_toStartOf="@+id/ratingTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Чёрное зеркало" />
+
+        <TextView
+            android:id="@+id/ratingTV"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="@dimen/margin_padding_small"
+            android:background="@drawable/bgr_circle_black"
+            android:gravity="center"
+            android:textColor="@color/white_light"
+            android:textSize="@dimen/text_size_xlarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="8.5" />
+
+        <ImageView
+            android:id="@+id/posterIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_large"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_empty_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTV" />
+
+        <TextView
+            android:id="@+id/overviewTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_padding_xlarge"
+            android:layout_marginTop="@dimen/margin_padding_medium"
+            android:maxLines="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/posterIV"
+            app:layout_constraintTop_toTopOf="@+id/posterIV"
+            tools:text="За последние десять лет технологии всесторонне изменили нашу жизнь, прежде чем мы успели фывывывывфыввы" />
+
+        <dev.kamikaze.movike.presentation.customviews.WatchMovieBtn
+            android:id="@+id/watchMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_large"
+            app:layout_constraintStart_toStartOf="@+id/overviewTV"
+            app:layout_constraintTop_toBottomOf="@+id/overviewTV" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
