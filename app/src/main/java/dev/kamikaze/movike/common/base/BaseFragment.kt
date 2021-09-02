@@ -37,6 +37,7 @@ abstract class BaseFragment<N : BaseNavigator> : DaggerFragment(), BaseViewCallb
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideError()
+        showToolbar()
         initView()
     }
     
@@ -72,6 +73,14 @@ abstract class BaseFragment<N : BaseNavigator> : DaggerFragment(), BaseViewCallb
     
     override fun hideProgress() {
         callbacks.hideProgress()
+    }
+    
+    override fun showToolbar() {
+        callbacks.showToolbar()
+    }
+    
+    override fun hideToolbar() {
+        callbacks.hideToolbar()
     }
     
     @ExperimentalSerializationApi

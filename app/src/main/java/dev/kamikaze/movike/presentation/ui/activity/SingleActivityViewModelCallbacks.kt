@@ -1,6 +1,5 @@
 package dev.kamikaze.movike.presentation.ui.activity
 
-import androidx.annotation.LayoutRes
 import dev.kamikaze.movike.presentation.customviews.error.ErrorCallback
 import dev.kamikaze.shared_error.ApiError
 
@@ -18,8 +17,8 @@ interface SingleActivityViewModelCallbacks {
     
     fun setTitle(titleString: String?)
     
-    fun supportCollapsingView(@LayoutRes collapsingViewRes: Int?)
+    fun hideToolbar()
     
-    fun clearCollapsingView()
+    fun showToolbar()
     
 }

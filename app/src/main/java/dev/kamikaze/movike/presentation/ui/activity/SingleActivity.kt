@@ -3,8 +3,6 @@ package dev.kamikaze.movike.presentation.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import dagger.android.support.DaggerAppCompatActivity
@@ -60,19 +58,12 @@ class SingleActivity : DaggerAppCompatActivity(), SingleActivityViewModelCallbac
         toolbar.title = title
     }
     
-    override fun supportCollapsingView(@LayoutRes collapsingViewRes: Int?) {
-        setCollapsingView(collapsingViewRes)
+    override fun hideToolbar() {
+        toolbar.isVisible = false
     }
     
-    override fun clearCollapsingView() {
-        setCollapsingView(null)
-    }
-    
-    private fun setCollapsingView(@LayoutRes collapsingViewRes: Int?) {
-        binding.collapsingContainer.removeAllViews()
-        if (collapsingViewRes != null) {
-            LayoutInflater.from(this).inflate(collapsingViewRes, binding.collapsingContainer, true)
-        }
+    override fun showToolbar() {
+        toolbar.isVisible = true
     }
     
 }

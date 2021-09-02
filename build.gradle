@@ -20,7 +20,7 @@ buildscript {
 
         vers = [
                 kotlin                  : "1.5.30",
-                gradle                  : '7.0.1',
+                gradle                  : '7.0.2',
                 dagger                  : "2.38.1",
                 nav_version             : "2.3.5",
                 paging                  : "3.0.1",
@@ -29,7 +29,7 @@ buildscript {
                 retrofit2               : "2.9.0",
                 okhttp3                 : "5.0.0-alpha.2",
                 network_response_adapter: "4.2.2",
-                coroutines              : "1.5.1",
+                coroutines              : '1.5.2-native-mt',
                 android_annotations     : "1.2.0",
                 jetbrains_annotations   : "22.0.0",
                 room                    : "2.4.0-alpha04",
@@ -54,7 +54,8 @@ buildscript {
                 activity                : "1.3.1",
                 appcompat               : "1.3.1",
                 serialization           : "1.2.2",
-                serialization_converter : "0.8.0"
+                serialization_converter : "0.8.0",
+                junit                   : "4.13.2"
         ]
 
         navigation = [
@@ -148,6 +149,7 @@ buildscript {
         constraint = "androidx.constraintlayout:constraintlayout:$vers.constraint"
         activity = "androidx.activity:activity-ktx:$vers.activity"
         appcompat = "androidx.appcompat:appcompat:$vers.appcompat"
+        junit = "junit:junit:$vers.junit"
     }
 
     repositories {

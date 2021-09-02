@@ -14,7 +14,10 @@ interface BaseViewCallbacks : ErrorCallback {
 
     fun setTitle(titleString: String?)
     fun setTitle(@StringRes titleRes: Int)
-
+    
+    fun showToolbar()
+    fun hideToolbar()
+    
     fun onLoading()
     fun onLoadFinish()
 

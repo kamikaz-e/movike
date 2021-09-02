@@ -15,37 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:collapsedTitleTextAppearance="@style/Theme.ActionBar.TitleTextStyle"
-            app:contentScrim="@color/black_dark"
-            app:expandedTitleGravity="top"
-            app:expandedTitleMargin="@dimen/margin_padding_medium"
-            app:expandedTitleTextAppearance="@style/Theme.ActionBar.TitleExpandedTextStyle"
+            android:layout_height="?attr/actionBarSize"
+            app:contentInsetStartWithNavigation="0dp"
             app:layout_collapseMode="pin"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleEnabled="false"
-            app:toolbarId="@+id/toolbar">
-
-            <FrameLayout
-                android:id="@+id/collapsingContainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed" />
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:contentInsetStartWithNavigation="0dp"
-                app:layout_collapseMode="pin"
-                app:titleTextAppearance="@style/Theme.ActionBar.TitleTextStyle" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            app:titleTextAppearance="@style/Theme.ActionBar.TitleTextStyle" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

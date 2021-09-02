@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import dev.kamikaze.movike.R
-import dev.kamikaze.movike.common.CollapsingToolbarFragment
+import dev.kamikaze.movike.common.base.BaseFragment
 import dev.kamikaze.movike.common.base.BaseUiState
 import dev.kamikaze.movike.databinding.FragmentDetailMovieBinding
 import dev.kamikaze.movike.models.room.entity.Movie
@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailsFragment : CollapsingToolbarFragment<DetailsNavigator>(), WatchMovieBtn.WatchCallback {
+class DetailsFragment : BaseFragment<DetailsNavigator>(), WatchMovieBtn.WatchCallback {
     
     private var _binding: FragmentDetailMovieBinding? = null
     private val binding get() = _binding!!
@@ -33,7 +33,6 @@ class DetailsFragment : CollapsingToolbarFragment<DetailsNavigator>(), WatchMovi
     @Inject
     lateinit var factory: ViewModelProvider.Factory
     private val viewModel: DetailsMovieViewModel by viewModels { factory }
-    
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentDetailMovieBinding.inflate(inflater, container, false)
@@ -71,6 +70,7 @@ class DetailsFragment : CollapsingToolbarFragment<DetailsNavigator>(), WatchMovi
     }
     
     override fun initView() {
+        hideToolbar()
         showProgress()
         val args: DetailsFragmentArgs by navArgs()
         viewModel.onLoadMovie(args.movieId)

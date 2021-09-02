@@ -13,8 +13,6 @@ android {
         minSdkVersion buildConfigVersion.min_sdk
         targetSdkVersion buildConfigVersion.sdk
 
-        versionCode = code
-        versionName = name
 
         javaCompileOptions {
             annotationProcessorOptions {

@@ -25,7 +25,6 @@ android {
                 arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     signingConfigs {
@@ -182,7 +181,10 @@ dependencies {
     //Todo AppCompat
     implementation appcompat
 
-    /*//Todo Transitions
-    implementation transitions*/
+    //Todo Transitions
+    //implementation transitions
+
+    //Todo TestUnit
+    testImplementation junit
 
 }
