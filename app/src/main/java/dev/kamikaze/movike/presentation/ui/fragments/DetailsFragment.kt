@@ -15,7 +15,7 @@ import androidx.navigation.fragment.navArgs
 import dev.kamikaze.movike.R
 import dev.kamikaze.movike.common.base.BaseFragment
 import dev.kamikaze.movike.common.base.BaseUiState
-import dev.kamikaze.movike.databinding.FragmentDetailMovieBinding
+import dev.kamikaze.movike.databinding.FragmentDetailsMovieBinding
 import dev.kamikaze.movike.models.room.entity.Movie
 import dev.kamikaze.movike.presentation.customviews.WatchMovieBtn
 import dev.kamikaze.movike.presentation.navigation.navigators.DetailsNavigator
@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 class DetailsFragment : BaseFragment<DetailsNavigator>(), WatchMovieBtn.WatchCallback {
     
-    private var _binding: FragmentDetailMovieBinding? = null
+    private var _binding: FragmentDetailsMovieBinding? = null
     private val binding get() = _binding!!
     
     @Inject
@@ -35,7 +35,7 @@ class DetailsFragment : BaseFragment<DetailsNavigator>(), WatchMovieBtn.WatchCal
     private val viewModel: DetailsMovieViewModel by viewModels { factory }
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentDetailMovieBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailsMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
     
@@ -70,7 +70,6 @@ class DetailsFragment : BaseFragment<DetailsNavigator>(), WatchMovieBtn.WatchCal
     }
     
     override fun initView() {
-        hideToolbar()
         showProgress()
         val args: DetailsFragmentArgs by navArgs()
         viewModel.onLoadMovie(args.movieId)

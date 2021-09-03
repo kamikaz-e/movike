@@ -1,1 +1,1 @@
-package dev.kamikaze.movike.presentation.customviews.searchinterface SearchCallback {    fun onSearch(searchQuery: String)    fun onCloseSearchClicked()}
+package dev.kamikaze.movike.presentation.customviews.searchinterface SearchCallback {    fun onSearch(searchQuery: String)}

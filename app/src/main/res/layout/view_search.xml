@@ -12,14 +12,14 @@
     android:visibility="gone"
     tools:visibility="visible">
 
-    <View
-        android:id="@+id/closeSearchBtn"
-        android:layout_width="@dimen/margin_padding_large"
-        android:layout_height="@dimen/margin_padding_large"
-        android:background="@drawable/ic_arrow_back_black"
+    <ImageView
+        android:id="@+id/upBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_black" />
 
     <EditText
         android:id="@+id/searchEditText"
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/clearBtn"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/closeSearchBtn"
+        app:layout_constraintStart_toEndOf="@+id/upBtn"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor" />
 

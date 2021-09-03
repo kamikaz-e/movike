@@ -3,7 +3,6 @@ package dev.kamikaze.movike.presentation.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import dagger.android.support.DaggerAppCompatActivity
 import dev.kamikaze.movike.BuildConfig
@@ -15,19 +14,20 @@ import dev.kamikaze.shared_error.ApiError
 
 class SingleActivity : DaggerAppCompatActivity(), SingleActivityViewModelCallbacks, NavigatorProvider {
     
-    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     
-    private val toolbar: Toolbar by lazy { binding.toolbar }
+    private val toolbar by lazy { binding.toolbar }
     
-    override val navigator: Navigator by lazy { Navigator(this, toolbar) }
+    override val navigator by lazy { Navigator(this) }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setSupportActionBar(toolbar)
     }
     
     override fun onSupportNavigateUp(): Boolean {
-        return navigator.supportNavigateToolbar() || super.onSupportNavigateUp()
+        return navigator.supportNavigateUp() or super.onSupportNavigateUp()
     }
     
     override fun startGooglePlay() {
@@ -52,10 +52,6 @@ class SingleActivity : DaggerAppCompatActivity(), SingleActivityViewModelCallbac
     
     override fun setOnErrorClick(callback: ErrorCallback?) {
         binding.errorView.errorCallback = callback
-    }
-    
-    override fun setTitle(titleString: String?) {
-        toolbar.title = title
     }
     
     override fun hideToolbar() {

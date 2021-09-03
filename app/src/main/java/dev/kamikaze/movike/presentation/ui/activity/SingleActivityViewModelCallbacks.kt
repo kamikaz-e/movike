@@ -15,8 +15,6 @@ interface SingleActivityViewModelCallbacks {
     
     fun setOnErrorClick(callback: ErrorCallback?)
     
-    fun setTitle(titleString: String?)
-    
     fun hideToolbar()
     
     fun showToolbar()

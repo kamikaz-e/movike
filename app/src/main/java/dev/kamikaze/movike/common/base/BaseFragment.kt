@@ -3,9 +3,10 @@ package dev.kamikaze.movike.common.base
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.StringRes
+import android.widget.ImageView
 import dagger.android.support.DaggerFragment
 import dev.kamikaze.feature_snack.showSnackCallback
+import dev.kamikaze.movike.R
 import dev.kamikaze.movike.presentation.ui.activity.SingleActivityViewModelCallbacks
 import dev.kamikaze.movike.utils.KeyboardUtil.hideKeyboard
 import dev.kamikaze.shared_error.ApiError
@@ -37,8 +38,9 @@ abstract class BaseFragment<N : BaseNavigator> : DaggerFragment(), BaseViewCallb
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideError()
-        showToolbar()
         initView()
+        val homeView = view.findViewById<ImageView>(R.id.upBtn)
+        homeView?.setOnClickListener { navigator.navigateUp() }
     }
     
     override fun onStart() {
@@ -75,14 +77,6 @@ abstract class BaseFragment<N : BaseNavigator> : DaggerFragment(), BaseViewCallb
         callbacks.hideProgress()
     }
     
-    override fun showToolbar() {
-        callbacks.showToolbar()
-    }
-    
-    override fun hideToolbar() {
-        callbacks.hideToolbar()
-    }
-    
     @ExperimentalSerializationApi
     override fun showError() {
         showError(Throwable())
@@ -106,14 +100,6 @@ abstract class BaseFragment<N : BaseNavigator> : DaggerFragment(), BaseViewCallb
     override fun onLoadFinish() {
         hideError()
         hideProgress()
-    }
-    
-    override fun setTitle(titleString: String?) {
-        callbacks.setTitle(titleString)
-    }
-    
-    override fun setTitle(@StringRes titleRes: Int) {
-        setTitle(getString(titleRes))
     }
     
     private fun showError(error: ApiError) {

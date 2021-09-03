@@ -40,7 +40,7 @@
         android:id="@+id/movieDetailsFragment"
         android:name="dev.kamikaze.movike.presentation.ui.fragments.DetailsFragment"
         android:label=""
-        tools:layout="@layout/fragment_detail_movie">
+        tools:layout="@layout/fragment_details_movie">
 
         <argument
             android:name="movieId"
