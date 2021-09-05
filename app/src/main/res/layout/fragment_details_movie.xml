@@ -6,83 +6,65 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/collapsing_toolbar"
+    app:layoutDescription="@xml/collapsing_details_movie"
     tools:showPaths="true">
-
-    <ImageView
-        android:id="@+id/toolbarIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/collapsing_toolbar_height"
-        android:scaleType="centerCrop"
-        app:layout_collapseMode="parallax"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-        tools:src="@drawable/ic_no_internet" />
 
     <ImageView
         android:id="@+id/upBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/margin_padding_micro"
         android:padding="@dimen/margin_padding_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_back_white" />
 
-    <TextView
-        android:id="@+id/title"
+    <ImageView
+        android:id="@+id/posterCollapseIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/red"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarIV"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:minHeight="@dimen/collapsing_toolbar_height"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/titleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xxxlarge"
+        app:autoSizeMaxTextSize="@dimen/text_size_xxxlarge"
+        app:autoSizeMinTextSize="@dimen/text_size_xlarge"
+        app:autoSizeTextType="uniform"
+        tools:background="@color/black"
+        tools:layout_editor_absoluteY="228dp"
+        tools:text="Чёрное зеркало дважды черное дважды черное дважды черное зеркало зеркало зеркало" />
+
+    <TextView
+        android:id="@+id/ratingTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bgr_circle_black"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding_micro"
+        android:textColor="@color/white_light"
+        android:textSize="@dimen/text_size_xxlarge"
+        tools:text="8.5" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="-10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarIV">
+        app:layout_constraintTop_toBottomOf="@+id/titleTV">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black_dark"
             android:padding="@dimen/margin_padding_medium">
-
-            <TextView
-                android:id="@+id/titleTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_micro"
-                android:layout_marginEnd="@dimen/margin_padding_large"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_xxxlarge"
-                app:layout_constraintEnd_toStartOf="@+id/ratingTV"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Чёрное зеркало" />
-
-            <TextView
-                android:id="@+id/ratingTV"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginTop="@dimen/margin_padding_small"
-                android:background="@drawable/bgr_circle_black"
-                android:gravity="center"
-                android:textColor="@color/white_light"
-                android:textSize="@dimen/text_size_xlarge"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="8.5" />
 
             <ImageView
                 android:id="@+id/posterIV"
@@ -92,7 +74,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_empty_image"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleTV" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/overviewTV"

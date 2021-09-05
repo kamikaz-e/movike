@@ -82,7 +82,7 @@ class DetailsFragment : BaseFragment<DetailsNavigator>(), WatchMovieBtn.WatchCal
     }
     
     private fun renderUi(movie: Movie) {
-        val collapseImage = activity?.findViewById<ImageView>(R.id.toolbarIV)
+        val collapseImage = activity?.findViewById<ImageView>(R.id.posterCollapseIV)
         collapseImage?.setImg(movie.backdropPath)
         with(binding) {
             watchMovie.callback = this@DetailsFragment

@@ -24,6 +24,7 @@
         <entry key="..\:/projects/Movike/feature-snack/src/main/res/layout/view_snack_callback.xml" value="0.2953703703703704" />
         <entry key="..\:/projects/Movike/shared-error/src/main/res/layout/error_view.xml" value="0.26666666666666666" />
         <entry key="..\:/projects/Movike/shared-error/src/main/res/layout/view_error.xml" value="0.26481481481481484" />
+        <entry key="..\:/projects/movike/app/src/main/res/layout-v26/fragment_details_movie.xml" value="0.37447916666666664" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/activity_main.xml" value="0.2935185185185185" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/collapsing_toolbar.xml" value="0.3074074074074074" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/fragment_detail_movie.xml" value="0.25" />
@@ -31,6 +32,7 @@
         <entry key="..\:/projects/movike/app/src/main/res/layout/fragment_feed.xml" value="0.30648148148148147" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/layout_default_collapsing_view.xml" value="0.37447916666666664" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/list_item_loading_state.xml" value="0.37447916666666664" />
+        <entry key="..\:/projects/movike/app/src/main/res/layout/list_item_movie.xml" value="0.37447916666666664" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/list_item_search_movie.xml" value="0.37447916666666664" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/view_home_back.xml" value="0.37447916666666664" />
         <entry key="..\:/projects/movike/app/src/main/res/layout/view_search.xml" value="0.37447916666666664" />

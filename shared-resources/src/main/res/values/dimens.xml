@@ -12,6 +12,7 @@
     <dimen name="margin_padding_nano">2dp</dimen>
     <dimen name="margin_padding_micro">4dp</dimen>
     <dimen name="margin_padding_small">8dp</dimen>
+    <!--<dimen name="margin_padding_minor">12dp</dimen>-->
     <dimen name="margin_padding_medium">16dp</dimen>
     <dimen name="margin_padding_large">24dp</dimen>
     <dimen name="margin_padding_xlarge">32dp</dimen>
@@ -21,6 +22,7 @@
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="text_size_xxlarge">24sp</dimen>
     <dimen name="text_size_xxxlarge">34sp</dimen>
 
 </resources>
