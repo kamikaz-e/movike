@@ -6,13 +6,16 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     app:layoutDescription="@xml/collapsing_details_movie"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showPaths="true">
 
     <ImageView
         android:id="@+id/upBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_large"
         android:elevation="@dimen/margin_padding_micro"
         android:padding="@dimen/margin_padding_medium"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,20 +38,19 @@
         android:textSize="@dimen/text_size_xxxlarge"
         app:autoSizeMaxTextSize="@dimen/text_size_xxxlarge"
         app:autoSizeMinTextSize="@dimen/text_size_xlarge"
+        app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        tools:background="@color/black"
-        tools:layout_editor_absoluteY="228dp"
         tools:text="Чёрное зеркало дважды черное дважды черное дважды черное зеркало зеркало зеркало" />
 
     <TextView
         android:id="@+id/ratingTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bgr_circle_black"
+        android:background="@drawable/bgr_circle_black_light"
         android:gravity="center"
         android:padding="@dimen/margin_padding_micro"
-        android:textColor="@color/white_light"
-        android:textSize="@dimen/text_size_xxlarge"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/text_size_large"
         tools:text="8.5" />
 
     <androidx.core.widget.NestedScrollView
@@ -63,7 +65,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_dark"
             android:padding="@dimen/margin_padding_medium">
 
             <ImageView
@@ -83,6 +84,7 @@
                 android:layout_marginHorizontal="@dimen/margin_padding_xlarge"
                 android:layout_marginTop="@dimen/margin_padding_medium"
                 android:maxLines="4"
+                android:textColor="@color/grey_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/posterIV"
                 app:layout_constraintTop_toTopOf="@+id/posterIV"

@@ -14,6 +14,8 @@ object AppConstants {
     const val API_KEY = "API_KEY"
 
     const val STATE = "STATE"
+    
+    const val IS_OPEN = "IS_OPEN"
 
     const val EXTRA_FRAGMENT = "EXTRA_FRAGMENT"
 

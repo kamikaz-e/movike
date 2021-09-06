@@ -31,7 +31,8 @@
             android:id="@+id/titleTV"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_padding_medium"
-            android:layout_marginTop="@dimen/margin_padding_small"
+            android:layout_marginEnd="@dimen/margin_padding_medium"
+            android:layout_marginTop="@dimen/margin_padding_medium"
             app:layout_constraintEnd_toStartOf="@+id/ratingTV"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/posterCollapseIV" />
@@ -39,7 +40,7 @@
         <Constraint
             android:id="@+id/ratingTV"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_padding_small"
+            android:layout_marginTop="@dimen/margin_padding_medium"
             android:layout_marginEnd="@dimen/margin_padding_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/posterCollapseIV" />
@@ -63,6 +64,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_marginEnd="@dimen/margin_padding_medium"
             app:layout_constraintEnd_toStartOf="@+id/ratingTV"
+            android:layout_marginTop="@dimen/margin_padding_large"
             app:layout_constraintStart_toEndOf="@+id/upBtn"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,6 +72,7 @@
             android:id="@+id/ratingTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_large"
             android:layout_marginEnd="@dimen/margin_padding_medium"
             app:layout_constraintBottom_toTopOf="@+id/nested_scroll_view"
             app:layout_constraintEnd_toEndOf="parent"

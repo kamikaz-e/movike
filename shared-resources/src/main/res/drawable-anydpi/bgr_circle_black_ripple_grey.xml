@@ -2,6 +2,6 @@
 
     android:color="@color/grey">
 
-    <item android:drawable="@drawable/bgr_circle_black" />
+    <item android:drawable="@drawable/bgr_circle_black_light" />
 
 </ripple>

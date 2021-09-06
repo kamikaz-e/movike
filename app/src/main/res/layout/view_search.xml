@@ -8,7 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bgr_round_white"
-    android:paddingHorizontal="@dimen/margin_padding_medium"
     android:visibility="gone"
     tools:visibility="visible">
 
@@ -16,6 +15,7 @@
         android:id="@+id/upBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/margin_padding_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +25,6 @@
         android:id="@+id/searchEditText"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/search_view_height"
-        android:layout_marginStart="@dimen/margin_padding_medium"
         android:layout_marginEnd="@dimen/margin_padding_large"
         android:background="@color/transparent"
         android:hint="@string/enter_name_movie"
@@ -40,15 +39,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="LabelFor" />
 
-    <View
+    <ImageView
         android:id="@+id/clearBtn"
-        android:layout_width="@dimen/margin_padding_medium"
-        android:layout_height="@dimen/margin_padding_medium"
-        android:background="@drawable/ic_cross_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_padding_medium"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_clear"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

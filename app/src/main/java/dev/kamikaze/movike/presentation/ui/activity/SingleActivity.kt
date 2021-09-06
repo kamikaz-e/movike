@@ -3,6 +3,7 @@ package dev.kamikaze.movike.presentation.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import dagger.android.support.DaggerAppCompatActivity
 import dev.kamikaze.movike.BuildConfig
@@ -24,6 +25,7 @@ class SingleActivity : DaggerAppCompatActivity(), SingleActivityViewModelCallbac
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setSupportActionBar(toolbar)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
     
     override fun onSupportNavigateUp(): Boolean {

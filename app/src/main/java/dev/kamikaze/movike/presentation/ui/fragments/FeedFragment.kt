@@ -7,6 +7,8 @@ import androidx.lifecycle.Lifecycle.State
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.onNavDestinationSelected
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -30,8 +32,10 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
     @Inject
     internal lateinit var factory: ViewModelProvider.Factory
     private val viewModel: FeedViewModel by viewModels { factory }
+    
     @Inject
     internal lateinit var moviesAdapter: MovieAdapter
+    
     @Inject
     internal lateinit var loadingStateAdapter: LoadingStateAdapter
     
@@ -83,8 +87,10 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
     
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_feed_activity, menu)
-        menu.findItem(R.id.menu_item_feed_search)
-                .setOnMenuItemClickListener { onSearchClicked();false }
+    }
+    
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(findNavController()) || super.onOptionsItemSelected(item)
     }
     
     override fun initView() {
@@ -107,10 +113,6 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
     
     private fun onFabClicked() {
         binding.movieRV.smoothScrollToPosition(0)
-    }
-    
-    private fun onSearchClicked() {
-        navigator.goToSearchMovies()
     }
     
     private fun initAdapter() {

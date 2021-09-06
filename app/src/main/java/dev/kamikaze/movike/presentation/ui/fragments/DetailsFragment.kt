@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.view.isVisible
+import androidx.core.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import dev.kamikaze.movike.R
 import dev.kamikaze.movike.common.base.BaseFragment
 import dev.kamikaze.movike.common.base.BaseUiState
 import dev.kamikaze.movike.databinding.FragmentDetailsMovieBinding
@@ -82,10 +80,9 @@ class DetailsFragment : BaseFragment<DetailsNavigator>(), WatchMovieBtn.WatchCal
     }
     
     private fun renderUi(movie: Movie) {
-        val collapseImage = activity?.findViewById<ImageView>(R.id.posterCollapseIV)
-        collapseImage?.setImg(movie.backdropPath)
         with(binding) {
             watchMovie.callback = this@DetailsFragment
+            posterCollapseIV.setImg(movie.backdropPath)
             titleTV.text = movie.title
             ratingTV.apply {
                 text = movie.ratingValue

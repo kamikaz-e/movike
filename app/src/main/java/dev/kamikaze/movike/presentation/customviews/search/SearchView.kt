@@ -1,6 +1,8 @@
 package dev.kamikaze.movike.presentation.customviews.search
 
 import android.content.Context
+import android.os.Bundle
+import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -12,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import dev.kamikaze.movike.databinding.ViewSearchBinding
 import dev.kamikaze.movike.extensions.showKeyboard
+import dev.kamikaze.movike.utils.AppConstants
 
 class SearchView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
     
@@ -35,6 +38,20 @@ class SearchView(context: Context, attrs: AttributeSet) : ConstraintLayout(conte
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         binding.apply { searchEditText.removeTextChangedListener(searchObserver) }
+    }
+    
+    override fun onSaveInstanceState(): Parcelable {
+        val bundle = Bundle()
+        bundle.putParcelable(AppConstants.STATE, super.onSaveInstanceState())
+        bundle.putBoolean(AppConstants.IS_OPEN, isOpen)
+        return bundle
+    }
+    
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            isOpen = state.getBoolean(AppConstants.IS_OPEN)
+            super.onRestoreInstanceState(state.getParcelable(AppConstants.STATE))
+        }
     }
     
     private fun observeSearch(searchValue: Editable?) {

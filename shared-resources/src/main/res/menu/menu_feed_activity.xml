@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_item_feed_search"
+        android:id="@+id/searchFragment"
         android:checkable="true"
         android:icon="@drawable/ic_search_white"
         android:title=""
@@ -12,7 +12,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/menu_item_feed_profile"
+        android:id="@+id/profileFragment"
         android:checkable="true"
         android:icon="@drawable/ic_user_white"
         android:title=""

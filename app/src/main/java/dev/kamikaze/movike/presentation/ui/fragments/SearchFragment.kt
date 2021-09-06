@@ -27,15 +27,15 @@ import javax.inject.Inject
 class SearchFragment : BaseFragment<SearchNavigator>(),
         SearchMovieItemClickListener, SearchCallback {
     
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-    private val viewModel: SearchViewModel by viewModels { factory }
-    
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     
     @Inject
-    lateinit var adapter: SearchMovieAdapter
+    internal lateinit var factory: ViewModelProvider.Factory
+    private val viewModel: SearchViewModel by viewModels { factory }
+    
+    @Inject
+    lateinit var moviesAdapter: SearchMovieAdapter
     
     @Inject
     lateinit var loadingStateAdapter: LoadingStateAdapter
@@ -50,17 +50,28 @@ class SearchFragment : BaseFragment<SearchNavigator>(),
     
     override fun onResume() {
         super.onResume()
+        moviesAdapter.apply {
+            callback = this@SearchFragment
+            addLoadStateListener { handleLoadState(it) }
+        }
+        loadingStateAdapter.callback = this
         binding.customSearchView.callback = this
     }
     
     override fun onPause() {
         super.onPause()
+        moviesAdapter.apply {
+            callback = null
+            removeLoadStateListener { handleLoadState(it) }
+        }
+        loadingStateAdapter.callback = null
         binding.customSearchView.callback = null
     }
     
     override fun onDestroyView() {
         super.onDestroyView()
         job?.cancel()
+        binding.movieRV.adapter = null
         _binding = null
     }
     
@@ -82,14 +93,10 @@ class SearchFragment : BaseFragment<SearchNavigator>(),
     }
     
     private fun initAdapter() {
-        with(adapter) {
-            callback = this@SearchFragment
-            addLoadStateListener { handleLoadState(it) }
-            loadingStateAdapter.callback = this@SearchFragment
-            binding.movieRV.adapter = withLoadStateFooter(loadingStateAdapter)
-            binding.movieRV.setHasFixedSize(true)
+        binding.movieRV.apply {
+            setHasFixedSize(true)
+            adapter = moviesAdapter.withLoadStateFooter(loadingStateAdapter)
         }
-        binding.customSearchView
     }
     
     /* private fun onSuccessLoad(movie: Flow<PagingData<Movie>>) {
@@ -108,7 +115,7 @@ class SearchFragment : BaseFragment<SearchNavigator>(),
     private fun getSearchJob(searchString: String): Job {
         return lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getMovieFlow(searchString).collectLatest { adapter.submitData(it) }
+                viewModel.getMovieFlow(searchString).collectLatest { moviesAdapter.submitData(it) }
             }
         }
     }
