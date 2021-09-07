@@ -1,5 +1,6 @@
 package dev.kamikaze.movike.presentation.ui.activity
 
+import android.view.View
 import dev.kamikaze.movike.presentation.customviews.error.ErrorCallback
 import dev.kamikaze.shared_error.ApiError
 
@@ -18,5 +19,9 @@ interface SingleActivityViewModelCallbacks {
     fun hideToolbar()
     
     fun showToolbar()
+    
+    fun showKeyboard(focusedView: View)
+    
+    fun hideKeyboard()
     
 }

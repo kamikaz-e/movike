@@ -24,7 +24,7 @@
             android:background="@color/orange"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_collapseMode="pin"
-            app:titleTextAppearance="@style/Theme.ActionBar.TitleTextStyle" />
+            app:titleTextAppearance="@style/ActionBar.TitleTextStyle" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

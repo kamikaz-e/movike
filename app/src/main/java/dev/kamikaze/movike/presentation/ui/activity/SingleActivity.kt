@@ -3,12 +3,14 @@ package dev.kamikaze.movike.presentation.ui.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.core.view.WindowCompat
+import android.view.View
 import androidx.core.view.isVisible
 import dagger.android.support.DaggerAppCompatActivity
 import dev.kamikaze.movike.BuildConfig
 import dev.kamikaze.movike.common.base.NavigatorProvider
 import dev.kamikaze.movike.databinding.ActivityMainBinding
+import dev.kamikaze.movike.extensions.hideAppKeyboard
+import dev.kamikaze.movike.extensions.showAppKeyboard
 import dev.kamikaze.movike.presentation.customviews.error.ErrorCallback
 import dev.kamikaze.movike.presentation.navigation.Navigator
 import dev.kamikaze.shared_error.ApiError
@@ -25,7 +27,6 @@ class SingleActivity : DaggerAppCompatActivity(), SingleActivityViewModelCallbac
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setSupportActionBar(toolbar)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
     
     override fun onSupportNavigateUp(): Boolean {
@@ -62,6 +63,14 @@ class SingleActivity : DaggerAppCompatActivity(), SingleActivityViewModelCallbac
     
     override fun showToolbar() {
         toolbar.isVisible = true
+    }
+    
+    override fun showKeyboard(focusedView: View) {
+        showAppKeyboard(focusedView)
+    }
+    
+    override fun hideKeyboard() {
+        hideAppKeyboard()
     }
     
 }

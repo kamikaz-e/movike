@@ -11,39 +11,39 @@ import dev.kamikaze.movike.common.base.BaseFragment
 import dev.kamikaze.movike.common.base.BaseNavigator
 import dev.kamikaze.movike.utils.KeyboardUtil
 
-fun Context.showKeyboard(view: View) {
+fun Context.showAppKeyboard(view: View) {
     KeyboardUtil.showKeyboard(view, this)
 }
 
-fun Activity.showKeyboard(view: View) {
+fun Activity.showAppKeyboard(view: View) {
     KeyboardUtil.showKeyboard(view, this)
 }
 
-fun Fragment.showKeyboard(view: View) {
-    context?.showKeyboard(view)
+fun Fragment.showAppKeyboard(view: View) {
+    requireContext().showAppKeyboard(view)
 }
 
-fun View.showKeyboard(view: View) {
-    context.showKeyboard(view)
+fun View.showAppKeyboard(view: View) {
+    context.showAppKeyboard(view)
 }
 
-fun Dialog.showKeyboard() {
+fun Dialog.showAppKeyboard() {
     KeyboardUtil.showKeyboardFromDialog(this)
 }
 
-fun Activity.hideKeyboard() {
+fun Activity.hideAppKeyboard() {
     KeyboardUtil.hideKeyboard(this)
 }
 
-fun BaseFragment<BaseNavigator>.hideKeyboard() {
-    activity?.hideKeyboard()
+fun BaseFragment<BaseNavigator>.hideAppKeyboard() {
+    requireActivity().hideAppKeyboard()
 }
 
-fun View.hideKeyboard() {
+fun View.hideAppKeyboard() {
     KeyboardUtil.hideKeyboard(this)
 }
 
-fun Dialog.hideKeyboard() {
+fun Dialog.hideAppKeyboard() {
     KeyboardUtil.hideKeyboardFromDialog(this)
 }
 
@@ -56,7 +56,7 @@ fun Activity.hideKeyBoardClickOutSide(view: View) {
 }
 
 fun Fragment.hideKeyBoardClickOutSide(view: View) {
-    context?.hideKeyBoardClickOutSide(view)
+    requireContext().hideKeyBoardClickOutSide(view)
 }
 
 fun View.hideKeyBoardClickOutSide(view: View) {

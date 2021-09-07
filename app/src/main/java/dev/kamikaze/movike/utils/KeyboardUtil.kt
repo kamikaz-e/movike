@@ -12,7 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 
 object KeyboardUtil {
-
+    
     @Suppress("unused")
     fun showKeyboard(view: View, context: Context?) {
         if (view.requestFocus()) {
@@ -20,16 +20,15 @@ object KeyboardUtil {
             imm.showSoftInput(view, InputMethodManager.SHOW_FORCED)
         }
     }
-
+    
     @Suppress("unused")
     fun hideKeyboard(view: View, context: Context?) {
         if (view.requestFocus()) {
             val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
-
         }
     }
-
+    
     @Suppress("unused")
     fun hideKeyboard(activity: Activity) {
         if (activity.currentFocus != null) {
@@ -37,26 +36,25 @@ object KeyboardUtil {
             imm.hideSoftInputFromWindow(activity.currentFocus?.windowToken, 0)
         }
     }
-
+    
     @Suppress("unused")
     fun hideKeyboard(view: View) {
         if (!view.isFocusable) {
-            val imm =
-                view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
-
+    
     @Suppress("unused")
     fun showKeyboardFromDialog(dialog: Dialog?) {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
     }
-
+    
     @Suppress("unused")
     fun hideKeyboardFromDialog(dialog: Dialog?) {
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
-
+    
     @Suppress("unused")
     fun hideKeyBoardClickOutSide(view: View?, context: Context?) {
         view?.let {
@@ -75,5 +73,5 @@ object KeyboardUtil {
             }
         }
     }
-
+    
 }

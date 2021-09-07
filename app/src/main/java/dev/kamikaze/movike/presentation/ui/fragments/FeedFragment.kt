@@ -50,29 +50,17 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
         return binding.root
     }
     
-    override fun onResume() {
-        super.onResume()
-        moviesAdapter.apply {
-            callback = this@FeedFragment
-            addLoadStateListener { handleLoadState(it) }
-        }
-        loadingStateAdapter.callback = this
-        binding.swipeRefreshLayout.callback = this
-    }
-    
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroyView() {
+        super.onDestroyView()
         moviesAdapter.apply {
             callback = null
             removeLoadStateListener { handleLoadState(it) }
         }
         loadingStateAdapter.callback = null
-        binding.swipeRefreshLayout.callback = null
-    }
-    
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.movieRV.adapter = null
+        binding.apply {
+            swipeRefreshLayout.callback = null
+            movieRV.adapter = null
+        }
         _binding = null
     }
     
@@ -119,7 +107,13 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
         binding.movieRV.apply {
             setHasFixedSize(true)
             adapter = moviesAdapter.withLoadStateFooter(loadingStateAdapter)
+            moviesAdapter.apply {
+                callback = this@FeedFragment
+                addLoadStateListener { handleLoadState(it) }
+            }
         }
+        loadingStateAdapter.callback = this
+        binding.swipeRefreshLayout.callback = this
     }
     
     private fun handleLoadState(state: CombinedLoadStates) {

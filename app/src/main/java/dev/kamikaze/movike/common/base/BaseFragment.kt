@@ -8,7 +8,6 @@ import dagger.android.support.DaggerFragment
 import dev.kamikaze.feature_snack.showSnackCallback
 import dev.kamikaze.movike.R
 import dev.kamikaze.movike.presentation.ui.activity.SingleActivityViewModelCallbacks
-import dev.kamikaze.movike.utils.KeyboardUtil.hideKeyboard
 import dev.kamikaze.shared_error.ApiError
 import dev.kamikaze.shared_error.ApiErrorFactory
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -55,7 +54,7 @@ abstract class BaseFragment<N : BaseNavigator> : DaggerFragment(), BaseViewCallb
     
     override fun onPause() {
         super.onPause()
-        hideKeyboard(requireActivity())
+        callbacks.hideKeyboard()
         callbacks.setOnErrorClick(null)
     }
     
