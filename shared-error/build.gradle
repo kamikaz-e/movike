@@ -5,9 +5,9 @@ plugins {
 }
 
 android {
+    namespace "dev.kamikaze.shared_error"
 
     compileSdkVersion buildConfigVersion.sdk
-    buildToolsVersion buildConfigVersion.tools
 
     defaultConfig {
         minSdkVersion buildConfigVersion.min_sdk
@@ -63,6 +63,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig true
         viewBinding true
     }
 

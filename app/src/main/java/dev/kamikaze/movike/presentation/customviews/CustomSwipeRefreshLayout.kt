@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dev.kamikaze.movike.R
+import dev.kamikaze.shared_extensions.R as SharedR
 
 class CustomSwipeRefreshLayout(context: Context, attrs: AttributeSet) :
     SwipeRefreshLayout(context, attrs), SwipeRefreshLayout.OnRefreshListener {
@@ -11,7 +12,7 @@ class CustomSwipeRefreshLayout(context: Context, attrs: AttributeSet) :
     var callback: OnRefreshListener? = null
 
     init {
-        setColorSchemeResources(R.color.orange, R.color.light_red, R.color.red)
+        setColorSchemeResources(SharedR.color.orange, SharedR.color.light_red, SharedR.color.red)
         setOnRefreshListener(this)
     }
 

@@ -9,9 +9,9 @@ buildscript {
                 "minor"  : 0,
                 "patch"  : 0,
                 "build"  : 1,
-                "sdk"    : 31,
+                "sdk"    : 34,
                 "min_sdk": 21,
-                "tools"  : "31.0.0"
+                "tools"  : "34.0.0"
         ]
 
         code = buildConfigVersion.major * 1000 + buildConfigVersion.minor * 100 + buildConfigVersion.patch * 10 + buildConfigVersion.build
@@ -19,12 +19,12 @@ buildscript {
         name = "$buildConfigVersion.major.$buildConfigVersion.minor.$buildConfigVersion.patch"
 
         vers = [
-                kotlin                  : "1.5.30",
-                gradle                  : '7.0.2',
-                dagger                  : "2.38.1",
-                nav_version             : "2.3.5",
+                kotlin                  : "1.9.24",
+                gradle                  : '8.13.1',
+                dagger                  : "2.50",
+                nav_version             : "2.7.7",
                 paging                  : "3.0.1",
-                google_services         : "4.3.4",
+                google_services         : '4.3.10',
                 moshi                   : "1.12.0",
                 retrofit2               : "2.9.0",
                 okhttp3                 : "5.0.0-alpha.2",

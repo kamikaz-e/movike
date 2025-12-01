@@ -8,9 +8,9 @@ plugins {
 }
 
 android {
+    namespace "dev.kamikaze.movike"
 
     compileSdkVersion buildConfigVersion.sdk
-    buildToolsVersion buildConfigVersion.tools
 
     defaultConfig {
         minSdkVersion buildConfigVersion.min_sdk
@@ -49,11 +49,12 @@ android {
             //debuggable true
             buildConfigField "String", "APP_LINK", '""'
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
-            buildConfigField "String", "API_KEY", "\"bfdc275b8577a736e7cd02b7ea45e335\""
+            buildConfigField "String", "API_KEY", "\"6521adbdad09387a278353f36e241434\""
         }
     }
 
     buildFeatures {
+        buildConfig true
         viewBinding true
     }
 

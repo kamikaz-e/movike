@@ -13,6 +13,7 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dev.kamikaze.movike.R
+import dev.kamikaze.shared_extensions.R as SharedR
 import dev.kamikaze.movike.common.base.BaseFragment
 import dev.kamikaze.movike.databinding.FragmentFeedBinding
 import dev.kamikaze.movike.presentation.adapters.LoadingStateAdapter
@@ -74,7 +75,7 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
     }
     
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_feed_activity, menu)
+        inflater.inflate(SharedR.menu.menu_feed_activity, menu)
     }
     
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

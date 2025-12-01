@@ -4,9 +4,9 @@ plugins {
 }
 
 android {
+    namespace "dev.kamikaze.shared_utils"
 
     compileSdkVersion buildConfigVersion.sdk
-    buildToolsVersion buildConfigVersion.tools
 
     defaultConfig {
         minSdkVersion buildConfigVersion.min_sdk
@@ -59,6 +59,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 
 }

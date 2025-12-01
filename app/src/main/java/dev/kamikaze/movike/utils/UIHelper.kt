@@ -7,6 +7,7 @@ import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import dev.kamikaze.movike.R
+import dev.kamikaze.shared_extensions.R as SharedR
 import dev.kamikaze.movike.AppController
 
 object UIHelper {
@@ -15,7 +16,7 @@ object UIHelper {
         AppController.appContext.resources.getDimensionPixelSize(dimenRes)
 
     val defaultFont: Typeface?
-        get() = ResourcesCompat.getFont(AppController.appContext, R.font.movike_regular)
+        get() = ResourcesCompat.getFont(AppController.appContext, SharedR.font.movike_regular)
 
     fun getDraw(@DrawableRes drawRes: Int) =
         ContextCompat.getDrawable(AppController.appContext, drawRes)

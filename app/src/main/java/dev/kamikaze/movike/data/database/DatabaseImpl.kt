@@ -1,6 +1,7 @@
 package dev.kamikaze.movike.data.database
 
 import dev.kamikaze.movike.R
+import dev.kamikaze.shared_extensions.R as SharedR
 import dev.kamikaze.movike.data.database.dao.CategoryFavoriteDao
 import dev.kamikaze.movike.data.database.dao.CategoryMovieCrossRefDao
 import dev.kamikaze.movike.data.database.dao.MovieDao
@@ -32,7 +33,7 @@ class DatabaseImpl
     override fun initStartValue() {
         val categoryList = categoryTable.getList()
         if (categoryList.isEmpty()) {
-            val categoryArray = UIHelper.getArray(R.array.categoryFavorite)
+            val categoryArray = UIHelper.getArray(SharedR.array.categoryFavorite)
             val defaultCategoryList = categoryArray.flatMap {
                 listOf(CategoryFavorite(categoryTitle = it))
             }

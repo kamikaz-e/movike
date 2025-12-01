@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.TextView
 import dev.kamikaze.movike.R
+import dev.kamikaze.shared_extensions.R as SharedR
 import dev.kamikaze.movike.utils.UIHelper
 
 class WatchMovieBtn(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
@@ -19,15 +20,15 @@ class WatchMovieBtn(context: Context, attrs: AttributeSet) : FrameLayout(context
     private val watchView by lazy { view.findViewById<TextView>(R.id.watchTV) }
 
     private val enableState = Triple(
-        R.drawable.bgr_circle_orange_ripple_light_orange,
-        R.color.black_dark,
-        R.drawable.ic_favorite_black
+        SharedR.drawable.bgr_circle_orange_ripple_light_orange,
+        SharedR.color.black_dark,
+        SharedR.drawable.ic_favorite_black
     )
 
     private val disableState = Triple(
-        R.drawable.bgr_circle_black_ripple_grey,
-        R.color.white_light,
-        R.drawable.ic_favorite_white
+        SharedR.drawable.bgr_circle_black_ripple_grey,
+        SharedR.color.white_light,
+        SharedR.drawable.ic_favorite_white
     )
 
     init {
