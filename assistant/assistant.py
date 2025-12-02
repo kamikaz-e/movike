@@ -324,6 +324,10 @@ def main():
         assistant.interactive_mode()
     else:
         command = sys.argv[1].lower()
+        
+        # Поддержка /help как синонима help
+        if command == '/help' or command == 'help':
+            command = 'help'
 
         if command == 'help':
             question = ' '.join(sys.argv[2:]) if len(sys.argv) > 2 else ""
@@ -355,12 +359,15 @@ def main():
             print(f"Неизвестная команда: {command}")
             print("\nИспользование:")
             print("  python3 assistant.py help 'вопрос'       # Задать вопрос")
+            print("  python3 assistant.py /help 'вопрос'      # То же самое (синоним)")
             print("  python3 assistant.py search 'текст'      # Поиск")
             print("  python3 assistant.py git                 # Git информация")
             print("  python3 assistant.py stats               # Статистика")
             print("  python3 assistant.py reindex             # Переиндексация")
             print("  python3 assistant.py interactive         # Интерактивный режим")
             print("  python3 assistant.py                     # Интерактивный режим (по умолчанию)")
+            print("\n💡 Важно: В zsh используйте одинарные кавычки для вопросов со знаками препинания:")
+            print("   python3 assistant.py help 'Какие модули есть в проекте?'")
 
 
 if __name__ == "__main__":

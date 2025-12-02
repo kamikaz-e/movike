@@ -1,5 +1,5 @@
 {
-  "total_documents": 137,
+  "total_documents": 139,
   "documents": [
     {
       "file": "README.md",
@@ -9,32 +9,42 @@
     {
       "file": "README.md",
       "chunk_index": 1,
-      "content": "1. Клонируйте репозиторий:\n```bash\ngit clone <repository-url>\ncd Movike\n```\n\n2. Откройте проект в Android Studio\n\n3. Синхронизируйте Gradle:\n```bash\n./gradlew build\n```\n\n4. Запустите приложение на эмуляторе или устройстве\n\n## Структура проекта\n\n```\nMovike/\n├── app/                    # Основное приложение\n├── feature-snack/          # Feature модуль\n├── shared-resources/       # Общие ресурсы\n├── shared-utils/           # Утилиты\n├── shared-error/           # Обработка ошибок"
+      "content": "1. Клонируйте репозиторий:\n```bash\ngit clone <repository-url>\ncd Movike\n```\n\n2. Откройте проект в Android Studio\n\n3. Синхронизируйте Gradle:\n```bash\n./gradlew build\n```\n\n4. Запустите приложение на эмуляторе или устройстве\n\n### AI Ассистент\n\nДля получения справки о проекте используйте простую команду:\n```bash\nrun_assistant help 'ваш вопрос'\n```\n\nПримеры:\n```bash\nrun_assistant help 'Какие модули есть в проекте?'\nrun_assistant help 'структура проекта'\nrun_assistant /help 'API'\n```\n"
     },
     {
       "file": "README.md",
       "chunk_index": 2,
-      "content": "├── project/docs/           # Документация проекта\n│   ├── PROJECT_STRUCTURE.md\n│   ├── API_REFERENCE.md\n│   └── CODE_STYLE.md\n├── build.gradle            # Корневая конфигурация Gradle\n└── settings.gradle         # Настройки проекта\n```\n\n## Модули\n\n### app\nОсновное приложение с точкой входа и навигацией.\n\n### feature-snack\nFeature модуль с функциональностью snack.\n\n### shared-resources\nОбщие ресурсы: строки, цвета, темы, drawable.\n\n### shared-utils\nУтилитные классы и расширения.\n\n### shared-error"
+      "content": "Подробнее см. раздел [Использование команды /help](#использование-команды-help)\n\n## Структура проекта\n\n```\nMovike/\n├── app/                    # Основное приложение\n├── feature-snack/          # Feature модуль\n├── shared-resources/       # Общие ресурсы\n├── shared-utils/           # Утилиты\n├── shared-error/           # Обработка ошибок\n├── project/docs/           # Документация проекта\n│   ├── PROJECT_STRUCTURE.md\n│   ├── API_REFERENCE.md\n│   └── CODE_STYLE.md"
     },
     {
       "file": "README.md",
       "chunk_index": 3,
-      "content": "Обработка ошибок и логирование.\n\n## Сборка\n\n### Debug сборка\n```bash\n./gradlew assembleDebug\n```\n\n### Release сборка\n```bash\n./gradlew assembleRelease\n```\n\n### Запуск тестов\n```bash\n./gradlew test\n```\n\n## Документация\n\n- [PROJECT_STRUCTURE.md](project/docs/PROJECT_STRUCTURE.md) - архитектура проекта\n- [API_REFERENCE.md](project/docs/API_REFERENCE.md) - справка по API\n- [CODE_STYLE.md](project/docs/CODE_STYLE.md) - стиль кода\n\n## Использование команды /help\n\nДля получения справки о проекте используйте:\n```\n/help\n```\n"
+      "content": "├── build.gradle            # Корневая конфигурация Gradle\n└── settings.gradle         # Настройки проекта\n```\n\n## Модули\n\n### app\nОсновное приложение с точкой входа и навигацией.\n\n### feature-snack\nFeature модуль с функциональностью snack.\n\n### shared-resources\nОбщие ресурсы: строки, цвета, темы, drawable.\n\n### shared-utils\nУтилитные классы и расширения.\n\n### shared-error\nОбработка ошибок и логирование.\n\n## Сборка\n\n### Debug сборка\n```bash\n./gradlew assembleDebug\n```\n\n### Release сборка\n```bash\n./gradlew assembleRelease\n```\n"
     },
     {
       "file": "README.md",
       "chunk_index": 4,
-      "content": "Команда поддерживает вопросы о:\n- Структуре проекта\n- API и методах\n- Стиле кода\n- Архитектурных решениях\n- Примерах использования\n\n## Примеры вопросов для /help\n\n- \"Какая структура проекта?\"\n- \"Какие модули есть в проекте?\"\n- \"Как добавить новый feature модуль?\"\n- \"Какой стиль именования для классов?\"\n- \"Как запустить сборку проекта?\"\n\n## Git workflow\n\nПроверить текущую ветку:\n```bash\ngit branch\n```\n\nСоздать новую ветку:\n```bash\ngit checkout -b feature/my-feature\n```\n\n## Архитектура\n\n### Multi-module\n```"
+      "content": "### Запуск тестов\n```bash\n./gradlew test\n```\n\n## Документация\n\n- [PROJECT_STRUCTURE.md](project/docs/PROJECT_STRUCTURE.md) - архитектура проекта\n- [API_REFERENCE.md](project/docs/API_REFERENCE.md) - справка по API\n- [CODE_STYLE.md](project/docs/CODE_STYLE.md) - стиль кода\n\n## Использование команды /help\n\n### В Claude Code\n\nДля получения справки о проекте используйте:\n```\n/help\n```\n\n### В терминале\n\n**Простая команда (рекомендуется):**\n```bash\n# Используйте простую команду run_assistant"
     },
     {
       "file": "README.md",
       "chunk_index": 5,
-      "content": "app → feature modules → shared libraries\n```\n\n### Зависимости модулей\n- app зависит от feature модулей\n- feature модули зависят от shared библиотек\n- shared библиотеки независимы друг от друга\n\n## Требования к системе\n\n- minSdk: 24 (Android 7.0)\n- targetSdk: 34 (Android 14)\n- compileSdk: 34\n\n## Лицензия\n\nTODO: Указать лицензию\n\n## Авторы\n\n- Разработка: 2024-2025\n- Текущая версия: 1.0\n\n## Поддержка\n\nДля вопросов и обратной связи:\n- Issues: создайте issue в репозитории\n- Документация: см. project/docs/\n\n---\n"
+      "content": "run_assistant help 'Какие модули есть в проекте?'\n\n# Также поддерживается /help как синоним\nrun_assistant /help 'Какие модули есть в проекте?'\n\n# Без знака вопроса тоже работает\nrun_assistant help 'Какие модули есть в проекте'\n```\n\n**Альтернативный способ (полный путь):**\n```bash\n# Используйте одинарные кавычки для вопросов со знаками препинания (особенно в zsh)\npython3 assistant/assistant.py help 'Какие модули есть в проекте?'\n\n# Также поддерживается /help как синоним"
     },
     {
       "file": "README.md",
       "chunk_index": 6,
-      "content": "Для подробной информации см. [документацию](project/docs/).\n"
+      "content": "python3 assistant/assistant.py /help 'вопрос'\n```\n\n**Важно для zsh:** Используйте одинарные кавычки `'...'` вместо двойных `\"...\"`, чтобы избежать проблем с glob-паттернами (знаки `?`, `*` и т.д.).\n\nКоманда поддерживает вопросы о:\n- Структуре проекта\n- API и методах\n- Стиле кода\n- Архитектурных решениях\n- Примерах использования\n\n## Примеры вопросов для /help\n\n- \"Какая структура проекта?\"\n- \"Какие модули есть в проекте?\"\n- \"Как добавить новый feature модуль?\"\n- \"Какой стиль именования для классов?\""
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 7,
+      "content": "- \"Как запустить сборку проекта?\"\n\n## Git workflow\n\nПроверить текущую ветку:\n```bash\ngit branch\n```\n\nСоздать новую ветку:\n```bash\ngit checkout -b feature/my-feature\n```\n\n## Архитектура\n\n### Multi-module\n```\napp → feature modules → shared libraries\n```\n\n### Зависимости модулей\n- app зависит от feature модулей\n- feature модули зависят от shared библиотек\n- shared библиотеки независимы друг от друга\n\n## Требования к системе\n\n- minSdk: 24 (Android 7.0)\n- targetSdk: 34 (Android 14)\n- compileSdk: 34\n\n## Лицензия\n"
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 8,
+      "content": "TODO: Указать лицензию\n\n## Авторы\n\n- Разработка: 2024-2025\n- Текущая версия: 1.0\n\n## Поддержка\n\nДля вопросов и обратной связи:\n- Issues: создайте issue в репозитории\n- Документация: см. project/docs/\n\n---\n\nДля подробной информации см. [документацию](project/docs/).\n"
     },
     {
       "file": "project/docs/API_REFERENCE.md",
@@ -1208,7 +1218,7 @@
     }
   ],
   "metadata": {
-    "documentation_chunks": 33,
+    "documentation_chunks": 35,
     "code_classes": 104
   }
 }

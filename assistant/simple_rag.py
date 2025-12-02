@@ -104,25 +104,56 @@ class SimpleRAG:
         return True
 
     def search(self, query: str, limit: int = 5) -> List[Dict]:
-        """Простой поиск по ключевым словам"""
+        """Улучшенный поиск по ключевым словам с учетом контекста"""
         if not self.documents:
             if not self.load_index():
                 return []
 
-        query_words = set(query.lower().split())
+        query_lower = query.lower()
+        query_words = set(query_lower.split())
         results = []
 
         for doc in self.documents:
             content_lower = doc['content'].lower()
+            file_lower = doc['file'].lower()
 
-            # Подсчёт совпадений
+            # Базовый подсчёт совпадений
             matches = sum(1 for word in query_words if word in content_lower)
+            
+            if matches == 0:
+                continue
 
-            if matches > 0:
-                results.append({
-                    **doc,
-                    'score': matches
-                })
+            score = matches
+
+            # Бонусы за релевантность:
+            # 1. Если запрос содержит "модули" и в контенте есть заголовок "## Модули" или "### app", "### feature"
+            if 'модули' in query_lower or 'модуль' in query_lower:
+                if '## модули' in content_lower or '### app' in content_lower or '### feature' in content_lower or '### shared' in content_lower:
+                    score += 10
+            
+            # 2. Если запрос содержит "структура" и в контенте есть "структура проекта"
+            if 'структура' in query_lower:
+                if 'структура проекта' in content_lower or '## структура' in content_lower:
+                    score += 5
+            
+            # 3. Если запрос содержит "api" и в контенте есть "## api" или "api reference"
+            if 'api' in query_lower:
+                if '## api' in content_lower or 'api reference' in content_lower:
+                    score += 5
+            
+            # 4. Бонус за точное совпадение фразы
+            if query_lower in content_lower:
+                score += 3
+            
+            # 5. Бонус за совпадение в начале контента (заголовки важнее)
+            first_200 = content_lower[:200]
+            if any(word in first_200 for word in query_words):
+                score += 2
+
+            results.append({
+                **doc,
+                'score': score
+            })
 
         # Сортировка по релевантности
         results.sort(key=lambda x: x['score'], reverse=True)

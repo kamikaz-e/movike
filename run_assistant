@@ -1,0 +1,7 @@
+#!/bin/bash
+# Простая команда для запуска Movike Assistant
+# Использование: run_assistant help 'вопрос' или run_assistant /help 'вопрос'
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+python3 "$SCRIPT_DIR/assistant/assistant.py" "$@"
+
