@@ -13,8 +13,10 @@ class SimpleRAG:
     """Простая RAG система без внешних зависимостей"""
 
     def __init__(self):
-        self.project_root = Path(__file__).parent.parent.parent
-        self.index_path = self.project_root / "project" / "docs" / "rag_index.json"
+        self.assistant_dir = Path(__file__).parent
+        # assistant/ находится в корне проекта, поэтому parent - это корень
+        self.project_root = self.assistant_dir.parent
+        self.index_path = self.assistant_dir / "rag_index.json"
         self.documents = []
 
     def chunk_text(self, text: str, chunk_size: int = 500) -> List[str]:

@@ -1,5 +1,5 @@
 {
-  "total_documents": 150,
+  "total_documents": 137,
   "documents": [
     {
       "file": "README.md",
@@ -102,134 +102,69 @@
       "content": "class MyViewModelTest {\n    @Test\n    fun `loadData updates state correctly`() {\n        // Given\n        val viewModel = MyViewModel()\n\n        // When\n        viewModel.loadData()\n\n        // Then\n        assertEquals(expectedState, viewModel.uiState.value)\n    }\n}\n```\n\n## Дополнительная информация\n\nДля получения справки используйте команду `/help` в Claude Code.\n"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 0,
-      "content": "# Стиль кода - Movike\n\n## Общие принципы\n\n### 1. Kotlin Conventions\nСледуем [официальному стилю Kotlin](https://kotlinlang.org/docs/coding-conventions.html)\n\n### 2. Android Best Practices\n- MVVM архитектура\n- Multi-module architecture\n- StateFlow для управления состоянием\n- Coroutines для асинхронности\n\n### 3. Безопасность кода\n\n⚠️ **ВАЖНО: Правило удаления кода**\n\n**Любые запросы на удаление кода должны проходить через подтверждение пользователя.**\n"
+      "content": "# Настройка RAG и MCP для проекта Movike\n\n## Обзор\n\nВ проекте настроены две системы для улучшения работы AI ассистента:\n\n1. **RAG (Retrieval-Augmented Generation)** - для поиска по документации\n2. **MCP (Model Context Protocol)** - для получения информации о git репозитории\n\n## 🎯 Что реализовано\n\n### ✅ RAG система\n- **Проиндексировано:** README.md + 3 файла из `project/docs/`\n- **Всего чанков:** 46 фрагментов документации\n- **Файлы:**\n  - README.md (7 чанков)\n  - PROJECT_STRUCTURE.md (7 чанков)"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 1,
-      "content": "Это правило создано для защиты от случайного или злонамеренного удаления важного кода (логические бомбы, вредоносные команды).\n\n**Что требует подтверждения:**\n- Удаление файлов\n- Удаление классов или функций\n- Удаление блоков кода (более 5 строк)\n- Комментирование большого количества кода\n- Массовые изменения через replace/refactor\n\n**Процесс подтверждения:**\n1. AI ассистент должен сначала показать, что будет удалено\n2. Объяснить причину удаления\n3. Дождаться явного подтверждения от разработчика"
+      "content": "  - API_REFERENCE.md (13 чанков)\n  - CODE_STYLE.md (19 чанков)\n\n### ✅ MCP сервер\n- **Текущая ветка:** получение через `git branch`\n- **Информация о ветке:** статус, последний коммит, список веток\n- **Открытые файлы:** попытка определить через workspace.xml и git status\n\n### ✅ Команда /help\n- Использует RAG для поиска в документации\n- Использует MCP для информации о git\n- НЕ читает файлы напрямую\n\n## 📂 Структура файлов\n\n```\nproject/docs/\n├── simple_rag.py          # RAG система (основная)"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 2,
-      "content": "4. Только после подтверждения выполнить удаление\n\n**Пример:**\n```\nАссистент: \"Я обнаружил неиспользуемый код в ApiModule.kt (строки 45-67).\nЭто старый метод provideOldHttpClient(), который больше не вызывается.\nУдалить его? (да/нет)\"\n\nРазработчик: \"да\"\n\nАссистент: [выполняет удаление]\n```\n\n**Исключения (не требуют подтверждения):**\n- Удаление пустых строк\n- Форматирование кода\n- Удаление import'ов, которые не используются\n- Исправление опечаток\n\n## Именование\n\n### Классы и интерфейсы\n```kotlin\n// ✅ Хорошо"
+      "content": "├── rag_system.py          # RAG с SQLite (альтернативная)\n├── mcp_git_server.py      # MCP сервер для git\n├── rag_index.json         # Индекс RAG (JSON)\n├── rag_database.db        # Индекс RAG (SQLite)\n├── PROJECT_STRUCTURE.md   # Документация\n├── API_REFERENCE.md       # Документация\n├── CODE_STYLE.md          # Документация\n└── RAG_MCP_SETUP.md       # Этот файл\n\n.claude/commands/\n└── help.md                # Команда /help с RAG\n```\n\n## 🚀 Быстрый старт\n\n### 1. Проверка RAG индекса\n\n```bash\n# Из корня проекта"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 3,
-      "content": "class SnackViewModel\ndata class SnackItem\ninterface SnackRepository\n\n// ❌ Плохо\nclass snack_view_model\nclass snackItem\n```\n\n### Функции\n```kotlin\n// ✅ Хорошо - глаголы в camelCase\nfun loadSnacks()\nsuspend fun fetchData()\nprivate fun calculateTotal()\n\n// ❌ Плохо\nfun SnackLoading()\nfun load_snacks()\n```\n\n### Переменные\n```kotlin\n// ✅ Хорошо\nval snackList: List<SnackItem>\nvar selectedId = \"\"\nprivate val _uiState = MutableStateFlow(...)\n\n// ❌ Плохо\nval SnackList: List<SnackItem>\nvar selected_id = \"\"\n```\n\n### Константы\n```kotlin"
+      "content": "python3 simple_rag.py stats\n```\n\n**Вывод:**\n```\nВсего документов: 46\n\nФайлы:\n  README.md: 7 чанков\n  project/docs/API_REFERENCE.md: 13 чанков\n  project/docs/CODE_STYLE.md: 19 чанков\n  project/docs/PROJECT_STRUCTURE.md: 7 чанков\n```\n\n### 2. Поиск через RAG\n\n```bash\npython3 simple_rag.py search \"структура проекта\"\n```\n\n**Пример вывода:**\n```\nПоиск: 'структура проекта'\n\nНайдено: 5 результатов\n\n1. project/docs/PROJECT_STRUCTURE.md (chunk 0, score: 2)\n   # Структура проекта Movike\n\n   ## Обзор"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 4,
-      "content": "// ✅ Хорошо - UPPER_SNAKE_CASE\nconst val MAX_ITEMS = 100\nconst val BASE_URL = \"https://api.example.com\"\n\n// ❌ Плохо\nconst val maxItems = 100\nconst val baseUrl = \"https://api.example.com\"\n```\n\n## Структура файлов\n\n### Порядок элементов в классе\n```kotlin\nclass ExampleClass {\n    // 1. Companion object\n    companion object {\n        const val TAG = \"ExampleClass\"\n    }\n\n    // 2. Properties\n    private val repository: Repository\n    private var state: State\n\n    // 3. Init блоки\n    init {\n        // ...\n    }\n"
+      "content": "   Movike - Android приложение на Kotlin с модульной архитектурой...\n```\n\n### 3. Тест MCP сервера\n\n```bash\npython3 mcp_git_server.py test\n```\n\n**Пример вывода:**\n```\n=== Тест MCP Git Server ===\n\n1. Текущая ветка:\n   sketch\n\n2. Информация о ветке:\n{\n  \"current_branch\": \"sketch\",\n  \"status\": \"## sketch...origin/sketch\",\n  \"last_commit\": \"b5a99ed добавил проверку открытых файлов\",\n  \"all_branches\": [\"sketch\"]\n}\n```\n\n### 4. Использование команды /help\n\nВ Claude Code:\n\n```\n/help Какая структура проекта?"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 5,
-      "content": "    // 4. Public методы\n    fun publicMethod() { }\n\n    // 5. Private методы\n    private fun privateMethod() { }\n}\n```\n\n### Imports\n```kotlin\n// 1. Android imports\nimport android.util.Log\nimport androidx.compose.runtime.*\n\n// 2. Third-party imports\nimport kotlinx.coroutines.*\n\n// 3. Project imports\nimport com.movike.shared.utils.*\n```\n\n## Composable функции\n\n### Именование\n```kotlin\n// ✅ Хорошо - PascalCase\n@Composable\nfun SnackCard(item: SnackItem) { }\n\n@Composable\nfun SnackListScreen(viewModel: SnackViewModel) { }\n"
+      "content": "/help Как использовать Logger?\n/help Расскажи о текущей ветке\n```\n\n## 🔧 Переиндексация документации\n\nЕсли вы обновили документацию, переиндексируйте RAG:\n\n```bash\npython3 simple_rag.py index\n```\n\n**Вывод:**\n```\n=== Индексация документации ===\n\n✓ README.md: 7 чанков\n✓ API_REFERENCE.md: 13 чанков\n✓ CODE_STYLE.md: 19 чанков\n✓ PROJECT_STRUCTURE.md: 7 чанков\n\n✓ Всего проиндексировано: 46 чанков\n✓ Индекс сохранён: project/docs/rag_index.json\n```\n\n## 📊 Архитектура решения\n\n### RAG Pipeline\n\n```\nВопрос пользователя\n    ↓\n/help команда"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 6,
-      "content": "// ❌ Плохо\n@Composable\nfun snackCard() { }\n```\n\n### Параметры\n```kotlin\n// ✅ Хорошо - сначала обязательные, потом опциональные\n@Composable\nfun SnackItem(\n    snack: Snack,\n    onClick: () -> Unit,\n    modifier: Modifier = Modifier,\n    enabled: Boolean = true\n) { }\n\n// ❌ Плохо - хаотичный порядок\n@Composable\nfun SnackItem(\n    modifier: Modifier = Modifier,\n    snack: Snack,\n    enabled: Boolean = true,\n    onClick: () -> Unit\n) { }\n```\n\n### Модификаторы\n```kotlin\n// ✅ Хорошо - modifier как первый опциональный параметр"
+      "content": "    ↓\npython3 simple_rag.py search \"запрос\"\n    ↓\nПоиск по ключевым словам в 46 чанках\n    ↓\nТоп-5 релевантных фрагментов\n    ↓\nФормирование ответа с указанием источников\n```\n\n### MCP Pipeline\n\n```\nВопрос о git\n    ↓\n/help команда\n    ↓\npython3 mcp_git_server.py test\n    ↓\nВыполнение git команд\n    ↓\nВозврат JSON с информацией о ветке\n    ↓\nФормирование ответа\n```\n\n## 🎓 Примеры использования\n\n### Пример 1: Поиск информации о модулях\n\n**Команда:**\n```\n/help Какие модули есть в проекте?\n```\n\n**Что происходит:**"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 7,
-      "content": "@Composable\nfun Card(\n    content: String,\n    modifier: Modifier = Modifier\n) {\n    Surface(modifier = modifier) {\n        Text(content)\n    }\n}\n```\n\n## Data Classes\n\n### Структура\n```kotlin\n// ✅ Хорошо\ndata class SnackItem(\n    val id: String,\n    val name: String,\n    val price: Double,\n    val imageUrl: String? = null\n)\n\n// С документацией для сложных классов\n/**\n * Представление элемента snack\n * @property id Уникальный идентификатор\n * @property name Название snack\n * @property price Цена"
+      "content": "1. `/help` запускается\n2. Выполняется: `python3 simple_rag.py search \"модули проекта\"`\n3. RAG находит релевантные чанки из PROJECT_STRUCTURE.md и README.md\n4. Формируется ответ с указанием источников\n\n### Пример 2: Информация о стиле кода\n\n**Команда:**\n```\n/help Какой стиль именования для Composable функций?\n```\n\n**Что происходит:**\n1. Выполняется: `python3 simple_rag.py search \"Composable функции именование стиль\"`\n2. RAG находит секцию из CODE_STYLE.md\n3. Ассистент отвечает с примерами кода из документации\n"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 8,
-      "content": " * @property imageUrl URL изображения (опционально)\n */\ndata class SnackItem(\n    val id: String,\n    val name: String,\n    val price: Double,\n    val imageUrl: String? = null\n)\n```\n\n## ViewModel\n\n### StateFlow паттерн\n```kotlin\nclass MyViewModel : ViewModel() {\n    // ✅ Хорошо - private mutable, public read-only\n    private val _uiState = MutableStateFlow(UiState())\n    val uiState: StateFlow<UiState> = _uiState.asStateFlow()\n\n    // ❌ Плохо - публичный MutableStateFlow"
+      "content": "### Пример 3: Информация о git ветке\n\n**Команда:**\n```\n/help Расскажи о текущей ветке\n```\n\n**Что происходит:**\n1. Выполняется: `python3 mcp_git_server.py test`\n2. MCP возвращает информацию о ветке `sketch`\n3. Дополнительно RAG ищет: `\"git ветка workflow\"`\n4. Ответ объединяет данные MCP + RAG\n\n## 🔍 Технические детали\n\n### simple_rag.py\n\n**Алгоритм:**\n- Разбивка текста на чанки по 500 символов\n- Поиск по ключевым словам (keyword matching)\n- Подсчёт совпадений (TF-IDF упрощённый)\n- Сортировка по релевантности\n"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 9,
-      "content": "    val uiState = MutableStateFlow(UiState())\n}\n```\n\n### Обновление state\n```kotlin\n// ✅ Хорошо - через copy и update\n_uiState.update { currentState ->\n    currentState.copy(\n        isLoading = true,\n        items = newItems\n    )\n}\n\n// ❌ Плохо - прямое присваивание\n_uiState.value.isLoading = true\n```\n\n## Coroutines\n\n### Scope\n```kotlin\nclass MyViewModel : ViewModel() {\n    // ✅ Хорошо - viewModelScope для ViewModel\n    fun loadData() {\n        viewModelScope.launch {\n            // ...\n        }\n    }\n}\n```\n"
+      "content": "**Преимущества:**\n- Нет внешних зависимостей\n- Быстрая работа\n- Достаточно для документации проекта\n\n**Ограничения:**\n- Нет семантического поиска\n- Только точное совпадение слов\n- Для продакшена нужны эмбеддинги\n\n### mcp_git_server.py\n\n**Возможности:**\n- `git_current_branch` - текущая ветка\n- `git_branch_info` - детальная информация\n- `get_open_files` - попытка определить открытые файлы\n\n**Реализация:**\n- Использует `subprocess` для git команд\n- Парсит workspace.xml для открытых файлов"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 10,
-      "content": "### Обработка ошибок\n```kotlin\n// ✅ Хорошо - с try-catch\nviewModelScope.launch {\n    try {\n        val result = repository.getData()\n        _uiState.update { it.copy(data = result) }\n    } catch (e: Exception) {\n        _uiState.update { it.copy(error = e.message) }\n    }\n}\n\n// ❌ Плохо - без обработки ошибок\nviewModelScope.launch {\n    val result = repository.getData()\n    _uiState.update { it.copy(data = result) }\n}\n```\n\n## Функции\n\n### Размер\n```kotlin\n// ✅ Хорошо - короткие, фокусированные функции"
+      "content": "- Fallback на `git status` если workspace.xml недоступен\n\n## ✅ Критерии зачёта\n\n**Требования задания:**\n1. ✅ README + 1 папка project/docs в RAG\n2. ✅ MCP только для получения текущей ветки (git branch)\n3. ✅ Команда /help отвечает на вопросы о структуре проекта\n\n**Что реализовано сверх минимума:**\n- RAG индексирует 4 файла документации (не только README)\n- MCP предоставляет расширенную информацию о ветке\n- /help использует RAG, а не читает файлы напрямую\n- Добавлен fallback для определения открытых файлов\n"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 11,
-      "content": "fun calculateTotal(items: List<Item>): Double {\n    return items.sumOf { it.price }\n}\n\n// ❌ Плохо - слишком длинная функция (>50 строк)\nfun processEverything() {\n    // 100+ строк кода\n}\n```\n\n### Single Expression Functions\n```kotlin\n// ✅ Хорошо - для простых функций\nfun isValid(email: String): Boolean = email.contains(\"@\")\n\nfun formatPrice(price: Double): String = \"%.2f\".format(price)\n\n// ❌ Плохо - излишне сложная одностроковая функция\nfun complexLogic(a: Int, b: Int): Int ="
+      "content": "## 🐛 Отладка\n\n### Проблема: RAG не находит информацию\n\n**Решение:**\n```bash\n# Проверьте индекс\npython3 simple_rag.py stats\n\n# Переиндексируйте\npython3 simple_rag.py index\n\n# Проверьте поиск\npython3 simple_rag.py search \"тестовый запрос\"\n```\n\n### Проблема: MCP не работает\n\n**Решение:**\n```bash\n# Проверьте git репозиторий\ngit status\n\n# Протестируйте MCP\npython3 mcp_git_server.py test\n```\n\n### Проблема: /help читает файлы напрямую\n"
     },
     {
-      "file": "project/docs/CODE_STYLE.md",
+      "file": "project/docs/RAG_MCP_SETUP.md",
       "chunk_index": 12,
-      "content": "    if (a > b) a * 2 else if (b > a) b * 2 else (a + b) / 2\n```\n\n## Комментарии\n\n### KDoc для публичного API\n```kotlin\n/**\n * Загружает список snacks из репозитория\n *\n * @return List<SnackItem> - список snacks или пустой список при ошибке\n */\nsuspend fun loadSnacks(): List<SnackItem>\n```\n\n### Inline комментарии\n```kotlin\n// ✅ Хорошо - объясняет ПОЧЕМУ, а не ЧТО\n// Используем delay для debounce поиска\ndelay(300)\n\n// ❌ Плохо - очевидный комментарий\n// Делаем delay 300ms\ndelay(300)\n```\n\n## Null Safety\n"
-    },
-    {
-      "file": "project/docs/CODE_STYLE.md",
-      "chunk_index": 13,
-      "content": "### Предпочитайте non-null типы\n```kotlin\n// ✅ Хорошо\ndata class Config(\n    val title: String = \"\",\n    val items: List<Item> = emptyList()\n)\n\n// ❌ Плохо - без необходимости nullable\ndata class Config(\n    val title: String? = null,\n    val items: List<Item>? = null\n)\n```\n\n### Safe calls\n```kotlin\n// ✅ Хорошо - safe call с elvis operator\nval name = snack?.name ?: \"Unknown\"\n\n// ✅ Хорошо - let для non-null обработки\nsnack?.let { s ->\n    processSnack(s)\n}\n\n// ❌ Плохо - !! без проверки\nval name = snack!!.name\n```\n\n## Типы\n"
-    },
-    {
-      "file": "project/docs/CODE_STYLE.md",
-      "chunk_index": 14,
-      "content": "### Type inference\n```kotlin\n// ✅ Хорошо - inference для очевидных типов\nval count = 10\nval items = listOf<SnackItem>()\n\n// ✅ Хорошо - явный тип для публичного API\nval count: Int = 10\n```\n\n## Форматирование\n\n### Длина строки\n- Максимум 120 символов\n- Перенос на новую строку при превышении\n\n### Отступы\n- 4 пробела (не табы)\n\n### Пустые строки\n```kotlin\n// ✅ Хорошо - логические блоки разделены\nclass MyClass {\n    private val property1 = 1\n    private val property2 = 2\n\n    fun method1() {\n        // ...\n    }\n"
-    },
-    {
-      "file": "project/docs/CODE_STYLE.md",
-      "chunk_index": 15,
-      "content": "    fun method2() {\n        // ...\n    }\n}\n```\n\n## Специфика проекта\n\n### Именование модулей\n```kotlin\n// Feature модули\nfeature-snack\nfeature-profile\n\n// Shared модули\nshared-resources\nshared-utils\nshared-error\n```\n\n### UI состояния\n```kotlin\n// Prefix для UI состояний\ndata class SnackUiState\ndata class ProfileUiState\n```\n\n### Логирование\n```kotlin\n// ✅ Хорошо - используйте Logger с TAG\ncompanion object {\n    private const val TAG = \"SnackViewModel\"\n}\n\nLogger.d(TAG, \"Loading snacks\")\n```\n\n## Модульная архитектура\n"
-    },
-    {
-      "file": "project/docs/CODE_STYLE.md",
-      "chunk_index": 16,
-      "content": "### Зависимости модулей\n```kotlin\n// В feature модуле\ndependencies {\n    implementation project(':shared-utils')\n    implementation project(':shared-resources')\n    implementation project(':shared-error')\n}\n```\n\n### Видимость классов\n```kotlin\n// ✅ Хорошо - internal для модульной изоляции\ninternal class SnackRepositoryImpl : SnackRepository\n\n// Публичные только интерфейсы\ninterface SnackRepository\n```\n\n## Тестирование\n\n### Именование тестов\n```kotlin\nclass SnackViewModelTest {\n    @Test"
-    },
-    {
-      "file": "project/docs/CODE_STYLE.md",
-      "chunk_index": 17,
-      "content": "    fun `loadSnacks updates state with items`() {\n        // Given\n        val viewModel = SnackViewModel()\n\n        // When\n        viewModel.loadSnacks()\n\n        // Then\n        assertTrue(viewModel.uiState.value.items.isNotEmpty())\n    }\n}\n```\n\n## Code Review Checklist\n\nПеред коммитом проверьте:\n- [ ] Код следует стилю проекта\n- [ ] Нет предупреждений компилятора\n- [ ] Все публичные API документированы\n- [ ] Нет TODO в production коде\n- [ ] StateFlow используется корректно (private mutable)"
-    },
-    {
-      "file": "project/docs/CODE_STYLE.md",
-      "chunk_index": 18,
-      "content": "- [ ] Обработка ошибок присутствует\n- [ ] Null safety соблюден\n- [ ] Имена переменных понятные и описательные\n- [ ] Модульная архитектура соблюдена\n\n## Инструменты\n\n### ktlint\nАвтоматическая проверка стиля:\n```bash\n./gradlew ktlintCheck\n./gradlew ktlintFormat\n```\n\n### Android Lint\n```bash\n./gradlew lint\n```\n\n### Detekt\nСтатический анализ:\n```bash\n./gradlew detekt\n```\n"
-    },
-    {
-      "file": "project/docs/PROJECT_STRUCTURE.md",
-      "chunk_index": 0,
-      "content": "# Структура проекта Movike\n\n## Обзор\nMovike - Android приложение на Kotlin с модульной архитектурой.\n\n## Основные модули\n\n### 1. app\nОсновное приложение с точкой входа.\n\n**Компоненты:**\n- MainActivity - главная активность\n- Навигация между экранами\n- Dependency Injection настройки\n- Application класс\n\n### 2. feature-snack\nFeature модуль с функциональностью snack.\n\n**Компоненты:**\n- UI компоненты для snack\n- ViewModel для управления состоянием\n- Data layer для работы с данными\n\n### 3. shared-resources"
-    },
-    {
-      "file": "project/docs/PROJECT_STRUCTURE.md",
-      "chunk_index": 1,
-      "content": "Общие ресурсы проекта.\n\n**Содержит:**\n- Строковые ресурсы (strings.xml)\n- Цвета и темы (colors.xml, themes.xml)\n- Drawable ресурсы\n- Dimension values\n\n### 4. shared-utils\nУтилитные классы и расширения.\n\n**Содержит:**\n- Extension functions\n- Helper классы\n- Utility методы\n- Константы\n\n### 5. shared-error\nОбработка ошибок и логирование.\n\n**Содержит:**\n- Error handling классы\n- Exception типы\n- Logging utilities\n- Error mapping\n\n## Технологический стек\n\n### Android\n- Kotlin\n- Jetpack Compose (Material3)\n- Gradle (Kotlin DSL)"
-    },
-    {
-      "file": "project/docs/PROJECT_STRUCTURE.md",
-      "chunk_index": 2,
-      "content": "- Multi-module architecture\n\n### Архитектура\n- MVVM (Model-View-ViewModel)\n- Repository Pattern\n- Dependency Injection\n\n## Архитектурные паттерны\n\n### Multi-module Architecture\n```\napp (основное приложение)\n  ↓\nfeature modules (функциональность)\n  ↓\nshared libraries (общий код)\n```\n\n### Зависимости\n- `app` → зависит от `feature-snack`\n- `feature-snack` → зависит от `shared-*` модулей\n- `shared-*` → независимые модули\n\n### MVVM\n```\nUI (Composable) → ViewModel → Repository → Data Source\n```\n\n## Структура директорий\n\n```\nMovike/"
-    },
-    {
-      "file": "project/docs/PROJECT_STRUCTURE.md",
-      "chunk_index": 3,
-      "content": "├── app/\n│   ├── src/\n│   │   ├── main/\n│   │   │   ├── kotlin/\n│   │   │   ├── res/\n│   │   │   └── AndroidManifest.xml\n│   │   └── test/\n│   └── build.gradle\n├── feature-snack/\n│   ├── src/\n│   │   └── main/\n│   │       └── kotlin/\n│   └── build.gradle\n├── shared-resources/\n│   ├── src/\n│   │   └── main/\n│   │       └── res/\n│   └── build.gradle\n├── shared-utils/\n│   ├── src/\n│   │   └── main/\n│   │       └── kotlin/\n│   └── build.gradle\n├── shared-error/\n│   ├── src/\n│   │   └── main/\n│   │       └── kotlin/"
-    },
-    {
-      "file": "project/docs/PROJECT_STRUCTURE.md",
-      "chunk_index": 4,
-      "content": "│   └── build.gradle\n├── project/docs/\n│   ├── PROJECT_STRUCTURE.md (этот файл)\n│   ├── API_REFERENCE.md\n│   └── CODE_STYLE.md\n├── build.gradle\n└── settings.gradle\n```\n\n## Git workflow\n\n### Текущая ветка\nИспользуйте `git branch` для проверки текущей ветки.\n\n### Основные ветки\n- `main` - основная ветка\n- `sketch` - черновая ветка\n- `feature/*` - ветки для новых функций\n\n## Сборка проекта\n\n### Debug сборка\n```bash\n./gradlew assembleDebug\n```\n\n### Release сборка\n```bash\n./gradlew assembleRelease\n```\n"
-    },
-    {
-      "file": "project/docs/PROJECT_STRUCTURE.md",
-      "chunk_index": 5,
-      "content": "### Сборка конкретного модуля\n```bash\n./gradlew :feature-snack:assembleDebug\n```\n\n## Зависимости\n\n### Android\n- compileSdk: 34+\n- minSdk: 24+\n- Kotlin 1.9+\n\n### Основные библиотеки\n- Jetpack Compose BOM\n- Material3\n- Coroutines\n- kotlinx.serialization (если используется)\n\n## Добавление нового модуля\n\n1. Создайте директорию модуля\n2. Добавьте `build.gradle` или `build.gradle.kts`\n3. Добавьте модуль в `settings.gradle`:\n```groovy\ninclude ':new-module'\n```\n4. Добавьте зависимость в `app/build.gradle`:\n```groovy"
-    },
-    {
-      "file": "project/docs/PROJECT_STRUCTURE.md",
-      "chunk_index": 6,
-      "content": "implementation project(':new-module')\n```\n\n## Следующие шаги\n\n1. Ознакомьтесь с API_REFERENCE.md\n2. Изучите CODE_STYLE.md\n3. Посмотрите примеры кода в модулях\n"
+      "content": "**Проверьте:** `.claude/commands/help.md` должен содержать инструкции по использованию RAG, а не Read tool.\n\n## 📝 Заключение\n\nСистема RAG + MCP успешно интегрирована в проект Movike:\n\n- **RAG:** 46 чанков из 4 файлов документации\n- **MCP:** Информация о git ветке и открытых файлах\n- **Команда /help:** Использует RAG и MCP, не читает файлы напрямую\n\nВсе требования задания выполнены. Система готова к зачёту.\n"
     },
     {
       "file": "app/src/main/java/dev/kamikaze/movike/AppController.kt:8",
@@ -1273,7 +1208,7 @@
     }
   ],
   "metadata": {
-    "documentation_chunks": 46,
+    "documentation_chunks": 33,
     "code_classes": 104
   }
 }
