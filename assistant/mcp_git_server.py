@@ -44,6 +44,56 @@ class GitMCPServer:
                     "properties": {},
                     "required": []
                 }
+            },
+            "get_pr_diff": {
+                "name": "get_pr_diff",
+                "description": "Получает diff для PR (между base и head ветками)",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "base": {
+                            "type": "string",
+                            "description": "Базовая ветка (например, main или master)"
+                        },
+                        "head": {
+                            "type": "string",
+                            "description": "Ветка с изменениями (по умолчанию текущая)"
+                        }
+                    },
+                    "required": []
+                }
+            },
+            "get_pr_files": {
+                "name": "get_pr_files",
+                "description": "Получает список измененных файлов в PR",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "base": {
+                            "type": "string",
+                            "description": "Базовая ветка"
+                        }
+                    },
+                    "required": []
+                }
+            },
+            "get_file_content": {
+                "name": "get_file_content",
+                "description": "Получает содержимое файла из репозитория",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "Путь к файлу"
+                        },
+                        "ref": {
+                            "type": "string",
+                            "description": "Git ref (ветка/коммит), по умолчанию HEAD"
+                        }
+                    },
+                    "required": ["file_path"]
+                }
             }
         }
 
@@ -224,6 +274,77 @@ class GitMCPServer:
             result['error'] = str(e)
             return result
 
+    def get_pr_diff(self, base: str = "main", head: str = None) -> Dict[str, Any]:
+        """Получает diff между ветками"""
+        try:
+            if head is None:
+                head = self.get_current_branch()
+
+            result = subprocess.run(
+                ['git', 'diff', f'{base}...{head}'],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+
+            return {
+                'base': base,
+                'head': head,
+                'diff': result.stdout,
+                'success': result.returncode == 0
+            }
+        except Exception as e:
+            return {'error': str(e), 'success': False}
+
+    def get_pr_files(self, base: str = "main") -> Dict[str, Any]:
+        """Получает список измененных файлов"""
+        try:
+            result = subprocess.run(
+                ['git', 'diff', '--name-status', f'{base}...HEAD'],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+
+            files = []
+            for line in result.stdout.strip().split('\n'):
+                if line:
+                    parts = line.split('\t')
+                    if len(parts) == 2:
+                        status, filepath = parts
+                        files.append({
+                            'status': status,
+                            'path': filepath
+                        })
+
+            return {
+                'base': base,
+                'files': files,
+                'count': len(files),
+                'success': result.returncode == 0
+            }
+        except Exception as e:
+            return {'error': str(e), 'success': False}
+
+    def get_file_content(self, file_path: str, ref: str = "HEAD") -> Dict[str, Any]:
+        """Получает содержимое файла из git"""
+        try:
+            result = subprocess.run(
+                ['git', 'show', f'{ref}:{file_path}'],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+
+            return {
+                'file_path': file_path,
+                'ref': ref,
+                'content': result.stdout,
+                'success': result.returncode == 0
+            }
+        except Exception as e:
+            return {'error': str(e), 'success': False}
+
     def handle_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
         """Обрабатывает MCP запрос"""
         method = request.get("method")
@@ -273,6 +394,51 @@ class GitMCPServer:
 
             elif tool_name == "get_open_files":
                 result = self.get_open_files()
+                return {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps(result, ensure_ascii=False, indent=2)
+                        }
+                    ]
+                }
+
+            elif tool_name == "get_pr_diff":
+                arguments = params.get("arguments", {})
+                base = arguments.get("base", "main")
+                head = arguments.get("head", None)
+                result = self.get_pr_diff(base, head)
+                return {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps(result, ensure_ascii=False, indent=2)
+                        }
+                    ]
+                }
+
+            elif tool_name == "get_pr_files":
+                arguments = params.get("arguments", {})
+                base = arguments.get("base", "main")
+                result = self.get_pr_files(base)
+                return {
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps(result, ensure_ascii=False, indent=2)
+                        }
+                    ]
+                }
+
+            elif tool_name == "get_file_content":
+                arguments = params.get("arguments", {})
+                file_path = arguments.get("file_path")
+                ref = arguments.get("ref", "HEAD")
+
+                if not file_path:
+                    return {"error": "file_path is required"}
+
+                result = self.get_file_content(file_path, ref)
                 return {
                     "content": [
                         {

@@ -32,14 +32,7 @@
 
 ```
 project/docs/
-├── simple_rag.py          # RAG система (основная)
-├── rag_system.py          # RAG с SQLite (альтернативная)
-├── mcp_git_server.py      # MCP сервер для git
-├── rag_index.json         # Индекс RAG (JSON)
-├── rag_database.db        # Индекс RAG (SQLite)
-├── PROJECT_STRUCTURE.md   # Документация
 ├── API_REFERENCE.md       # Документация
-├── CODE_STYLE.md          # Документация
 └── RAG_MCP_SETUP.md       # Этот файл
 
 .claude/commands/
@@ -62,27 +55,12 @@ python3 simple_rag.py stats
 Файлы:
   README.md: 7 чанков
   project/docs/API_REFERENCE.md: 13 чанков
-  project/docs/CODE_STYLE.md: 19 чанков
-  project/docs/PROJECT_STRUCTURE.md: 7 чанков
 ```
 
 ### 2. Поиск через RAG
 
 ```bash
 python3 simple_rag.py search "структура проекта"
-```
-
-**Пример вывода:**
-```
-Поиск: 'структура проекта'
-
-Найдено: 5 результатов
-
-1. project/docs/PROJECT_STRUCTURE.md (chunk 0, score: 2)
-   # Структура проекта Movike
-
-   ## Обзор
-   Movike - Android приложение на Kotlin с модульной архитектурой...
 ```
 
 ### 3. Тест MCP сервера
@@ -129,10 +107,7 @@ python3 simple_rag.py index
 ```
 === Индексация документации ===
 
-✓ README.md: 7 чанков
 ✓ API_REFERENCE.md: 13 чанков
-✓ CODE_STYLE.md: 19 чанков
-✓ PROJECT_STRUCTURE.md: 7 чанков
 
 ✓ Всего проиндексировано: 46 чанков
 ✓ Индекс сохранён: project/docs/rag_index.json
