@@ -32,7 +32,43 @@
 
 См. подробности в `project/docs/CODE_STYLE.md` (раздел "Безопасность кода")
 
-### 2. Настроен MCP сервер для работы с Git
+### 2. Создана RAG система для документации
+
+**Файл:** `project/docs/simple_rag.py`
+
+RAG (Retrieval-Augmented Generation) система индексирует документацию проекта.
+
+**Что индексируется:**
+- `README.md` - основная документация
+- `project/docs/*.md` - вся техническая документация
+
+**Статистика:**
+- Всего файлов: 4
+- Всего чанков: 46
+- Размер чанка: 500 символов
+
+**Использование:**
+```bash
+# Индексация
+python3 project/docs/simple_rag.py index
+
+# Поиск
+python3 project/docs/simple_rag.py search "какие модули"
+
+# Статистика
+python3 project/docs/simple_rag.py stats
+```
+
+**Пример поиска:**
+```bash
+$ python3 project/docs/simple_rag.py search "структура проекта"
+Найдено: 5 результатов
+1. README.md (chunk 2, score: 3)
+2. PROJECT_STRUCTURE.md (chunk 0, score: 2)
+...
+```
+
+### 3. Настроен MCP сервер для работы с Git
 
 **Файл:** `project/docs/mcp_git_server.py`
 
@@ -48,7 +84,7 @@ cd /Users/admin/StudioProjects/Movike
 python3 project/docs/mcp_git_server.py test
 ```
 
-### 3. Создана команда /help
+### 4. Создана команда /help
 
 **Файл:** `.claude/commands/help.md`
 
@@ -61,7 +97,7 @@ python3 project/docs/mcp_git_server.py test
 - "Какой стиль именования для классов?"
 - "Как запустить сборку проекта?"
 
-### 4. Настроены разрешения
+### 5. Настроены разрешения
 
 **Файл:** `.claude/settings.local.json`
 

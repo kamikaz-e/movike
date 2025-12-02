@@ -1,0 +1,235 @@
+{
+  "total_documents": 46,
+  "documents": [
+    {
+      "file": "README.md",
+      "chunk_index": 0,
+      "content": "# Movike - Android Application\n\nAndroid приложение Movike с модульной архитектурой.\n\n## Возможности\n\n- Модульная архитектура приложения\n- Feature модули для разделения функциональности\n- Shared библиотеки для переиспользования кода\n\n## Технологии\n\n- **Kotlin** - основной язык разработки\n- **Jetpack Compose** - современный UI toolkit\n- **Gradle** - система сборки\n- **Multi-module** - модульная архитектура\n\n## Быстрый старт\n\n### Требования\n\n- Android Studio Hedgehog+\n- JDK 17+\n- Android SDK 34+\n\n### Установка\n"
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 1,
+      "content": "1. Клонируйте репозиторий:\n```bash\ngit clone <repository-url>\ncd Movike\n```\n\n2. Откройте проект в Android Studio\n\n3. Синхронизируйте Gradle:\n```bash\n./gradlew build\n```\n\n4. Запустите приложение на эмуляторе или устройстве\n\n## Структура проекта\n\n```\nMovike/\n├── app/                    # Основное приложение\n├── feature-snack/          # Feature модуль\n├── shared-resources/       # Общие ресурсы\n├── shared-utils/           # Утилиты\n├── shared-error/           # Обработка ошибок"
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 2,
+      "content": "├── project/docs/           # Документация проекта\n│   ├── PROJECT_STRUCTURE.md\n│   ├── API_REFERENCE.md\n│   └── CODE_STYLE.md\n├── build.gradle            # Корневая конфигурация Gradle\n└── settings.gradle         # Настройки проекта\n```\n\n## Модули\n\n### app\nОсновное приложение с точкой входа и навигацией.\n\n### feature-snack\nFeature модуль с функциональностью snack.\n\n### shared-resources\nОбщие ресурсы: строки, цвета, темы, drawable.\n\n### shared-utils\nУтилитные классы и расширения.\n\n### shared-error"
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 3,
+      "content": "Обработка ошибок и логирование.\n\n## Сборка\n\n### Debug сборка\n```bash\n./gradlew assembleDebug\n```\n\n### Release сборка\n```bash\n./gradlew assembleRelease\n```\n\n### Запуск тестов\n```bash\n./gradlew test\n```\n\n## Документация\n\n- [PROJECT_STRUCTURE.md](project/docs/PROJECT_STRUCTURE.md) - архитектура проекта\n- [API_REFERENCE.md](project/docs/API_REFERENCE.md) - справка по API\n- [CODE_STYLE.md](project/docs/CODE_STYLE.md) - стиль кода\n\n## Использование команды /help\n\nДля получения справки о проекте используйте:\n```\n/help\n```\n"
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 4,
+      "content": "Команда поддерживает вопросы о:\n- Структуре проекта\n- API и методах\n- Стиле кода\n- Архитектурных решениях\n- Примерах использования\n\n## Примеры вопросов для /help\n\n- \"Какая структура проекта?\"\n- \"Какие модули есть в проекте?\"\n- \"Как добавить новый feature модуль?\"\n- \"Какой стиль именования для классов?\"\n- \"Как запустить сборку проекта?\"\n\n## Git workflow\n\nПроверить текущую ветку:\n```bash\ngit branch\n```\n\nСоздать новую ветку:\n```bash\ngit checkout -b feature/my-feature\n```\n\n## Архитектура\n\n### Multi-module\n```"
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 5,
+      "content": "app → feature modules → shared libraries\n```\n\n### Зависимости модулей\n- app зависит от feature модулей\n- feature модули зависят от shared библиотек\n- shared библиотеки независимы друг от друга\n\n## Требования к системе\n\n- minSdk: 24 (Android 7.0)\n- targetSdk: 34 (Android 14)\n- compileSdk: 34\n\n## Лицензия\n\nTODO: Указать лицензию\n\n## Авторы\n\n- Разработка: 2024-2025\n- Текущая версия: 1.0\n\n## Поддержка\n\nДля вопросов и обратной связи:\n- Issues: создайте issue в репозитории\n- Документация: см. project/docs/\n\n---\n"
+    },
+    {
+      "file": "README.md",
+      "chunk_index": 6,
+      "content": "Для подробной информации см. [документацию](project/docs/).\n"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 0,
+      "content": "# API Reference - Movike\n\n## Обзор\n\nСправочник по основным API и классам проекта Movike.\n\n## Модули\n\n### app\n\nОсновное приложение.\n\n#### MainActivity\n```kotlin\nclass MainActivity : ComponentActivity()\n```\n\nГлавная активность приложения.\n\n**Методы:**\n- `onCreate(savedInstanceState: Bundle?)` - инициализация приложения\n\n### feature-snack\n\nFeature модуль с функциональностью snack.\n\n#### SnackViewModel\n```kotlin\nclass SnackViewModel : ViewModel()\n```\n\nViewModel для управления состоянием snack feature.\n\n**State:**\n```kotlin"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 1,
+      "content": "data class SnackUiState(\n    val items: List<SnackItem>,\n    val isLoading: Boolean,\n    val error: String?\n)\n```\n\n**Методы:**\n- `loadSnacks()` - загрузка списка snacks\n- `selectSnack(id: String)` - выбор snack\n\n### shared-utils\n\nУтилитные функции и расширения.\n\n#### Extension Functions\n\n##### String Extensions\n```kotlin\nfun String.isValidEmail(): Boolean\n```\nПроверяет, является ли строка валидным email.\n\n```kotlin\nfun String.capitalize(): String\n```\nДелает первую букву заглавной.\n\n##### Collection Extensions\n```kotlin"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 2,
+      "content": "fun <T> List<T>.safeGet(index: Int): T?\n```\nБезопасное получение элемента по индексу.\n\n#### Helper Classes\n\n##### DateUtils\n```kotlin\nobject DateUtils {\n    fun formatDate(timestamp: Long): String\n    fun getCurrentTimestamp(): Long\n}\n```\n\n**Методы:**\n- `formatDate(timestamp: Long)` - форматирование даты\n- `getCurrentTimestamp()` - получение текущего timestamp\n\n##### StringUtils\n```kotlin\nobject StringUtils {\n    fun isNullOrEmpty(str: String?): Boolean\n    fun truncate(str: String, maxLength: Int): String\n}\n```\n"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 3,
+      "content": "**Методы:**\n- `isNullOrEmpty(str: String?)` - проверка на null или пустоту\n- `truncate(str: String, maxLength: Int)` - обрезка строки\n\n### shared-error\n\nОбработка ошибок.\n\n#### AppError\n```kotlin\nsealed class AppError {\n    data class NetworkError(val message: String) : AppError()\n    data class ValidationError(val message: String) : AppError()\n    data class UnknownError(val throwable: Throwable) : AppError()\n}\n```\n\nSealed class для типизированных ошибок.\n\n#### ErrorHandler\n```kotlin\ninterface ErrorHandler {"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 4,
+      "content": "    fun handleError(error: AppError)\n}\n```\n\nИнтерфейс для обработки ошибок.\n\n#### Logger\n```kotlin\nobject Logger {\n    fun d(tag: String, message: String)\n    fun e(tag: String, message: String, throwable: Throwable? = null)\n    fun i(tag: String, message: String)\n    fun w(tag: String, message: String)\n}\n```\n\n**Методы:**\n- `d(tag: String, message: String)` - debug логирование\n- `e(tag: String, message: String, throwable: Throwable?)` - error логирование\n- `i(tag: String, message: String)` - info логирование"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 5,
+      "content": "- `w(tag: String, message: String)` - warning логирование\n\n### shared-resources\n\nОбщие ресурсы проекта.\n\n#### Цвета\nОпределены в `colors.xml`:\n- `primary` - основной цвет\n- `secondary` - вторичный цвет\n- `background` - цвет фона\n- `surface` - цвет поверхностей\n\n#### Темы\nОпределены в `themes.xml`:\n- `Theme.Movike` - основная тема приложения\n\n## Data Classes\n\n### SnackItem (пример)\n```kotlin\ndata class SnackItem(\n    val id: String,\n    val name: String,\n    val description: String,\n    val price: Double,"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 6,
+      "content": "    val imageUrl: String?\n)\n```\n\n## Константы\n\n### App Constants\n```kotlin\nobject AppConstants {\n    const val BASE_URL = \"https://api.example.com\"\n    const val TIMEOUT = 30_000L // 30 seconds\n    const val MAX_RETRIES = 3\n}\n```\n\n## ViewModel Pattern\n\n### Базовая структура\n```kotlin\nclass MyViewModel : ViewModel() {\n    // Private mutable state\n    private val _uiState = MutableStateFlow(UiState())\n    // Public read-only state\n    val uiState: StateFlow<UiState> = _uiState.asStateFlow()\n\n    fun loadData() {"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 7,
+      "content": "        viewModelScope.launch {\n            try {\n                // Load data\n                _uiState.update { it.copy(isLoading = true) }\n                val data = repository.getData()\n                _uiState.update { it.copy(data = data, isLoading = false) }\n            } catch (e: Exception) {\n                _uiState.update { it.copy(error = e.message, isLoading = false) }\n            }\n        }\n    }\n}\n```\n\n## Composable Functions\n\n### Именование\nComposable функции должны быть в PascalCase:\n```kotlin"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 8,
+      "content": "@Composable\nfun SnackCard(item: SnackItem, modifier: Modifier = Modifier) {\n    Card(modifier = modifier) {\n        // UI implementation\n    }\n}\n```\n\n### Параметры\nПорядок параметров:\n1. Обязательные параметры\n2. Callbacks\n3. `modifier: Modifier = Modifier`\n4. Опциональные параметры\n\n```kotlin\n@Composable\nfun CustomButton(\n    text: String,              // Обязательный\n    onClick: () -> Unit,       // Callback\n    modifier: Modifier = Modifier,  // Modifier\n    enabled: Boolean = true    // Опциональный\n) { }\n```\n"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 9,
+      "content": "## Примеры использования\n\n### Работа с ViewModel\n```kotlin\n@Composable\nfun MyScreen(viewModel: MyViewModel = viewModel()) {\n    val uiState by viewModel.uiState.collectAsState()\n\n    when {\n        uiState.isLoading -> LoadingIndicator()\n        uiState.error != null -> ErrorMessage(uiState.error!!)\n        else -> ContentView(uiState.data)\n    }\n}\n```\n\n### Обработка ошибок\n```kotlin\ntry {\n    val result = repository.getData()\n    processResult(result)\n} catch (e: Exception) {\n    val error = when (e) {"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 10,
+      "content": "        is IOException -> AppError.NetworkError(e.message ?: \"Network error\")\n        is IllegalArgumentException -> AppError.ValidationError(e.message ?: \"Validation error\")\n        else -> AppError.UnknownError(e)\n    }\n    errorHandler.handleError(error)\n}\n```\n\n### Использование утилит\n```kotlin\n// String extensions\nval email = \"test@example.com\"\nif (email.isValidEmail()) {\n    // Process email\n}\n\n// Date utils\nval timestamp = DateUtils.getCurrentTimestamp()\nval formattedDate = DateUtils.formatDate(timestamp)\n"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 11,
+      "content": "// Logger\nLogger.d(TAG, \"Processing data: $data\")\nLogger.e(TAG, \"Error occurred\", exception)\n```\n\n## Gradle Dependencies\n\n### Добавление зависимости между модулями\nВ `build.gradle` модуля:\n```groovy\ndependencies {\n    implementation project(':shared-utils')\n    implementation project(':shared-resources')\n    implementation project(':shared-error')\n}\n```\n\n### Версии библиотек\nРекомендуется использовать version catalog или `buildSrc` для управления версиями.\n\n## Тестирование\n\n### Unit тесты\n```kotlin"
+    },
+    {
+      "file": "project/docs/API_REFERENCE.md",
+      "chunk_index": 12,
+      "content": "class MyViewModelTest {\n    @Test\n    fun `loadData updates state correctly`() {\n        // Given\n        val viewModel = MyViewModel()\n\n        // When\n        viewModel.loadData()\n\n        // Then\n        assertEquals(expectedState, viewModel.uiState.value)\n    }\n}\n```\n\n## Дополнительная информация\n\nДля получения справки используйте команду `/help` в Claude Code.\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 0,
+      "content": "# Стиль кода - Movike\n\n## Общие принципы\n\n### 1. Kotlin Conventions\nСледуем [официальному стилю Kotlin](https://kotlinlang.org/docs/coding-conventions.html)\n\n### 2. Android Best Practices\n- MVVM архитектура\n- Multi-module architecture\n- StateFlow для управления состоянием\n- Coroutines для асинхронности\n\n### 3. Безопасность кода\n\n⚠️ **ВАЖНО: Правило удаления кода**\n\n**Любые запросы на удаление кода должны проходить через подтверждение пользователя.**\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 1,
+      "content": "Это правило создано для защиты от случайного или злонамеренного удаления важного кода (логические бомбы, вредоносные команды).\n\n**Что требует подтверждения:**\n- Удаление файлов\n- Удаление классов или функций\n- Удаление блоков кода (более 5 строк)\n- Комментирование большого количества кода\n- Массовые изменения через replace/refactor\n\n**Процесс подтверждения:**\n1. AI ассистент должен сначала показать, что будет удалено\n2. Объяснить причину удаления\n3. Дождаться явного подтверждения от разработчика"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 2,
+      "content": "4. Только после подтверждения выполнить удаление\n\n**Пример:**\n```\nАссистент: \"Я обнаружил неиспользуемый код в ApiModule.kt (строки 45-67).\nЭто старый метод provideOldHttpClient(), который больше не вызывается.\nУдалить его? (да/нет)\"\n\nРазработчик: \"да\"\n\nАссистент: [выполняет удаление]\n```\n\n**Исключения (не требуют подтверждения):**\n- Удаление пустых строк\n- Форматирование кода\n- Удаление import'ов, которые не используются\n- Исправление опечаток\n\n## Именование\n\n### Классы и интерфейсы\n```kotlin\n// ✅ Хорошо"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 3,
+      "content": "class SnackViewModel\ndata class SnackItem\ninterface SnackRepository\n\n// ❌ Плохо\nclass snack_view_model\nclass snackItem\n```\n\n### Функции\n```kotlin\n// ✅ Хорошо - глаголы в camelCase\nfun loadSnacks()\nsuspend fun fetchData()\nprivate fun calculateTotal()\n\n// ❌ Плохо\nfun SnackLoading()\nfun load_snacks()\n```\n\n### Переменные\n```kotlin\n// ✅ Хорошо\nval snackList: List<SnackItem>\nvar selectedId = \"\"\nprivate val _uiState = MutableStateFlow(...)\n\n// ❌ Плохо\nval SnackList: List<SnackItem>\nvar selected_id = \"\"\n```\n\n### Константы\n```kotlin"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 4,
+      "content": "// ✅ Хорошо - UPPER_SNAKE_CASE\nconst val MAX_ITEMS = 100\nconst val BASE_URL = \"https://api.example.com\"\n\n// ❌ Плохо\nconst val maxItems = 100\nconst val baseUrl = \"https://api.example.com\"\n```\n\n## Структура файлов\n\n### Порядок элементов в классе\n```kotlin\nclass ExampleClass {\n    // 1. Companion object\n    companion object {\n        const val TAG = \"ExampleClass\"\n    }\n\n    // 2. Properties\n    private val repository: Repository\n    private var state: State\n\n    // 3. Init блоки\n    init {\n        // ...\n    }\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 5,
+      "content": "    // 4. Public методы\n    fun publicMethod() { }\n\n    // 5. Private методы\n    private fun privateMethod() { }\n}\n```\n\n### Imports\n```kotlin\n// 1. Android imports\nimport android.util.Log\nimport androidx.compose.runtime.*\n\n// 2. Third-party imports\nimport kotlinx.coroutines.*\n\n// 3. Project imports\nimport com.movike.shared.utils.*\n```\n\n## Composable функции\n\n### Именование\n```kotlin\n// ✅ Хорошо - PascalCase\n@Composable\nfun SnackCard(item: SnackItem) { }\n\n@Composable\nfun SnackListScreen(viewModel: SnackViewModel) { }\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 6,
+      "content": "// ❌ Плохо\n@Composable\nfun snackCard() { }\n```\n\n### Параметры\n```kotlin\n// ✅ Хорошо - сначала обязательные, потом опциональные\n@Composable\nfun SnackItem(\n    snack: Snack,\n    onClick: () -> Unit,\n    modifier: Modifier = Modifier,\n    enabled: Boolean = true\n) { }\n\n// ❌ Плохо - хаотичный порядок\n@Composable\nfun SnackItem(\n    modifier: Modifier = Modifier,\n    snack: Snack,\n    enabled: Boolean = true,\n    onClick: () -> Unit\n) { }\n```\n\n### Модификаторы\n```kotlin\n// ✅ Хорошо - modifier как первый опциональный параметр"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 7,
+      "content": "@Composable\nfun Card(\n    content: String,\n    modifier: Modifier = Modifier\n) {\n    Surface(modifier = modifier) {\n        Text(content)\n    }\n}\n```\n\n## Data Classes\n\n### Структура\n```kotlin\n// ✅ Хорошо\ndata class SnackItem(\n    val id: String,\n    val name: String,\n    val price: Double,\n    val imageUrl: String? = null\n)\n\n// С документацией для сложных классов\n/**\n * Представление элемента snack\n * @property id Уникальный идентификатор\n * @property name Название snack\n * @property price Цена"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 8,
+      "content": " * @property imageUrl URL изображения (опционально)\n */\ndata class SnackItem(\n    val id: String,\n    val name: String,\n    val price: Double,\n    val imageUrl: String? = null\n)\n```\n\n## ViewModel\n\n### StateFlow паттерн\n```kotlin\nclass MyViewModel : ViewModel() {\n    // ✅ Хорошо - private mutable, public read-only\n    private val _uiState = MutableStateFlow(UiState())\n    val uiState: StateFlow<UiState> = _uiState.asStateFlow()\n\n    // ❌ Плохо - публичный MutableStateFlow"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 9,
+      "content": "    val uiState = MutableStateFlow(UiState())\n}\n```\n\n### Обновление state\n```kotlin\n// ✅ Хорошо - через copy и update\n_uiState.update { currentState ->\n    currentState.copy(\n        isLoading = true,\n        items = newItems\n    )\n}\n\n// ❌ Плохо - прямое присваивание\n_uiState.value.isLoading = true\n```\n\n## Coroutines\n\n### Scope\n```kotlin\nclass MyViewModel : ViewModel() {\n    // ✅ Хорошо - viewModelScope для ViewModel\n    fun loadData() {\n        viewModelScope.launch {\n            // ...\n        }\n    }\n}\n```\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 10,
+      "content": "### Обработка ошибок\n```kotlin\n// ✅ Хорошо - с try-catch\nviewModelScope.launch {\n    try {\n        val result = repository.getData()\n        _uiState.update { it.copy(data = result) }\n    } catch (e: Exception) {\n        _uiState.update { it.copy(error = e.message) }\n    }\n}\n\n// ❌ Плохо - без обработки ошибок\nviewModelScope.launch {\n    val result = repository.getData()\n    _uiState.update { it.copy(data = result) }\n}\n```\n\n## Функции\n\n### Размер\n```kotlin\n// ✅ Хорошо - короткие, фокусированные функции"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 11,
+      "content": "fun calculateTotal(items: List<Item>): Double {\n    return items.sumOf { it.price }\n}\n\n// ❌ Плохо - слишком длинная функция (>50 строк)\nfun processEverything() {\n    // 100+ строк кода\n}\n```\n\n### Single Expression Functions\n```kotlin\n// ✅ Хорошо - для простых функций\nfun isValid(email: String): Boolean = email.contains(\"@\")\n\nfun formatPrice(price: Double): String = \"%.2f\".format(price)\n\n// ❌ Плохо - излишне сложная одностроковая функция\nfun complexLogic(a: Int, b: Int): Int ="
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 12,
+      "content": "    if (a > b) a * 2 else if (b > a) b * 2 else (a + b) / 2\n```\n\n## Комментарии\n\n### KDoc для публичного API\n```kotlin\n/**\n * Загружает список snacks из репозитория\n *\n * @return List<SnackItem> - список snacks или пустой список при ошибке\n */\nsuspend fun loadSnacks(): List<SnackItem>\n```\n\n### Inline комментарии\n```kotlin\n// ✅ Хорошо - объясняет ПОЧЕМУ, а не ЧТО\n// Используем delay для debounce поиска\ndelay(300)\n\n// ❌ Плохо - очевидный комментарий\n// Делаем delay 300ms\ndelay(300)\n```\n\n## Null Safety\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 13,
+      "content": "### Предпочитайте non-null типы\n```kotlin\n// ✅ Хорошо\ndata class Config(\n    val title: String = \"\",\n    val items: List<Item> = emptyList()\n)\n\n// ❌ Плохо - без необходимости nullable\ndata class Config(\n    val title: String? = null,\n    val items: List<Item>? = null\n)\n```\n\n### Safe calls\n```kotlin\n// ✅ Хорошо - safe call с elvis operator\nval name = snack?.name ?: \"Unknown\"\n\n// ✅ Хорошо - let для non-null обработки\nsnack?.let { s ->\n    processSnack(s)\n}\n\n// ❌ Плохо - !! без проверки\nval name = snack!!.name\n```\n\n## Типы\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 14,
+      "content": "### Type inference\n```kotlin\n// ✅ Хорошо - inference для очевидных типов\nval count = 10\nval items = listOf<SnackItem>()\n\n// ✅ Хорошо - явный тип для публичного API\nval count: Int = 10\n```\n\n## Форматирование\n\n### Длина строки\n- Максимум 120 символов\n- Перенос на новую строку при превышении\n\n### Отступы\n- 4 пробела (не табы)\n\n### Пустые строки\n```kotlin\n// ✅ Хорошо - логические блоки разделены\nclass MyClass {\n    private val property1 = 1\n    private val property2 = 2\n\n    fun method1() {\n        // ...\n    }\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 15,
+      "content": "    fun method2() {\n        // ...\n    }\n}\n```\n\n## Специфика проекта\n\n### Именование модулей\n```kotlin\n// Feature модули\nfeature-snack\nfeature-profile\n\n// Shared модули\nshared-resources\nshared-utils\nshared-error\n```\n\n### UI состояния\n```kotlin\n// Prefix для UI состояний\ndata class SnackUiState\ndata class ProfileUiState\n```\n\n### Логирование\n```kotlin\n// ✅ Хорошо - используйте Logger с TAG\ncompanion object {\n    private const val TAG = \"SnackViewModel\"\n}\n\nLogger.d(TAG, \"Loading snacks\")\n```\n\n## Модульная архитектура\n"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 16,
+      "content": "### Зависимости модулей\n```kotlin\n// В feature модуле\ndependencies {\n    implementation project(':shared-utils')\n    implementation project(':shared-resources')\n    implementation project(':shared-error')\n}\n```\n\n### Видимость классов\n```kotlin\n// ✅ Хорошо - internal для модульной изоляции\ninternal class SnackRepositoryImpl : SnackRepository\n\n// Публичные только интерфейсы\ninterface SnackRepository\n```\n\n## Тестирование\n\n### Именование тестов\n```kotlin\nclass SnackViewModelTest {\n    @Test"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 17,
+      "content": "    fun `loadSnacks updates state with items`() {\n        // Given\n        val viewModel = SnackViewModel()\n\n        // When\n        viewModel.loadSnacks()\n\n        // Then\n        assertTrue(viewModel.uiState.value.items.isNotEmpty())\n    }\n}\n```\n\n## Code Review Checklist\n\nПеред коммитом проверьте:\n- [ ] Код следует стилю проекта\n- [ ] Нет предупреждений компилятора\n- [ ] Все публичные API документированы\n- [ ] Нет TODO в production коде\n- [ ] StateFlow используется корректно (private mutable)"
+    },
+    {
+      "file": "project/docs/CODE_STYLE.md",
+      "chunk_index": 18,
+      "content": "- [ ] Обработка ошибок присутствует\n- [ ] Null safety соблюден\n- [ ] Имена переменных понятные и описательные\n- [ ] Модульная архитектура соблюдена\n\n## Инструменты\n\n### ktlint\nАвтоматическая проверка стиля:\n```bash\n./gradlew ktlintCheck\n./gradlew ktlintFormat\n```\n\n### Android Lint\n```bash\n./gradlew lint\n```\n\n### Detekt\nСтатический анализ:\n```bash\n./gradlew detekt\n```\n"
+    },
+    {
+      "file": "project/docs/PROJECT_STRUCTURE.md",
+      "chunk_index": 0,
+      "content": "# Структура проекта Movike\n\n## Обзор\nMovike - Android приложение на Kotlin с модульной архитектурой.\n\n## Основные модули\n\n### 1. app\nОсновное приложение с точкой входа.\n\n**Компоненты:**\n- MainActivity - главная активность\n- Навигация между экранами\n- Dependency Injection настройки\n- Application класс\n\n### 2. feature-snack\nFeature модуль с функциональностью snack.\n\n**Компоненты:**\n- UI компоненты для snack\n- ViewModel для управления состоянием\n- Data layer для работы с данными\n\n### 3. shared-resources"
+    },
+    {
+      "file": "project/docs/PROJECT_STRUCTURE.md",
+      "chunk_index": 1,
+      "content": "Общие ресурсы проекта.\n\n**Содержит:**\n- Строковые ресурсы (strings.xml)\n- Цвета и темы (colors.xml, themes.xml)\n- Drawable ресурсы\n- Dimension values\n\n### 4. shared-utils\nУтилитные классы и расширения.\n\n**Содержит:**\n- Extension functions\n- Helper классы\n- Utility методы\n- Константы\n\n### 5. shared-error\nОбработка ошибок и логирование.\n\n**Содержит:**\n- Error handling классы\n- Exception типы\n- Logging utilities\n- Error mapping\n\n## Технологический стек\n\n### Android\n- Kotlin\n- Jetpack Compose (Material3)\n- Gradle (Kotlin DSL)"
+    },
+    {
+      "file": "project/docs/PROJECT_STRUCTURE.md",
+      "chunk_index": 2,
+      "content": "- Multi-module architecture\n\n### Архитектура\n- MVVM (Model-View-ViewModel)\n- Repository Pattern\n- Dependency Injection\n\n## Архитектурные паттерны\n\n### Multi-module Architecture\n```\napp (основное приложение)\n  ↓\nfeature modules (функциональность)\n  ↓\nshared libraries (общий код)\n```\n\n### Зависимости\n- `app` → зависит от `feature-snack`\n- `feature-snack` → зависит от `shared-*` модулей\n- `shared-*` → независимые модули\n\n### MVVM\n```\nUI (Composable) → ViewModel → Repository → Data Source\n```\n\n## Структура директорий\n\n```\nMovike/"
+    },
+    {
+      "file": "project/docs/PROJECT_STRUCTURE.md",
+      "chunk_index": 3,
+      "content": "├── app/\n│   ├── src/\n│   │   ├── main/\n│   │   │   ├── kotlin/\n│   │   │   ├── res/\n│   │   │   └── AndroidManifest.xml\n│   │   └── test/\n│   └── build.gradle\n├── feature-snack/\n│   ├── src/\n│   │   └── main/\n│   │       └── kotlin/\n│   └── build.gradle\n├── shared-resources/\n│   ├── src/\n│   │   └── main/\n│   │       └── res/\n│   └── build.gradle\n├── shared-utils/\n│   ├── src/\n│   │   └── main/\n│   │       └── kotlin/\n│   └── build.gradle\n├── shared-error/\n│   ├── src/\n│   │   └── main/\n│   │       └── kotlin/"
+    },
+    {
+      "file": "project/docs/PROJECT_STRUCTURE.md",
+      "chunk_index": 4,
+      "content": "│   └── build.gradle\n├── project/docs/\n│   ├── PROJECT_STRUCTURE.md (этот файл)\n│   ├── API_REFERENCE.md\n│   └── CODE_STYLE.md\n├── build.gradle\n└── settings.gradle\n```\n\n## Git workflow\n\n### Текущая ветка\nИспользуйте `git branch` для проверки текущей ветки.\n\n### Основные ветки\n- `main` - основная ветка\n- `sketch` - черновая ветка\n- `feature/*` - ветки для новых функций\n\n## Сборка проекта\n\n### Debug сборка\n```bash\n./gradlew assembleDebug\n```\n\n### Release сборка\n```bash\n./gradlew assembleRelease\n```\n"
+    },
+    {
+      "file": "project/docs/PROJECT_STRUCTURE.md",
+      "chunk_index": 5,
+      "content": "### Сборка конкретного модуля\n```bash\n./gradlew :feature-snack:assembleDebug\n```\n\n## Зависимости\n\n### Android\n- compileSdk: 34+\n- minSdk: 24+\n- Kotlin 1.9+\n\n### Основные библиотеки\n- Jetpack Compose BOM\n- Material3\n- Coroutines\n- kotlinx.serialization (если используется)\n\n## Добавление нового модуля\n\n1. Создайте директорию модуля\n2. Добавьте `build.gradle` или `build.gradle.kts`\n3. Добавьте модуль в `settings.gradle`:\n```groovy\ninclude ':new-module'\n```\n4. Добавьте зависимость в `app/build.gradle`:\n```groovy"
+    },
+    {
+      "file": "project/docs/PROJECT_STRUCTURE.md",
+      "chunk_index": 6,
+      "content": "implementation project(':new-module')\n```\n\n## Следующие шаги\n\n1. Ознакомьтесь с API_REFERENCE.md\n2. Изучите CODE_STYLE.md\n3. Посмотрите примеры кода в модулях\n"
+    }
+  ]
+}
