@@ -32,14 +32,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          if [ -f assistant/requirements.txt ]; then
-            pip install -r assistant/requirements.txt
-          fi
+          # No external dependencies needed - using built-in Python modules only
+          echo "✅ Python dependencies ready"
 
       - name: Index documentation with RAG
         run: |
