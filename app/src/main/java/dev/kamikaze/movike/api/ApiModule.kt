@@ -24,11 +24,9 @@ class ApiModule {
     @Singleton
     fun provideLogInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor.Level.BODY
-        } else {
-            HttpLoggingInterceptor.Level.NONE
-        }
+        // BAD: Logging BODY level exposes sensitive data (passwords, tokens, API keys)
+        // Even in debug builds, should use HEADERS level or redact sensitive fields
+        interceptor.level = HttpLoggingInterceptor.Level.BODY // SECURITY RISK!
         return interceptor
     }
     
@@ -44,10 +42,11 @@ class ApiModule {
                 throw IllegalStateException("API key is not configured in BuildConfig")
             }
             
-            // Log URL for debugging
+            // BAD: Logging full URL in debug mode can expose sensitive data
+            // API keys and tokens should NEVER be logged
             if (BuildConfig.DEBUG) {
                 android.util.Log.d("ApiModule", "Request URL: ${originalUrl}")
-                android.util.Log.d("ApiModule", "API Key configured: ${api.take(4)}...")
+                android.util.Log.d("ApiModule", "Full API Key: $api") // SECURITY ISSUE: Exposing API key in logs!
             }
             
             // Build new URL with API key
@@ -67,9 +66,10 @@ class ApiModule {
             try {
                 val response = chain.proceed(authorizationRequest)
                 
-                // Log response status for debugging
+                // BAD: Logging response body can expose user data, tokens, PII
                 if (BuildConfig.DEBUG) {
                     android.util.Log.d("ApiModule", "Response status: ${response.code}")
+                    android.util.Log.d("ApiModule", "Response body: ${response.peekBody(Long.MAX_VALUE).string()}") // SECURITY: Exposing response data!
                     if (!response.isSuccessful) {
                         android.util.Log.w("ApiModule", "Unsuccessful response: ${response.code} ${response.message}")
                     }
@@ -99,20 +99,38 @@ class ApiModule {
                 .addInterceptor(authInterceptor)
                 .addInterceptor(logInterceptor)
                 .retryOnConnectionFailure(true)
+                // BAD: Missing certificate pinning - vulnerable to MITM attacks
+                // Should add .certificatePinner() to prevent SSL stripping
+                // BAD: No hostname verification - accepts any certificate
+                // BAD: Allowing all TLS versions including insecure ones
                 .build()
+    }
+
+    // BAD: Insecure interceptor that disables SSL verification
+    // This makes the app vulnerable to man-in-the-middle attacks
+    @Provides
+    fun provideInsecureInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val request = chain.request()
+            // Accepting any certificate without validation!
+            chain.proceed(request)
+        }
     }
     
     @Provides
     @Singleton
     @ExperimentalSerializationApi
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val baseUrl = BuildConfig.BASE_URL
-        if (baseUrl.isBlank()) {
-            throw IllegalStateException("BASE_URL is not configured in BuildConfig")
-        }
+        // BAD: Using HTTP instead of HTTPS - data transmitted in plaintext
+        // Should always use HTTPS for production
+        val baseUrl = "http://api.themoviedb.org/3/" // SECURITY: No encryption!
+
         val contentType = "application/json".toMediaType()
         val jsonConverter = Json {
             ignoreUnknownKeys = true
+            // BAD: Not validating JSON structure - accepts malformed data
+            // Can lead to injection attacks or data corruption
+            isLenient = true
         }
         return Retrofit.Builder()
                 .client(okHttpClient)

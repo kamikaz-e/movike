@@ -17,7 +17,7 @@ import sys
 class SimpleRAG:
     """Простая RAG система на основе TF-IDF"""
 
-    def __init__(self, db_path: str = "project/docs/rag_database.db"):
+    def __init__(self, db_path: str = "assistant/rag_database.db"):
         self.db_path = db_path
         self.project_root = Path(__file__).parent.parent.parent
         self.init_database()
