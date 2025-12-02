@@ -32,6 +32,27 @@ class CodeReviewer:
         if self.rag.index_path.exists():
             self.rag.load_index()
 
+    def get_all_kotlin_files(self) -> List[Dict[str, str]]:
+        """Получает все Kotlin файлы в проекте"""
+        kotlin_files = []
+        
+        # Ищем все .kt файлы в проекте
+        for kt_file in self.project_root.rglob('*.kt'):
+            # Пропускаем файлы в build директориях и других служебных папках
+            relative_path = kt_file.relative_to(self.project_root)
+            path_str = str(relative_path)
+            
+            # Исключаем build, .gradle, .idea и другие служебные директории
+            if any(excluded in path_str for excluded in ['/build/', '/.gradle/', '/.idea/', '/__pycache__/']):
+                continue
+            
+            kotlin_files.append({
+                'path': path_str,
+                'status': 'M'  # Modified для всех файлов в sketch режиме
+            })
+        
+        return sorted(kotlin_files, key=lambda x: x['path'])
+
     def get_pr_context(self) -> Dict[str, Any]:
         """Получает контекст PR через MCP"""
         print("📊 Получение информации о PR...\n")
@@ -49,7 +70,21 @@ class CodeReviewer:
             'head': diff_info.get('head', 'HEAD')
         }
 
-    def analyze_file_changes(self, file_path: str, status: str) -> Dict[str, Any]:
+    def get_all_files_context(self) -> Dict[str, Any]:
+        """Получает контекст всех файлов для sketch режима"""
+        print("📊 Получение всех Kotlin файлов в проекте...\n")
+
+        # Получаем все Kotlin файлы
+        all_files = self.get_all_kotlin_files()
+
+        return {
+            'files': all_files,
+            'diff': '',  # Нет diff для всех файлов
+            'base': 'all_files',
+            'head': 'HEAD'
+        }
+
+    def analyze_file_changes(self, file_path: str, status: str, use_filesystem: bool = False) -> Dict[str, Any]:
         """Анализирует изменения в конкретном файле"""
         analysis = {
             'file': file_path,
@@ -60,12 +95,23 @@ class CodeReviewer:
         }
 
         # Получаем содержимое файла
-        file_content = self.git_server.get_file_content(file_path)
-
-        if not file_content.get('success'):
-            return analysis
-
-        content = file_content.get('content', '')
+        if use_filesystem:
+            # Читаем напрямую из файловой системы (для sketch режима)
+            file_full_path = self.project_root / file_path
+            try:
+                if not file_full_path.exists():
+                    return analysis
+                with open(file_full_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+            except Exception as e:
+                print(f"  ⚠️ Ошибка чтения файла {file_path}: {e}")
+                return analysis
+        else:
+            # Читаем через git (для PR режима)
+            file_content = self.git_server.get_file_content(file_path)
+            if not file_content.get('success'):
+                return analysis
+            content = file_content.get('content', '')
 
         # Проверки для Kotlin файлов
         if file_path.endswith('.kt'):
@@ -177,15 +223,22 @@ class CodeReviewer:
 
         review = []
         review.append("# 🤖 AI Code Review\n")
-        review.append(f"**Base branch:** `{pr_context['base']}`")
-        review.append(f"**Head branch:** `{pr_context['head']}`")
-        review.append(f"**Files changed:** {len(files)}\n")
+        if pr_context['base'] == 'all_files':
+            review.append("**Mode:** Проверка всех файлов (sketch)")
+            review.append(f"**Files analyzed:** {len(files)}\n")
+        else:
+            review.append(f"**Base branch:** `{pr_context['base']}`")
+            review.append(f"**Head branch:** `{pr_context['head']}`")
+            review.append(f"**Files changed:** {len(files)}\n")
         review.append("---\n")
 
         # Анализируем каждый файл
         total_issues = 0
         total_suggestions = 0
         total_bugs = 0
+        
+        # Определяем, нужно ли читать из файловой системы (для sketch режима)
+        use_filesystem = pr_context['base'] == 'all_files'
 
         for file_info in files:
             file_path = file_info['path']
@@ -193,7 +246,7 @@ class CodeReviewer:
 
             print(f"  Анализирую: {file_path}")
 
-            analysis = self.analyze_file_changes(file_path, status)
+            analysis = self.analyze_file_changes(file_path, status, use_filesystem=use_filesystem)
 
             if analysis['issues'] or analysis['suggestions'] or analysis['potential_bugs']:
                 review.append(f"## 📄 `{file_path}`\n")
@@ -248,14 +301,20 @@ class CodeReviewer:
 
         return '\n'.join(review)
 
-    def review_pr(self) -> str:
-        """Выполняет полное ревью PR"""
+    def review_pr(self, check_all_files: bool = False) -> str:
+        """Выполняет полное ревью PR или всех файлов"""
         print("\n" + "="*60)
-        print("  🤖 AI Code Reviewer для Pull Requests")
+        if check_all_files:
+            print("  🤖 AI Code Reviewer - Проверка всех файлов")
+        else:
+            print("  🤖 AI Code Reviewer для Pull Requests")
         print("="*60 + "\n")
 
-        # Получаем контекст PR
-        pr_context = self.get_pr_context()
+        # Получаем контекст PR или всех файлов
+        if check_all_files:
+            pr_context = self.get_all_files_context()
+        else:
+            pr_context = self.get_pr_context()
 
         # Генерируем ревью
         review = self.generate_review(pr_context)
@@ -266,20 +325,27 @@ class CodeReviewer:
 def main():
     """Главная функция"""
     base_branch = "main"
+    check_all_files = False
 
     # Проверяем аргументы командной строки
     if len(sys.argv) > 1:
-        base_branch = sys.argv[1]
+        arg = sys.argv[1]
+        if arg.lower() == "sketch":
+            check_all_files = True
+            print("🔍 Режим 'sketch': проверка всех файлов в проекте\n")
+        else:
+            base_branch = arg
 
     # Проверяем переменные окружения (для CI)
     if 'GITHUB_BASE_REF' in os.environ:
         base_branch = os.environ['GITHUB_BASE_REF']
 
-    print(f"Base branch: {base_branch}\n")
+    if not check_all_files:
+        print(f"Base branch: {base_branch}\n")
 
     # Создаем ревьюер и выполняем анализ
     reviewer = CodeReviewer(base_branch)
-    review_text = reviewer.review_pr()
+    review_text = reviewer.review_pr(check_all_files=check_all_files)
 
     # Выводим результат
     print("\n" + "="*60)
