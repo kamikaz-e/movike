@@ -68,21 +68,43 @@ $ python3 project/docs/simple_rag.py search "структура проекта"
 ...
 ```
 
-### 3. Настроен MCP сервер для работы с Git
+### 3. Настроен MCP сервер для работы с Git и открытыми файлами
 
 **Файл:** `project/docs/mcp_git_server.py`
 
-MCP (Model Context Protocol) сервер предоставляет информацию о текущей ветке git.
+MCP (Model Context Protocol) сервер предоставляет информацию о текущей ветке git и открытых файлах в Android Studio.
 
 **Возможности:**
 - `git_current_branch` - получение имени текущей ветки
 - `git_branch_info` - детальная информация о ветке, статусе, коммитах
+- `get_open_files` - **НОВОЕ!** Список открытых файлов в Android Studio
 
 **Тестирование:**
 ```bash
 cd /Users/admin/StudioProjects/Movike
 python3 project/docs/mcp_git_server.py test
 ```
+
+**Вывод:**
+```
+1. Текущая ветка: sketch
+2. Информация о ветке: {...}
+3. Открытые файлы:
+   - Repository.kt
+   - RepositoryImpl.kt
+   - ApiModule.kt
+   ...
+```
+
+**Анализ открытых файлов:**
+```bash
+python3 project/docs/show_open_files.py
+```
+
+Показывает детальную информацию о каждом открытом файле:
+- Тип файла (ViewModel, Repository, Module и т.д.)
+- Количество строк
+- Превью кода
 
 ### 4. Создана команда /help
 
