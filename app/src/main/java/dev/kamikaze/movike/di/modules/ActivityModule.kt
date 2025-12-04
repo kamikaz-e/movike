@@ -1,5 +1,6 @@
 package dev.kamikaze.movike.di.modules
 
+import dev.kamikaze.movike.presentation.ui.activity.AssistantChatActivity
 import dev.kamikaze.movike.presentation.ui.activity.SingleActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -9,5 +10,8 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector(modules = [FragmentModule::class])
     abstract fun contributeMainActivity(): SingleActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeAssistantChatActivity(): AssistantChatActivity
 
 }

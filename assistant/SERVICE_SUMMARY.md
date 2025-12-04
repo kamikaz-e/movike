@@ -72,7 +72,7 @@ import telebot
 import requests
 
 bot = telebot.TeleBot('YOUR_TOKEN')
-API_URL = 'http://localhost:5000'
+API_URL = 'http://localhost:5001'
 
 @bot.message_handler(func=lambda m: True)
 def handle(message):
@@ -92,7 +92,7 @@ bot.polling()
 import requests
 
 response = requests.post(
-    'http://localhost:5000/api/support/ask',
+    'http://localhost:5001/api/support/ask',
     json={
         'question': 'Почему не работает авторизация?',
         'email': 'ivan.petrov@example.com'
@@ -105,7 +105,7 @@ print(result['answer'])
 
 **cURL:**
 ```bash
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Как восстановить пароль?"}'
 ```
@@ -199,7 +199,7 @@ POST /api/support/ask
 
 **Request:**
 ```bash
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{
     "question": "Почему не работает авторизация?",
@@ -295,7 +295,7 @@ curl -X POST http://localhost:5000/api/support/ask \
 ### С Gunicorn
 ```bash
 pip install gunicorn
-gunicorn -w 4 -b 0.0.0.0:5000 support_service:app
+gunicorn -w 4 -b 0.0.0.0:5001 support_service:app
 ```
 
 ### С Docker
@@ -305,7 +305,7 @@ WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
 RUN python3 support_assistant.py index
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "support_service:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "support_service:app"]
 ```
 
 ### С Nginx
@@ -315,7 +315,7 @@ server {
     server_name support.movike.app;
 
     location / {
-        proxy_pass http://localhost:5000;
+        proxy_pass http://localhost:5001;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
@@ -358,7 +358,7 @@ python3 test_service.py test
 python3 support_service.py
 
 # Терминал 2
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Как восстановить пароль?"}'
 ```
@@ -382,7 +382,7 @@ curl -X POST http://localhost:5000/api/support/ask \
 import requests
 
 response = requests.post(
-    'http://localhost:5000/api/support/ask',
+    'http://localhost:5001/api/support/ask',
     json={'question': 'Почему не работает авторизация?'}
 )
 

@@ -108,8 +108,9 @@ class ApiModule {
 
     // BAD: Insecure interceptor that disables SSL verification
     // This makes the app vulnerable to man-in-the-middle attacks
-    @Provides
-    fun provideInsecureInterceptor(): Interceptor {
+    // Removed @Provides to avoid duplicate binding with provideAuthInterceptor
+    // If needed, use @Named qualifier to distinguish
+    private fun provideInsecureInterceptor(): Interceptor {
         return Interceptor { chain ->
             val request = chain.request()
             // Accepting any certificate without validation!

@@ -143,7 +143,7 @@ source venv/bin/activate
 python3 support_service.py
 
 # В другом терминале
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Как восстановить пароль?"}'
 ```
@@ -155,7 +155,7 @@ import requests
 
 # Отправить вопрос в Support Service
 response = requests.post(
-    'http://localhost:5000/api/support/ask',
+    'http://localhost:5001/api/support/ask',
     json={'question': user_message}
 )
 
@@ -236,7 +236,7 @@ python3 support_assistant.py ask "Как восстановить пароль?"
 source venv/bin/activate
 python3 support_service.py
 # В другом терминале:
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 ```
 
 ## 🎯 Начните отсюда

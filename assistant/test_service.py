@@ -12,7 +12,7 @@ import sys
 class SupportServiceClient:
     """Клиент для работы с Support Service API"""
 
-    def __init__(self, base_url='http://localhost:5000'):
+    def __init__(self, base_url='http://localhost:5001'):
         self.base_url = base_url
 
     def health_check(self):
@@ -93,12 +93,12 @@ def main():
         print("Использование:")
         print("  python3 test_service.py <base_url>")
         print("\nПример:")
-        print("  python3 test_service.py http://localhost:5000")
+        print("  python3 test_service.py http://localhost:5001")
         print("\nИли просто:")
         print("  python3 test_service.py test")
         return
 
-    base_url = sys.argv[1] if sys.argv[1] != 'test' else 'http://localhost:5000'
+    base_url = sys.argv[1] if sys.argv[1] != 'test' else 'http://localhost:5001'
     client = SupportServiceClient(base_url)
 
     print("\n" + "="*60)

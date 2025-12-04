@@ -1,5 +1,5 @@
 {
-  "total_documents": 44,
+  "total_documents": 70,
   "documents": [
     {
       "file": "README.md",
@@ -220,6 +220,136 @@
       "file": "project/docs/SUPPORT_FAQ.md",
       "chunk_index": 9,
       "content": "### Какие данные вы собираете?\n\nМы собираем:\n- Email и основная информация профиля\n- История просмотров (для рекомендаций)\n- Технические данные (для улучшения приложения)\n\nМы НЕ собираем:\n- Платежные данные (обрабатываются Google Play)\n- Геолокацию\n- Контакты\n- Другие личные данные\n\nПодробнее: Настройки → Политика конфиденциальности\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 0,
+      "content": "# Team Assistant - Integrated Chat Service\n\n## Overview\n\nThe Team Assistant is an integrated service that combines:\n- **RAG (Retrieval-Augmented Generation)** for documentation search\n- **MCP (Model Context Protocol)** for Git and CRM integration\n- **Task Management** with prioritization and recommendations\n- **Jetpack Compose** chat interface for Android\n\n## Architecture\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    Android App (Kotlin)                      │"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 1,
+      "content": "│  ┌───────────────────────────────────────────────────────┐  │\n│  │         Jetpack Compose Chat UI                       │  │\n│  │  • AssistantChatScreen                                │  │\n│  │  • Material Design 3                                  │  │\n│  │  • Real-time message updates                          │  │\n│  └───────────────────┬───────────────────────────────────┘  │\n│                      │                                       │"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 2,
+      "content": "│  ┌───────────────────┴───────────────────────────────────┐  │\n│  │         AssistantChatViewModel                        │  │\n│  │  • State management                                   │  │\n│  │  • Message handling                                   │  │\n│  │  • Error handling                                     │  │\n│  └───────────────────┬───────────────────────────────────┘  │\n│                      │                                       │"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 3,
+      "content": "│  ┌───────────────────┴───────────────────────────────────┐  │\n│  │         AssistantRepository                           │  │\n│  │  • Intent parsing                                     │  │\n│  │  • Context aggregation                                │  │\n│  │  • Response formatting                                │  │\n│  └───────────────────┬───────────────────────────────────┘  │\n│                      │                                       │"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 4,
+      "content": "│  ┌───────────────────┴───────────────────────────────────┐  │\n│  │         Ktor HTTP Client                              │  │\n│  │  • JSON serialization                                 │  │\n│  │  • Network requests                                   │  │\n│  │  • Logging                                            │  │\n│  └───────────────────┬───────────────────────────────────┘  │\n└────────────────────┬─┴───────────────────────────────────────┘\n                     │ HTTP/REST API"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 5,
+      "content": "┌────────────────────┴─────────────────────────────────────────┐\n│                Python Backend Service                         │\n│  ┌───────────────────────────────────────────────────────┐  │\n│  │         TeamAssistant (Flask)                         │  │\n│  │  • Question answering                                 │  │\n│  │  • Intent parsing                                     │  │\n│  │  • Context integration                                │  │"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 6,
+      "content": "│  └──────┬────────────┬────────────┬───────────────────────┘  │\n│         │            │            │                          │\n│  ┌──────┴─────┐ ┌───┴─────┐ ┌───┴──────────┐               │\n│  │    RAG     │ │   MCP   │ │     Tasks    │               │\n│  │  System    │ │   Git   │ │  Management  │               │\n│  │            │ │ Server  │ │              │               │\n│  │ • Index    │ │ • Branch│ │ • CRUD       │               │\n│  │ • Search   │ │ • Status│ │ • Priority   │               │"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 7,
+      "content": "│  │ • Score    │ │ • Files │ │ • Recommend  │               │\n│  └────────────┘ └─────────┘ └──────────────┘               │\n└──────────────────────────────────────────────────────────────┘\n```\n\n## Components\n\n### Android Components\n\n#### 1. Models (`app/src/main/java/dev/kamikaze/movike/models/assistant/`)\n\n- **ChatMessage.kt**: Chat message model with metadata\n- **Task.kt**: Task model with priority and status\n- **AssistantRequest.kt**: API request/response models\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 8,
+      "content": "#### 2. Data Layer (`app/src/main/java/dev/kamikaze/movike/data/assistant/`)\n\n- **AssistantApiService.kt**: Ktor-based HTTP client\n- **AssistantRepository.kt**: Business logic and intent parsing\n\n#### 3. UI Layer (`app/src/main/java/dev/kamikaze/movike/presentation/ui/compose/assistant/`)\n\n- **AssistantChatScreen.kt**: Main Compose UI\n- **AssistantChatViewModel.kt**: State management\n- **AssistantChatActivity.kt**: Activity host\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 9,
+      "content": "#### 4. Dependency Injection (`app/src/main/java/dev/kamikaze/movike/di/modules/`)\n\n- **NetworkModule.kt**: HTTP client configuration\n- **AssistantModule.kt**: ViewModel bindings\n\n### Python Backend\n\n#### Main Service (`assistant/team_assistant_service.py`)\n\n**Key Features:**\n- Flask REST API server\n- Intent-based query routing\n- Multi-source context aggregation\n- Task management with in-memory storage\n\n**Endpoints:**\n\n```\nPOST /api/assistant/ask\nBody: {\n  \"question\": \"Show high priority tasks\",\n  \"context\": {"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 10,
+      "content": "    \"includeRAG\": true,\n    \"includeGitContext\": true,\n    \"includeTasks\": true,\n    \"maxResults\": 5\n  }\n}\n\nGET /api/assistant/status\nResponse: Project status with task statistics\n\nPOST /api/tasks/query\nBody: {\n  \"priority\": \"HIGH\",\n  \"status\": \"TODO\",\n  \"limit\": 10\n}\n\nPOST /api/tasks/create\nBody: {\n  \"title\": \"New task\",\n  \"description\": \"Task description\",\n  \"priority\": \"MEDIUM\",\n  \"tags\": [\"backend\"]\n}\n\nGET /api/rag/search?query=architecture&limit=5\nResponse: Documentation search results\n\nGET /api/git/context"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 11,
+      "content": "Response: Current Git branch and status\n```\n\n## Setup and Installation\n\n### Prerequisites\n\n- Android Studio Hedgehog or newer\n- JDK 17+\n- Python 3.7+\n- Git\n\n### Backend Setup\n\n1. **Install Python dependencies:**\n```bash\npip3 install flask flask-cors\n```\n\n2. **Index documentation:**\n```bash\ncd assistant\npython3 simple_rag.py index\n```\n\n3. **Start the service:**\n```bash\ncd ..\n./run_team_assistant.sh\n```\n\nOr manually:\n```bash\ncd assistant\npython3 team_assistant_service.py --host 0.0.0.0 --port 5001 --load-samples --debug\n```\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 12,
+      "content": "The service will start on `http://localhost:5001`\n\n### Android Setup\n\n1. **Open project in Android Studio:**\n```bash\ncd /Users/admin/StudioProjects/movike\n```\n\n2. **Sync Gradle:**\n- Open Android Studio\n- Wait for Gradle sync to complete\n\n3. **Build the project:**\n```bash\n./gradlew assembleDebug\n```\n\n4. **Run the app:**\n- Select a device/emulator\n- Click Run or use: `./gradlew installDebug`\n\n5. **Launch Assistant:**\n- From your app, navigate to the Assistant Chat\n- Or use Intent:\n```kotlin"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 13,
+      "content": "val intent = Intent(context, AssistantChatActivity::class.java)\nstartActivity(intent)\n```\n\n## Usage Examples\n\n### 1. Query High Priority Tasks\n\n**User:** \"Show tasks with high priority\"\n\n**Response:**\n```\n🔥 High Priority Tasks:\n\n1. [HIGH] Implement user authentication\n   Status: IN_PROGRESS\n   Add JWT-based authentication to the API\n\n2. [HIGH] Optimize database queries\n   Status: BLOCKED\n   Waiting for database schema approval\n\n💡 Recommendations:\n• Focus on 2 high-priority tasks first"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 14,
+      "content": "• Unblock 1 blocked tasks to improve workflow\n```\n\n### 2. Get Project Status\n\n**User:** \"What's the project status?\"\n\n**Response:**\n```\n📊 Project Status:\n\nTotal tasks: 5\n\nBy Priority:\n  LOW: 1\n  MEDIUM: 1\n  HIGH: 2\n  CRITICAL: 1\n\nBy Status:\n  TODO: 2\n  IN_PROGRESS: 1\n  IN_REVIEW: 1\n  BLOCKED: 1\n\n🔥 High Priority Tasks:\n  • Implement user authentication\n  • Optimize database queries\n\n💡 Recommendations:\n  • Focus on 2 high-priority tasks first\n  • Unblock 1 blocked tasks to improve workflow\n```\n\n### 3. Search Documentation\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 15,
+      "content": "**User:** \"How does the architecture work?\"\n\n**Response:**\n```\n📚 Found relevant documentation:\n\n1. From PROJECT_STRUCTURE.md:\n   The project follows Clean Architecture with three main layers:\n   - Presentation (UI, ViewModels)\n   - Domain (Use Cases, Entities)\n   - Data (Repositories, APIs)...\n\n2. From ARCHITECTURE_VERIFICATION.md:\n   The architecture is verified through automated tests...\n```\n\n### 4. Create a Task\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 16,
+      "content": "**User:** \"Create task: Fix memory leak with high priority. Description: Images not released properly\"\n\nThe assistant will parse the request and create the task.\n\n### 5. Get Recommendations\n\n**User:** \"What should I do first?\"\n\n**Response:**\n```\n💡 Task Recommendations:\n\nBased on current priorities:\n1. Start with CRITICAL task: Fix memory leak in image loading\n2. Then work on: Implement user authentication\n3. Unblock: Optimize database queries\n\nThese tasks will have the highest impact on project progress.\n```\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 17,
+      "content": "## Features\n\n### Intent Recognition\n\nThe assistant automatically recognizes question intent:\n\n- **Tasks**: \"показать задачи\", \"show tasks\", \"tasks with high priority\"\n- **Status**: \"project status\", \"статус проекта\", \"overview\"\n- **Priority**: \"high priority\", \"важные задачи\", \"what's urgent\"\n- **Documentation**: \"how does\", \"как работает\", \"documentation about\"\n- **Git**: \"current branch\", \"git status\", \"recent commits\"\n- **General**: Any other questions combine all contexts\n\n### Context Integration\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 18,
+      "content": "Each response can include:\n\n1. **RAG Context**: Relevant documentation sections\n2. **Git Context**: Current branch, modified files, recent commits\n3. **Task Context**: Related tasks, priorities, blockers\n4. **Recommendations**: AI-generated suggestions\n\n### UI Features\n\n- **Material Design 3**: Modern, adaptive theming\n- **Real-time Updates**: Live message streaming\n- **Loading States**: Visual feedback during processing\n- **Error Handling**: User-friendly error messages"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 19,
+      "content": "- **Quick Actions**: Pre-defined common queries\n- **Metadata Display**: Sources, tasks, and suggestions\n- **Dark Mode**: Automatic theme switching\n\n## Configuration\n\n### Backend Configuration\n\nEdit `assistant/team_assistant_service.py`:\n\n```python\n# Change port\nparser.add_argument('--port', type=int, default=5001)\n\n# Enable/disable features\ninclude_rag = True\ninclude_git = True\ninclude_tasks = True\n```\n\n### Android Configuration\n\nEdit `app/src/main/java/dev/kamikaze/movike/data/assistant/AssistantApiService.kt`:\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 20,
+      "content": "```kotlin\n// Change backend URL\nprivate val baseUrl: String = \"http://10.0.2.2:5001\" // For emulator\n// private val baseUrl: String = \"http://localhost:5001\" // For device\n```\n\n## Testing\n\n### Test Backend Service\n\n```bash\n# Health check\ncurl http://localhost:5001/health\n\n# Ask question\ncurl -X POST http://localhost:5001/api/assistant/ask \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"question\": \"Show high priority tasks\"}'\n\n# Get status\ncurl http://localhost:5001/api/assistant/status\n\n# Query tasks"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 21,
+      "content": "curl -X POST http://localhost:5001/api/tasks/query \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"priority\": \"HIGH\"}'\n\n# Create task\ncurl -X POST http://localhost:5001/api/tasks/create \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"title\": \"Test task\",\n    \"description\": \"Test description\",\n    \"priority\": \"HIGH\"\n  }'\n```\n\n### Test Android App\n\n1. **Start backend service**\n2. **Launch app on emulator/device**\n3. **Open Assistant Chat**\n4. **Try sample queries:**\n   - \"Show high priority tasks\""
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 22,
+      "content": "   - \"What's the project status?\"\n   - \"Search documentation about architecture\"\n   - \"What should I do first?\"\n\n## Troubleshooting\n\n### Backend Issues\n\n**Problem:** Service won't start\n```bash\n# Check Python version\npython3 --version  # Should be 3.7+\n\n# Install dependencies\npip3 install flask flask-cors\n\n# Check port availability\nlsof -i :5001\n```\n\n**Problem:** RAG index not found\n```bash\n# Re-index documentation\ncd assistant\npython3 simple_rag.py index\n```\n\n### Android Issues\n\n**Problem:** Network error"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 23,
+      "content": "- For emulator, use `http://10.0.2.2:5001`\n- For device, use your computer's IP\n- Check backend is running: `curl http://localhost:5001/health`\n\n**Problem:** Compose build errors\n- Ensure Kotlin version matches Compose compiler\n- Sync Gradle files\n- Clean and rebuild: `./gradlew clean build`\n\n**Problem:** Dagger injection errors\n- Rebuild project\n- Check all modules are included in AppComponent\n- Verify @Inject annotations\n\n## Future Enhancements\n"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 24,
+      "content": "1. **Persistent Storage**: Replace in-memory tasks with SQLite/Room\n2. **Authentication**: Add user authentication and authorization\n3. **Real-time Sync**: WebSocket support for live updates\n4. **Voice Input**: Speech-to-text integration\n5. **Notifications**: Push notifications for task updates\n6. **Attachments**: File and image support in chat\n7. **Multi-language**: i18n support for multiple languages\n8. **Analytics**: Usage tracking and insights\n9. **Offline Mode**: Local processing with sync"
+    },
+    {
+      "file": "project/docs/TEAM_ASSISTANT.md",
+      "chunk_index": 25,
+      "content": "10. **Export**: Export chat history and reports\n\n## Contributing\n\nWhen contributing to the Team Assistant:\n\n1. Follow the existing code style\n2. Add tests for new features\n3. Update documentation\n4. Test on both emulator and device\n5. Ensure backend compatibility\n\n## License\n\nSame as the main Movike project.\n\n## Support\n\nFor issues and questions:\n- Check the [troubleshooting section](#troubleshooting)\n- Review the [API documentation](#endpoints)\n- Open an issue on GitHub\n"
     }
   ]
 }

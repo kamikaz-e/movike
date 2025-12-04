@@ -302,7 +302,7 @@ def main():
 
     parser = argparse.ArgumentParser(description='Movike Support Service')
     parser.add_argument('--host', default='0.0.0.0', help='Host для запуска (default: 0.0.0.0)')
-    parser.add_argument('--port', type=int, default=5000, help='Port для запуска (default: 5000)')
+    parser.add_argument('--port', type=int, default=5001, help='Port для запуска (default: 5001)')
     parser.add_argument('--debug', action='store_true', help='Режим отладки')
 
     args = parser.parse_args()

@@ -35,7 +35,7 @@ python3 support_service.py
 python3 support_service.py --host 0.0.0.0 --port 8080 --debug
 ```
 
-Сервис будет доступен на `http://localhost:5000`
+Сервис будет доступен на `http://localhost:5001`
 
 ### 4. Тестирование
 
@@ -128,12 +128,12 @@ python3 test_service.py test
 
 ```bash
 # С пользователем
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Почему не работает авторизация?", "email": "ivan.petrov@example.com"}'
 
 # Без пользователя
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Как восстановить пароль?"}'
 ```
@@ -145,7 +145,7 @@ curl -X POST http://localhost:5000/api/support/ask \
 
 **Example:**
 ```bash
-curl http://localhost:5000/api/users/ivan.petrov@example.com
+curl http://localhost:5001/api/users/ivan.petrov@example.com
 ```
 
 **Response:**
@@ -165,7 +165,7 @@ curl http://localhost:5000/api/users/ivan.petrov@example.com
 
 **Example:**
 ```bash
-curl http://localhost:5000/api/users/user_001/tickets
+curl http://localhost:5001/api/users/user_001/tickets
 ```
 
 **Response:**
@@ -184,7 +184,7 @@ curl http://localhost:5000/api/users/user_001/tickets
 
 **Example:**
 ```bash
-curl http://localhost:5000/api/tickets/TICK-001
+curl http://localhost:5001/api/tickets/TICK-001
 ```
 
 **Response:**
@@ -267,7 +267,7 @@ import telebot
 import requests
 
 bot = telebot.TeleBot('YOUR_TOKEN')
-API_URL = 'http://localhost:5000'
+API_URL = 'http://localhost:5001'
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -312,7 +312,7 @@ import requests
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
-API_URL = 'http://localhost:5000'
+API_URL = 'http://localhost:5001'
 
 @bot.event
 async def on_ready():
@@ -366,7 +366,7 @@ bot.run('YOUR_TOKEN')
 import requests
 import json
 
-API_URL = 'http://localhost:5000'
+API_URL = 'http://localhost:5001'
 
 def ask_question(question, email=None):
     """Задать вопрос через API"""
@@ -403,7 +403,7 @@ print(result['answer'])
 ```javascript
 const axios = require('axios');
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5001';
 
 async function askQuestion(question, email = null) {
     const data = { question };
@@ -443,7 +443,7 @@ python3 support_service.py --help
 
 Доступные параметры:
 - `--host` - хост для запуска (default: 0.0.0.0)
-- `--port` - порт для запуска (default: 5000)
+- `--port` - порт для запуска (default: 5001)
 - `--debug` - режим отладки
 
 ### Запуск в production
@@ -455,10 +455,10 @@ python3 support_service.py --help
 pip install gunicorn
 
 # Запуск с 4 worker'ами
-gunicorn -w 4 -b 0.0.0.0:5000 support_service:app
+gunicorn -w 4 -b 0.0.0.0:5001 support_service:app
 
 # С gevent для асинхронности
-gunicorn -k gevent -w 4 -b 0.0.0.0:5000 support_service:app
+gunicorn -k gevent -w 4 -b 0.0.0.0:5001 support_service:app
 ```
 
 ### Docker
@@ -478,15 +478,15 @@ COPY . .
 # Индексация документации при сборке
 RUN python3 support_assistant.py index
 
-EXPOSE 5000
+EXPOSE 5001
 
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "support_service:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "support_service:app"]
 ```
 
 Запуск:
 ```bash
 docker build -t movike-support-service .
-docker run -p 5000:5000 movike-support-service
+docker run -p 5001:5001 movike-support-service
 ```
 
 ## 📊 Мониторинг
@@ -495,10 +495,10 @@ docker run -p 5000:5000 movike-support-service
 
 ```bash
 # Простая проверка
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 
 # С интервалом (каждые 30 секунд)
-watch -n 30 curl -s http://localhost:5000/health
+watch -n 30 curl -s http://localhost:5001/health
 ```
 
 ### Логирование
@@ -569,20 +569,20 @@ python3 test_service.py test
 
 ```bash
 # Health check
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 
 # Вопрос без контекста
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Как восстановить пароль?"}'
 
 # Вопрос с контекстом
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Почему не работает авторизация?", "email": "ivan.petrov@example.com"}'
 
 # Поиск в документации
-curl -X POST http://localhost:5000/api/documentation/search \
+curl -X POST http://localhost:5001/api/documentation/search \
   -H "Content-Type: application/json" \
   -d '{"query": "подписка", "limit": 3}'
 ```

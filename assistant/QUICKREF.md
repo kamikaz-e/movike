@@ -37,26 +37,26 @@ python3 example_bot.py
 
 ### Задать вопрос (главный endpoint)
 ```bash
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Как восстановить пароль?"}'
 ```
 
 ### С контекстом пользователя
 ```bash
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Почему не работает авторизация?", "email": "ivan.petrov@example.com"}'
 ```
 
 ### Health check
 ```bash
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 ```
 
 ### Статистика
 ```bash
-curl http://localhost:5000/api/stats
+curl http://localhost:5001/api/stats
 ```
 
 ## 🤖 Интеграция с ботом
@@ -65,7 +65,7 @@ curl http://localhost:5000/api/stats
 import requests
 
 response = requests.post(
-    'http://localhost:5000/api/support/ask',
+    'http://localhost:5001/api/support/ask',
     json={'question': user_message}
 )
 
@@ -89,7 +89,7 @@ bot.reply(answer)  # Готово!
 ### 1. REST API (для ботов)
 ```bash
 python support_service.py
-# http://localhost:5000/api/support/ask
+# http://localhost:5001/api/support/ask
 ```
 
 ### 2. Консольный (без установки)
@@ -162,7 +162,7 @@ python support_service.py
 source venv/bin/activate && python support_service.py
 
 # 2. В другом терминале
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 # Должно вернуть: {"status": "ok", ...}
 ```
 

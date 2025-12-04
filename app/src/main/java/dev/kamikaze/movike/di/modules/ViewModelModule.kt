@@ -8,11 +8,14 @@ import dev.kamikaze.movike.presentation.ui.viewmodel.FeedViewModel
 import dev.kamikaze.movike.presentation.ui.viewmodel.DetailsMovieViewModel
 import dev.kamikaze.movike.presentation.ui.viewmodel.ProfileViewModel
 import dev.kamikaze.movike.presentation.ui.viewmodel.SearchViewModel
+import dev.kamikaze.movike.presentation.ui.compose.assistant.AssistantChatViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@Module
+@Module(
+    includes = [AssistantModule::class]
+)
 abstract class ViewModelModule {
 
     @Binds

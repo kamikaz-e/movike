@@ -141,16 +141,16 @@ assistant/
 
 После установки сервис будет доступен на:
 ```
-http://localhost:5000
+http://localhost:5001
 ```
 
 **Тестирование:**
 ```bash
 # Health check
-curl http://localhost:5000/health
+curl http://localhost:5001/health
 
 # Задать вопрос
-curl -X POST http://localhost:5000/api/support/ask \
+curl -X POST http://localhost:5001/api/support/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "Как восстановить пароль?"}'
 ```

@@ -27,7 +27,7 @@ class MockSupportAPI:
 class SupportBot:
     """Пример бота поддержки"""
 
-    def __init__(self, api_url='http://localhost:5000'):
+    def __init__(self, api_url='http://localhost:5001'):
         # В реальности используйте requests
         # self.api = requests (для HTTP запросов)
         # Для демо используем мок
@@ -142,7 +142,7 @@ def main():
     print("3. Support Service обрабатывает через RAG + контекст")
     print("4. Бот получает готовый ответ и отправляет пользователю")
     print("\nВ production используйте HTTP запросы через requests:")
-    print("  response = requests.post('http://localhost:5000/api/support/ask', ...)")
+    print("  response = requests.post('http://localhost:5001/api/support/ask', ...)")
     print("")
 
 
