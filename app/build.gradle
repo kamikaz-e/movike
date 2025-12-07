@@ -44,18 +44,29 @@ android {
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
             signingConfig signingConfigs.release
+            // For production, you might want to use a different URL or leave empty
+            buildConfigField "String", "ASSISTANT_BASE_URL", "\"http://10.0.2.2:5001\""
         }
         debug {
             //debuggable true
             buildConfigField "String", "APP_LINK", '""'
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
             buildConfigField "String", "API_KEY", "\"6521adbdad09387a278353f36e241434\""
+            // For Android Emulator: use 10.0.2.2 to access host machine's localhost
+            // For real device: use your computer's IP address in local network (e.g., "http://192.168.1.100:5001")
+            // Note: Port 5001 is used instead of 5001 because macOS AirPlay uses port 5001
+            buildConfigField "String", "ASSISTANT_BASE_URL", "\"http://10.0.2.2:5001\""
         }
     }
 
     buildFeatures {
         buildConfig true
         viewBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     lintOptions {
@@ -98,7 +109,7 @@ dependencies {
     //Todo Paging
     implementation paging.main
     implementation paging.guava // Guava ListenableFuture support
-    //implementation paging.compose  // Jetpack Compose integration
+    //implementation paging.compose  // Jetpack Compose integration - not needed for assistant
 
     //Todo Okhttp3
     implementation okhttp3.main
@@ -187,5 +198,29 @@ dependencies {
 
     //Todo TestUnit
     testImplementation junit
+
+    //Todo Compose
+    implementation compose.ui
+    implementation compose.material3
+    implementation compose.ui_tooling_preview
+    implementation compose.foundation
+    implementation compose.activity_compose
+    implementation compose.viewmodel_compose
+    implementation compose.navigation_compose
+    implementation compose.material_icons
+    debugImplementation compose.ui_tooling
+
+    //Todo Ktor Client
+    implementation ktor.client_core
+    implementation ktor.client_android
+    implementation ktor.client_content_negotiation
+    implementation ktor.serialization_json
+    implementation ktor.client_logging
+
+    //Todo Accompanist
+    implementation accompanist.systemuicontroller
+
+    //Todo Gson
+    implementation gson
 
 }

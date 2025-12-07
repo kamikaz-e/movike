@@ -3,9 +3,12 @@ package dev.kamikaze.movike.di.modules
 import dagger.Module
 import dagger.Provides
 import dev.kamikaze.movike.api.ApiService
+import dev.kamikaze.movike.data.assistant.AssistantApiService
+import dev.kamikaze.movike.data.assistant.AssistantRepository
 import dev.kamikaze.movike.data.database.DatabaseImpl
 import dev.kamikaze.movike.domain.usecases.*
 import dev.kamikaze.movike.repository.RepositoryImpl
+import io.ktor.client.HttpClient
 import javax.inject.Singleton
 
 @Module
@@ -29,5 +32,17 @@ class DataModule {
 
     @Provides
     fun provideInitStartValueUseCase(repository: RepositoryImpl) = InitStartValueUseCase(repository)
+
+    @Singleton
+    @Provides
+    fun provideAssistantApiService(httpClient: HttpClient, baseUrl: String): AssistantApiService {
+        return AssistantApiService(httpClient, baseUrl)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAssistantRepository(apiService: AssistantApiService): AssistantRepository {
+        return AssistantRepository(apiService)
+    }
 
 }

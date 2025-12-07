@@ -11,6 +11,7 @@ import dagger.android.DaggerApplication
 import dev.kamikaze.movike.di.modules.ActivityModule
 import dev.kamikaze.movike.di.modules.AppModule
 import dev.kamikaze.movike.di.annotations.qualifier.ApiQualifier
+import dev.kamikaze.movike.di.modules.NetworkModule
 import javax.inject.Singleton
 
 @Component(
@@ -18,6 +19,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         ActivityModule::class,
+        NetworkModule::class,
     ]
 )
 @Singleton
