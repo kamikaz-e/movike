@@ -19,3 +19,4 @@ assistant/__pycache__/
 assistant/review_output.md
 assistant/rag_index.json
 assistant/classes_index.json
+assistant/build_stats.json
