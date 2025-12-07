@@ -39,12 +39,6 @@ class RepositoryImpl
         pagingSourceFactory = { SearchPagingDataSource(apiService, searchString) }
     ).flow
 
-    /* override var apiKey: String
-         get() = appPreferences.apiKey
-         set(value) {
-             appPreferences.apiKey = value
-         }
- */
     override val moviesWithCategory: List<MovieWithCategories>
         get() = database.moviesWithCategory
 
