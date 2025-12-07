@@ -1,424 +1,250 @@
-# Movike Project Assistant
+# Movike AI Assistants
 
-AI-ассистент для работы с проектом Movike через RAG и MCP.
+Два AI-ассистента для работы с проектом Movike.
 
-## 📁 Структура
+## 🎯 Два ассистента
+
+### 1. Code Assistant - Помощь с кодом
+Отвечает на вопросы о коде, архитектуре и документации проекта.
+
+```bash
+python3 code_assistant.py "Как использовать ApiService?"
+```
+
+### 2. Support Assistant - Техническая поддержка
+Отвечает на вопросы пользователей о приложении, используя FAQ и CRM данные.
+
+```bash
+python3 support_assistant.py ask "Почему не работает авторизация?" user@email.com
+```
+
+## 📁 Структура файлов
 
 ```
 assistant/
-├── README.md                  # Эта документация
-├── assistant.py              # Главный скрипт (единая точка входа)
-├── simple_rag.py             # RAG система
-├── rag_system.py             # RAG с SQLite (альтернативная)
-├── index_classes.py          # Индексация классов Kotlin
-├── mcp_git_server.py         # MCP сервер для git
-├── rag_index.json            # RAG индекс (генерируется)
-├── classes_index.json        # Индекс классов (генерируется)
-└── rag_database.db           # SQLite база (опционально)
+├── code_assistant.py          # Code Assistant (вопросы о коде)
+├── support_assistant.py       # Support Assistant (техподдержка)
+├── support_service.py         # REST API для Support Assistant
+├── simple_rag.py              # RAG система (общая для обоих)
+│
+├── mcp_git_server.py          # MCP сервер для git
+├── mcp_crm_server.py          # MCP сервер для CRM
+├── code_reviewer.py           # Code reviewer
+│
+├── example_bot.py             # Пример бота
+├── test_service.py            # Тестовый клиент API
+│
+├── crm_data.json              # Данные CRM (пользователи, тикеты)
+├── rag_index.json             # RAG индекс (генерируется)
+│
+└── docs/
+    ├── README.md              # Этот файл
+    ├── QUICK_START.md         # Быстрый старт
+    ├── HOW_TO_USE.md          # Подробное руководство
+    ├── CODE_ASSISTANT_README.md    # Документация Code Assistant
+    ├── SERVICE_README.md      # Документация REST API
+    ├── SERVICE_SUMMARY.md     # Архитектура сервиса
+    ├── INSTALL.md             # Установка зависимостей
+    ├── QUICKREF.md            # Быстрая справка
+    └── COMMANDS.md            # Команды
 ```
 
 ## 🚀 Быстрый старт
 
-### Из Claude Code (команда /help)
-
-Просто используй команду `/help`:
-
-```
-/help Как использовать ApiService?
-/help Какая структура проекта?
-/help Расскажи о текущей ветке
-```
-
-### Из терминала / logcat консоли
+### Первый запуск (индексация)
 
 ```bash
-# Перейди в папку docs
-cd project/docs
+# Индексация для Code Assistant
+python3 code_assistant.py index
 
-# Задай вопрос
-python3 assistant/assistant.py help "Как использовать ApiService?"
-
-# Или запусти интерактивный режим
-python3 assistant/assistant.py
+# Индексация для Support Assistant
+python3 support_assistant.py index
 ```
 
-## 📖 Команды
-
-### 1. `help` - Задать вопрос о проекте
-
-Самая важная команда. Ищет ответ в RAG базе и возвращает результаты.
+### Code Assistant
 
 ```bash
-python3 assistant/assistant.py help "ваш вопрос"
+# Интерактивный режим
+python3 code_assistant.py
+
+# Один вопрос
+python3 code_assistant.py "Где находится FeedViewModel?"
+
+# Поиск по коду
+python3 code_assistant.py "ApiService"
 ```
 
-**Примеры:**
-```bash
-python3 assistant/assistant.py help "ApiService"
-python3 assistant/assistant.py help "структура проекта"
-python3 assistant/assistant.py help "FeedViewModel"
-python3 assistant/assistant.py help "как использовать Logger"
-```
-
-**Вывод:**
-```
-============================================================
-  Movike Assistant - Вопрос: ApiService
-============================================================
-
-🔍 Поиск в RAG базе данных...
-
-✅ Найдено результатов: 3
-
-------------------------------------------------------------
-
-📄 Результат #1
-   Файл: app/src/main/java/dev/kamikaze/movike/api/ApiService.kt:10
-   Релевантность: 1
-
-   Содержимое:
-   --------------------------------------------------------
-   # interface ApiService
-
-   **Файл:** app/src/main/java/dev/kamikaze/movike/api/ApiService.kt:10
-
-   **Код:**
-   ```kotlin
-   interface ApiService {
-
-       @GET("discover/movie")
-       suspend fun apiMainMovie(
-           @Query("page") page: Int
-       ): MovieListResponse
-
-       @GET("search/movie")
-       suspend fun apiSearchMovie(
-           @Query("query") query: String,
-           @Query("page") page: Int
-       ): MovieListResponse
-
-       @GET("movie/{movie_id}")
-       suspend fun apiMovie(
-           @Path("movie_id") movieId: Int
-       ): Response<Movie>
-   }
-   ```
-   --------------------------------------------------------
-```
-
-### 2. `search` - Прямой поиск
-
-Поиск ключевых слов в RAG базе (без форматированного вывода).
+### Support Assistant
 
 ```bash
-python3 assistant/assistant.py search "Repository"
+# Интерактивный режим
+python3 support_assistant.py
+
+# Вопрос с контекстом пользователя
+python3 support_assistant.py ask "Почему не работает авторизация?" ivan.petrov@example.com
+
+# Вопрос без контекста
+python3 support_assistant.py ask "Как восстановить пароль?"
 ```
 
-### 3. `git` - Информация о git ветке
-
-Получает информацию через MCP сервер.
+### Support Service (REST API)
 
 ```bash
-python3 assistant/assistant.py git
+# Установка (создает venv и устанавливает Flask)
+./setup_service.sh
+
+# Запуск сервиса
+source venv/bin/activate
+python3 support_service.py
+
+# Тест API
+python3 test_service.py test
+
+# Пример бота
+python3 example_bot.py
 ```
 
-**Вывод:**
-```
-📊 Git информация через MCP
+## 📚 Документация
 
-=== Тест MCP Git Server ===
+| Документ | Описание |
+|----------|----------|
+| **QUICK_START.md** | Быстрый старт - начните отсюда |
+| **HOW_TO_USE.md** | Подробное руководство |
+| **CODE_ASSISTANT_README.md** | Документация Code Assistant |
+| **SERVICE_README.md** | REST API документация |
+| **SERVICE_SUMMARY.md** | Архитектура и deployment |
+| **INSTALL.md** | Установка Flask для REST API |
+| **QUICKREF.md** | Быстрая справка по командам |
+| **COMMANDS.md** | Все доступные команды |
 
-1. Текущая ветка:
-   sketch
+## 💡 Примеры использования
 
-2. Информация о ветке:
-{
-  "current_branch": "sketch",
-  "status": "## sketch...origin/sketch",
-  "last_commit": "b5a99ed добавил проверку открытых файлов",
-  "all_branches": ["sketch"]
-}
-```
-
-### 4. `stats` - Статистика RAG
-
-Показывает, сколько документов проиндексировано.
+### Вопросы о коде
 
 ```bash
-python3 assistant/assistant.py stats
+python3 code_assistant.py "Как работает авторизация?"
+python3 code_assistant.py "Где находится FeedViewModel?"
+python3 code_assistant.py "ApiService"
 ```
 
-**Вывод:**
-```
-📈 Статистика RAG системы
-
-Всего документов: 150
-
-📚 Документация:
-  README.md: 7 чанков
-  project/docs/API_REFERENCE.md: 13 чанков
-  project/docs/CODE_STYLE.md: 19 чанков
-  project/docs/PROJECT_STRUCTURE.md: 7 чанков
-
-💻 Классы проекта: 104 файлов
-
-✅ Всего в RAG: 150 документов
-```
-
-### 5. `reindex` - Переиндексация
-
-Полная переиндексация документации и классов.
+### Вопросы техподдержки
 
 ```bash
-python3 assistant/assistant.py reindex
+python3 support_assistant.py ask "Почему не работает авторизация?" ivan.petrov@example.com
+python3 support_assistant.py ask "Не прошел платеж"
+python3 support_assistant.py ask "Как отменить подписку?"
 ```
 
-**Когда использовать:**
-- После изменения документации
-- После добавления новых классов
-- Если поиск не находит недавно добавленный код
-
-### 6. Интерактивный режим
-
-Запусти без аргументов для интерактивного режима:
+### REST API (для ботов)
 
 ```bash
-python3 assistant/assistant.py
+# Запуск сервиса
+source venv/bin/activate
+python3 support_service.py
+
+# В другом терминале
+curl -X POST http://localhost:5001/api/support/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Как восстановить пароль?"}'
 ```
 
-или
+## 🤖 Интеграция с ботом
+
+```python
+import requests
+
+# Отправить вопрос в Support Service
+response = requests.post(
+    'http://localhost:5001/api/support/ask',
+    json={'question': user_message}
+)
+
+answer = response.json()['answer']
+bot.reply(answer)  # Готовый ответ!
+```
+
+Полные примеры:
+- Telegram Bot - см. `SERVICE_README.md`
+- Discord Bot - см. `SERVICE_README.md`
+- Python client - см. `example_bot.py`
+
+## 🎓 Что умеют ассистенты
+
+### Code Assistant
+- ✅ RAG поиск в документации проекта
+- ✅ Поиск по коду Kotlin (классы, функции)
+- ✅ Git контекст (текущая ветка, изменения)
+- ✅ Интерактивный режим с просмотром файлов
+
+### Support Assistant
+- ✅ RAG поиск в FAQ и документации
+- ✅ Контекст пользователя из CRM (подписка, устройство)
+- ✅ Поиск похожих тикетов
+- ✅ Персонализированные ответы
+- ✅ REST API для ботов
+
+## 🔧 Дополнительные инструменты
+
+### MCP серверы
 
 ```bash
-python3 assistant/assistant.py interactive
+# Git MCP сервер
+python3 mcp_git_server.py test
+
+# CRM MCP сервер
+python3 mcp_crm_server.py test
 ```
 
-**Пример сессии:**
-```
-============================================================
-  🤖 Movike Project Assistant - Интерактивный режим
-============================================================
-
-Команды:
-  help <вопрос>  - Задать вопрос о проекте
-  search <текст> - Поиск в документации
-  git            - Информация о git ветке
-  stats          - Статистика RAG
-  reindex        - Переиндексация
-  exit           - Выход
-
-============================================================
-
-Assistant> help ApiService
-[Вывод результатов...]
-
-Assistant> git
-[Информация о git...]
-
-Assistant> exit
-Выход...
-```
-
-## 🎯 Использование из logcat консоли Android Studio
-
-### Вариант 1: Через терминал Android Studio
-
-1. Открой Terminal в Android Studio (Alt+F12 / Cmd+T)
-2. Перейди в папку docs:
-   ```bash
-   cd project/docs
-   ```
-3. Запусти assistant:
-   ```bash
-   python3 assistant/assistant.py help "ваш вопрос"
-   ```
-
-### Вариант 2: Создай alias
-
-Добавь в `~/.bashrc` или `~/.zshrc`:
+### Code Reviewer
 
 ```bash
-alias movike-help='python3 /Users/admin/StudioProjects/movike/project/docs/assistant/assistant.py help'
-alias movike-assist='python3 /Users/admin/StudioProjects/movike/project/docs/assistant/assistant.py'
+python3 code_reviewer.py
 ```
 
-Теперь можно использовать из любого места:
+## 📝 Конфигурация
+
+### Данные CRM (Support Assistant)
+
+Редактируйте `crm_data.json`:
+- `users[]` - пользователи
+- `tickets[]` - тикеты поддержки
+
+### FAQ (Support Assistant)
+
+Редактируйте `project/docs/SUPPORT_FAQ.md` и переиндексируйте:
+```bash
+python3 support_assistant.py index
+```
+
+### Документация проекта (Code Assistant)
+
+Добавьте `.md` файлы в `project/docs/` и переиндексируйте:
+```bash
+python3 code_assistant.py index
+```
+
+## ✅ Проверка работы
 
 ```bash
-movike-help "ApiService"
-movike-assist git
-movike-assist stats
+# Code Assistant
+python3 code_assistant.py "ApiService"
+
+# Support Assistant
+python3 support_assistant.py ask "Как восстановить пароль?"
+
+# Support Service (требует установки Flask)
+source venv/bin/activate
+python3 support_service.py
+# В другом терминале:
+curl http://localhost:5001/health
 ```
 
-### Вариант 3: Через Run Configuration
+## 🎯 Начните отсюда
 
-1. В Android Studio: Run → Edit Configurations
-2. Добавь новую Python configuration:
-   - Script: `/Users/admin/StudioProjects/movike/project/docs/assistant/assistant.py`
-   - Parameters: `help "ApiService"`
-3. Запускай через Shift+F10
+1. **Быстрый старт**: Читайте `QUICK_START.md`
+2. **Подробное руководство**: Читайте `HOW_TO_USE.md`
+3. **REST API для ботов**: Читайте `SERVICE_README.md`
 
-## 📊 Что покрывает RAG
+---
 
-**Документация (46 чанков):**
-- README.md
-- project/docs/PROJECT_STRUCTURE.md
-- project/docs/API_REFERENCE.md
-- project/docs/CODE_STYLE.md
-
-**Классы проекта (104 класса):**
-- ApiService, Repository, RepositoryImpl
-- ViewModels: FeedViewModel, SearchViewModel, DetailsMovieViewModel
-- Fragments: FeedFragment, SearchFragment, DetailsFragment
-- Adapters, ViewHolders, UseCases
-- Database: AppDatabase, DAOs
-- DI modules: ApiModule, DataModule, ViewModelModule
-- И многое другое...
-
-**Всего: 150 документов в RAG базе**
-
-## 🔧 Архитектура
-
-```
-┌─────────────────────────────────────────┐
-│        assistant.py (main entry)        │
-│   Единая точка входа для всех команд    │
-└─────────────────────────────────────────┘
-                    │
-        ┌───────────┴───────────┐
-        │                       │
-        ▼                       ▼
-┌──────────────┐       ┌──────────────┐
-│  simple_rag  │       │ mcp_git_     │
-│     .py      │       │  server.py   │
-│              │       │              │
-│ • Поиск в    │       │ • Git branch │
-│   документах │       │ • Git status │
-│ • Индексация │       │ • Открытые   │
-│              │       │   файлы      │
-└──────────────┘       └──────────────┘
-        │
-        ▼
-┌──────────────┐
-│ index_       │
-│  classes.py  │
-│              │
-│ • Сканирует  │
-│   Kotlin код │
-│ • Извлекает  │
-│   классы     │
-└──────────────┘
-```
-
-## 💡 Советы и трюки
-
-### Эффективные вопросы
-
-**✅ Хорошо:**
-- "ApiService" (конкретный класс)
-- "FeedViewModel" (конкретный класс)
-- "структура проекта модули" (ключевые слова)
-- "Repository pattern" (паттерн)
-
-**❌ Плохо:**
-- "как это работает?" (слишком расплывчато)
-- "покажи код" (нужно указать что именно)
-
-### Поиск классов
-
-Для поиска классов просто укажи имя:
-```bash
-python3 assistant/assistant.py help "SearchViewModel"
-python3 assistant/assistant.py help "MovieAdapter"
-```
-
-### Поиск по теме
-
-Для широкого поиска используй ключевые слова:
-```bash
-python3 assistant/assistant.py help "navigation навигация"
-python3 assistant/assistant.py help "database dao"
-python3 assistant/assistant.py help "viewmodel lifecycle"
-```
-
-## 🐛 Отладка
-
-### Проблема: Не находит недавно добавленный класс
-
-**Решение:**
-```bash
-python3 assistant/assistant.py reindex
-```
-
-### Проблема: Ошибка "No module named 'simple_rag'"
-
-**Решение:** Запускай из папки `project/docs`:
-```bash
-cd /Users/admin/StudioProjects/movike/project/docs
-python3 assistant/assistant.py help "вопрос"
-```
-
-### Проблема: RAG индекс не найден
-
-**Решение:**
-```bash
-# Сначала переиндексируй
-python3 assistant/assistant.py reindex
-
-# Потом попробуй снова
-python3 assistant/assistant.py help "вопрос"
-```
-
-## 📝 Примеры реальных вопросов
-
-### 1. Узнать о классе
-
-```bash
-python3 assistant/assistant.py help "ApiService"
-```
-
-Вернёт интерфейс ApiService с методами API.
-
-### 2. Узнать структуру проекта
-
-```bash
-python3 assistant/assistant.py help "структура проекта"
-```
-
-Вернёт информацию о модулях, архитектуре, зависимостях.
-
-### 3. Узнать стиль кода
-
-```bash
-python3 assistant/assistant.py help "Composable функции именование"
-```
-
-Вернёт правила именования для Composable функций.
-
-### 4. Информация о ViewModel
-
-```bash
-python3 assistant/assistant.py help "FeedViewModel"
-```
-
-Вернёт код FeedViewModel с зависимостями.
-
-### 5. Текущая git ветка
-
-```bash
-python3 assistant/assistant.py git
-```
-
-Вернёт информацию о текущей ветке, коммитах, статусе.
-
-## 🎓 Заключение
-
-Movike Project Assistant - это мощный инструмент для работы с проектом:
-
-- ✅ **150 документов** в RAG базе
-- ✅ **104 класса** проиндексировано
-- ✅ **RAG** для поиска в документации и коде
-- ✅ **MCP** для git информации
-- ✅ **Работает из любого места** (терминал, logcat, Claude Code)
-- ✅ **Интерактивный режим** для удобства
-
-Используй `python3 assistant/assistant.py help "ваш вопрос"` для получения информации о проекте!
+**Нужна помощь?** Откройте `HOW_TO_USE.md` или `QUICK_START.md`

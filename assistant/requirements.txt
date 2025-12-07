@@ -1,0 +1,38 @@
+# Зависимости для AI Code Reviewer
+# Минимальные зависимости - используем встроенные библиотеки Python
+
+# Нет внешних зависимостей!
+# Все используемые модули встроены в Python 3.x:
+# - json
+# - subprocess
+# - pathlib
+# - typing
+# - xml.etree.ElementTree
+# - sys
+# - os
+
+# Если в будущем понадобятся векторные эмбеддинги, добавьте:
+# sentence-transformers>=2.2.0
+# numpy>=1.24.0
+# scikit-learn>=1.3.0
+
+# Для продвинутой обработки кода:
+# tree-sitter>=0.20.0
+# pygments>=2.15.0
+
+# Для интеграции с AI моделями:
+# anthropic>=0.18.0
+# openai>=1.0.0
+
+# === Support Service Dependencies ===
+# Flask web framework
+Flask>=3.0.0
+
+# CORS support
+flask-cors>=4.0.0
+
+# Optional: for production deployment
+gunicorn>=21.2.0
+
+# Optional: for async support
+gevent>=23.9.1

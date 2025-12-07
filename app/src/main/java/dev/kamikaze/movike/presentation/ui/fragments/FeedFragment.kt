@@ -25,20 +25,27 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// BAD: Class name doesn't match Kotlin naming conventions
+// Should follow PascalCase consistently (this is actually ok, but next line is bad)
 class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, SwipeRefreshLayout.OnRefreshListener {
-    
+
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
-    
+
     @Inject
     internal lateinit var factory: ViewModelProvider.Factory
     private val viewModel: FeedViewModel by viewModels { factory }
-    
+
     @Inject
     internal lateinit var moviesAdapter: MovieAdapter
-    
+
     @Inject
     internal lateinit var loadingStateAdapter: LoadingStateAdapter
+
+    // BAD: Variable naming convention violation - should be camelCase
+    private var IS_LOADING = false
+    private val MAX_RETRY_COUNT = 3 // Should be const val at top level
+    private var retry_count = 0 // Snake case instead of camelCase!
     
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +55,9 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
+        // BAD: Magic number - should be extracted to named constant
+        binding.movieRV.itemAnimator?.addDuration = 300
+        binding.movieRV.itemAnimator?.removeDuration = 300
         return binding.root
     }
     
@@ -89,6 +99,18 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
                 viewModel.movieFlow.collectLatest { moviesAdapter.submitData(it) }
             }
         }
+        // BAD: Deeply nested code - should be extracted to separate function
+        // BAD: Multiple magic numbers
+        lifecycleScope.launch {
+            kotlinx.coroutines.delay(500) // Magic number!
+            if (binding.movieRV.adapter != null) {
+                if (binding.movieRV.adapter!!.itemCount > 0) {
+                    if (binding.movieRV.layoutManager != null) {
+                        binding.movieRV.smoothScrollToPosition(0)
+                    }
+                }
+            }
+        }
     }
     
     override fun onMovieClicked(movieId: Int) {
@@ -122,6 +144,40 @@ class FeedFragment : BaseFragment<FeedNavigator>(), MovieItemClickListener, Swip
             is LoadState.Loading -> onLoading()
             is LoadState.Error -> showError((state.refresh as LoadState.Error).error)
             is LoadState.NotLoading -> onLoadFinish()
+        }
+    }
+
+    // BAD: Function name doesn't follow naming convention
+    // Should be camelCase starting with lowercase
+    private fun PerformNetworkCall() {
+        // BAD: Inconsistent spacing and formatting
+        val url="https://api.example.com"  // No spaces around =
+        val timeout=5000 // Magic number
+        IS_LOADING=true // No spaces
+
+        // BAD: Inconsistent indentation
+      lifecycleScope.launch {
+            // 2 spaces instead of 4
+        retry_count++
+          if(retry_count>MAX_RETRY_COUNT){ // No spaces in if condition
+                    IS_LOADING=false
+          }
+      }
+    }
+
+    // BAD: Unused private function - dead code
+    private fun unusedFunction() {
+        val x = 42 // Magic number
+    }
+
+    // BAD: Function doing too many things - violates Single Responsibility
+    // BAD: Too many magic numbers
+    private fun updateUIWithMagicNumbers() {
+        binding.movieRV.setPadding(16, 16, 16, 16) // Magic numbers!
+        binding.swipeRefreshLayout.setProgressViewOffset(false, 0, 100) // More magic numbers!
+        lifecycleScope.launch {
+            kotlinx.coroutines.delay(1000) // Magic number
+            binding.movieRV.alpha = 0.5f // Magic number
         }
     }
     
